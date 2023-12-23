@@ -32,7 +32,7 @@ export default defineComponent({
     align-items: center;
 }
 .header__logo-img{
-    width: 165px;
+    width: 200px;
     height: 50px;
 }
 .header__btns{
