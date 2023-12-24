@@ -4,6 +4,7 @@
   <div class="container">
     <Filter />
     <Destinations />
+    <Depoiments />
   </div>
   
 </template>
@@ -13,7 +14,9 @@ import { defineComponent } from 'vue';
 import Header from './components/Header/Header.vue';
 import Banner from './components/Banner/Banner.vue';
 import Filter from './components/Filter/Filter.vue';
-import Destinations from './components/Destinations/Destinations.vue'
+import Destinations from './components/Destinations/Destinations.vue';
+import Depoiments from './components/Depoiments/Depoiments.vue';
+
 
 
 export default defineComponent({
@@ -22,7 +25,8 @@ export default defineComponent({
     Header,
     Banner,
     Filter,
-    Destinations
+    Destinations,
+    Depoiments
   }
 });
 </script>

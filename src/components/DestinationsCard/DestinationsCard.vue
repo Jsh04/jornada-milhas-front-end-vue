@@ -35,6 +35,7 @@ import { defineComponent } from 'vue'
     border-radius: 12px;
     flex-direction: column;
     border: 1px solid  #CAC4D0;
+    background: #FEF7FF;
 }
 
 .destinations-card__container-img img{

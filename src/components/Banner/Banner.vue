@@ -2,7 +2,6 @@
     <div class="banner">
 
     </div>
-
 </template>
 
 <script lang="ts">
