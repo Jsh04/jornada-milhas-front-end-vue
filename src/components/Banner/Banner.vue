@@ -1,5 +1,5 @@
 <template>
-    <div class="banner">
+    <div :style="{backgroundImage: 'url( '+ urlImage +')'}" class="banner">
 
     </div>
 </template>
@@ -8,13 +8,18 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: "BannerComponent"
+    name: "BannerComponent",
+    props: ['urlImage'],
+    data() {
+        return {
+            
+        }
+    },
 })
 </script>
 
 <style scoped>
 .banner{
-    background-image: url('../../assets/Banner-homepage.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

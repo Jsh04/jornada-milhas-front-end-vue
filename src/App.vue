@@ -1,12 +1,13 @@
 <template>
   <Header></Header>
-  <Banner />
+  <Banner :url-image="urlImageTop"/>
   <div class="container">
     <Filter />
     <Destinations />
     <Depoiments />
   </div>
-  
+  <Banner :url-image="urlImageBotton"/>
+  <Footer />
 </template>
 
 <script lang="ts">
@@ -16,6 +17,7 @@ import Banner from './components/Banner/Banner.vue';
 import Filter from './components/Filter/Filter.vue';
 import Destinations from './components/Destinations/Destinations.vue';
 import Depoiments from './components/Depoiments/Depoiments.vue';
+import Footer from './components/footer/Footer.vue';
 
 
 
@@ -26,8 +28,15 @@ export default defineComponent({
     Banner,
     Filter,
     Destinations,
-    Depoiments
-  }
+    Depoiments,
+    Footer
+  },
+  data() {
+    return {
+      urlImageBotton: require('@/assets/Imagens/2-Banner-homepage2.png'),
+      urlImageTop: require('@/assets/Imagens/Banner-homepage.png'),
+    }
+  },
 });
 </script>
 
