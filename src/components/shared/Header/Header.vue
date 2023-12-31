@@ -2,7 +2,7 @@
 
     <header class="header">
         <div class="header__logo">
-            <img class="header__logo-img" src="../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas">
+            <img class="header__logo-img" src="../../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas">
         </div>
         <div class="header__btns">
             <button class="header__btns-register ff-roboto">Cadastre-se</button>

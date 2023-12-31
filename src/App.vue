@@ -1,42 +1,21 @@
 <template>
   <Header></Header>
-  <Banner :url-image="urlImageTop"/>
-  <div class="container">
-    <Filter />
-    <Destinations />
-    <Depoiments />
-  </div>
-  <Banner :url-image="urlImageBotton"/>
+  <router-view></router-view>
   <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from './components/Header/Header.vue';
-import Banner from './components/Banner/Banner.vue';
-import Filter from './components/Filter/Filter.vue';
-import Destinations from './components/Destinations/Destinations.vue';
-import Depoiments from './components/Depoiments/Depoiments.vue';
-import Footer from './components/footer/Footer.vue';
-
-
+import Header from './components/shared/Header/Header.vue';
+import Footer from './components/shared/footer/Footer.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     Header,
-    Banner,
-    Filter,
-    Destinations,
-    Depoiments,
     Footer
   },
-  data() {
-    return {
-      urlImageBotton: require('@/assets/Imagens/2-Banner-homepage2.png'),
-      urlImageTop: require('@/assets/Imagens/Banner-homepage.png'),
-    }
-  },
+  
 });
 </script>
 

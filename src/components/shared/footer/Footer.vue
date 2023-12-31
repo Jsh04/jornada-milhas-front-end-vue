@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="footer__container-info">
             <div class="footer__container-img">
-                <img src="../../assets/Logo/Logo-branco-com-tagline.png" alt="">
+                <img src="../../../assets/Logo/Logo-branco-com-tagline.png" alt="">
             </div>
             <div class="footer__container-texts">
                 <p class="ff-roboto">Horário de atendimento: 08h - 20h (Segunda a Sábado)</p>
@@ -15,9 +15,9 @@
             </div>
             <div class="footer__container-list-networks">
                 <ul>
-                    <li><img src="../../assets/Icones/Whatsapp-1-(2).png" alt=""></li>
-                    <li><img src="../../assets/Icones/Instragam-1-(2).png" alt=""></li>
-                    <li><img src="../../assets/Icones/Twiter-1-(2).png" alt=""></li>
+                    <li><img src="../../../assets/Icones/Whatsapp-1-(2).png" alt=""></li>
+                    <li><img src="../../../assets/Icones/Instragam-1-(2).png" alt=""></li>
+                    <li><img src="../../../assets/Icones/Twiter-1-(2).png" alt=""></li>
                 </ul>
             </div>
         </div>

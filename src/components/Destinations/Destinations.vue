@@ -11,56 +11,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useStore } from '../../store'
 import DestinationsCard from '../DestinationsCard/DestinationsCard.vue';
-import Destination from '../../models/Destination.js';
 
     export default defineComponent({
         name: "DestinationsComponent",
         components: { DestinationsCard },
         data() {
             return {
-                ListDestiantions: [
-                    {
-                        Name: 'Atacama',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Atacama.png')
-
-                    } as Destination,
-                    {
-                        Name: 'Veneza',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Veneza.png')
-                    } as Destination,
-                    {
-                        Name: 'Patagonia',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Patagonia.png')
-
-                    } as Destination,
-                    {
-                        Name: 'Grand Canyon',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Grand-Canyon.png')
-
-                    } as Destination,
-                    {
-                        Name: 'Turquia',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Turquia.png')
-                    } as Destination,
-                    {
-                        Name: 'Cordilheira dos Andes',
-                        Price: 500.00,
-                        PictuteTest: require('@/assets/Imagens/Card-Cordilheira-dos-Andes.png')
-
-                    } as Destination
-                ]
+                
             }
         },
         methods: {
             
         },
+        setup(){
+            const store = useStore()
+            return {
+                store,
+                ListDestiantions: computed(() => store.state.destinys)
+            }
+        }
     })
 </script>
 
