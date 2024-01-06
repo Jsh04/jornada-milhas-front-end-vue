@@ -1,6 +1,6 @@
 <template>
     <Banner style="height: 100px;" :url-image="urlImage"/>
-    
+    <DestinyDescription />
 </template>
 
 <script lang="ts">
@@ -8,10 +8,11 @@ import { defineComponent, computed } from 'vue';
 import Banner from '../Banner/Banner.vue';
 import { useStore } from '@/store';
 import Destination from '@/models/Destination';
+import DestinyDescription from '../DestinyDescription/DestinyDescription.vue';
 
 export default defineComponent({
     name: "DescriptionComponent",
-    components: { Banner },
+    components: { Banner, DestinyDescription },
     data() {
         return {
             urlImage: require("@/assets/Imagens/Banner-destino.png"),
