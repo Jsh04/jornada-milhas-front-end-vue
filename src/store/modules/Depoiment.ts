@@ -8,5 +8,7 @@ export interface StateDepoiment{
 
 
 export const depoiment: Module<StateDepoiment, State> = {
-    
+    state: {
+        depoiments: []
+    }
 }
