@@ -9,6 +9,7 @@ export default class User{
     City = ''
     State = ''
     Email = ''
+    ConfirmEmail = ''
     Password = ''
     ConfirmPassword = ''
 }

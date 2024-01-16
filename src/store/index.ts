@@ -9,8 +9,8 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export interface State {
     destinys: Destination[],
-    depoiment: StateDepoiment;
-    userState: StateUser
+    depoimentModule: StateDepoiment;
+    userStateModule: StateUser
 }
 
 export const store = createStore<State>({
@@ -60,10 +60,10 @@ export const store = createStore<State>({
 
             } as Destination
         ],
-        depoiment: {
+        depoimentModule: {
             depoiments: []
         },
-        userState: {
+        userStateModule: {
             user: {} as User
         }
     },

@@ -36,4 +36,11 @@ export default defineComponent({
 .container{
   padding: 0rem 10rem;
 }
+
+.message_error{
+  color: red;
+  margin-top: 1rem;
+}
+
+
 </style>

@@ -14,10 +14,14 @@
               class="ff-roboto"
               name="Name"
               placeholder="Digite seu nome completo"
+              :class="[v$.User.Name.$errors.length > 0 ? 'register__input_erro' : '']"
               v-model.trim="User.Name"
               @blur="v$.User.Name.$touch"
             />
             <label class="ff-roboto">Nome</label>
+            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.Name.$errors" :key="index">
+              {{ error.$message }}
+            </span>
           </div>
           <div class="register__container-fields">
             <div class="register__form-input">
@@ -27,8 +31,12 @@
                 class="ff-roboto"
                 placeholder="XX/XX/XXXX"
                 v-model="User.DtBirth"
+                @blur="v$.User.DtBirth.$touch"
               />
               <label class="ff-roboto">Data de nascimento</label>
+              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.DtBirth.$errors" :key="index">
+                {{ error.$message }}
+              </span>
             </div>
             <div class="register__form-genre">
                 <label class="ff-roboto register__form-genre-label">Gênero</label>
@@ -54,9 +62,12 @@
                 class="ff-roboto"
                 placeholder="XXX.XXX.XXX-XX"
                 v-model="User.Cpf"
-
+                @blur="v$.User.Cpf.$touch"
               />
               <label class="ff-roboto">CPF</label>
+              <span v-if="v$.User.Cpf.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.Cpf.$errors[0].$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -65,8 +76,14 @@
                 class="ff-roboto"
                 placeholder="Digite seu telefone"
                 v-model="User.Phone"
+                maxlength="15"
+                @blur="v$.User.Phone.$touch"
+                @keyup="MaskPhone()"
               />
               <label class="ff-roboto">Telefone</label>
+              <span v-if="v$.User.Phone.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.Phone.$errors[0].$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -75,11 +92,15 @@
                 class="ff-roboto"
                 placeholder="Digite seu cidade"
                 v-model="User.City"
+                @blur="v$.User.City.$touch"
               />
               <label class="ff-roboto">Cidade</label>
+              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.City.$errors" :key="index">
+                {{ error.$message }}
+              </span>
             </div>
             <div class="register__form-input">
-              <select v-model="User.State" style="width: calc((530px / 2) - 6px)" class="ff-roboto">
+              <select v-model="User.State" style="width: calc((530px / 2) - 6px)" class="ff-roboto" @blur="v$.User.State.$touch">
                 <option value="0">Selecione o estado</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -109,6 +130,9 @@
                 <option value="SE">Sergipe</option>
               </select>
               <label class="ff-roboto">Estado</label>
+              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.State.$errors" :key="index">
+                {{ error.$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -117,8 +141,13 @@
                 class="ff-roboto"
                 v-model="User.Email"
                 placeholder="Digite seu e-mail"
+                @blur="v$.User.Email.$touch"
+                
               />
               <label class="ff-roboto">E-mail</label>
+              <span v-if="v$.User.Email.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.Email.$errors[0].$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -126,8 +155,13 @@
                 type="email"
                 class="ff-roboto"
                 placeholder="Digite seu e-mail novamente"
+                v-model="User.ConfirmEmail"
+                @blur="v$.User.ConfirmEmail.$touch"
               />
               <label class="ff-roboto">Confirmar e-mail</label>
+              <span v-if="v$.User.ConfirmEmail.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.ConfirmEmail.$errors[0].$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -136,8 +170,12 @@
                 class="ff-roboto"
                 v-model="User.Password"
                 placeholder="Digite sua senha"
+                @blur="v$.User.Password.$touch"
               />
               <label class="ff-roboto">Senha</label>
+              <span v-if="v$.User.Password.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.Password.$errors[0].$message }}
+              </span>
             </div>
             <div class="register__form-input">
               <input
@@ -146,14 +184,17 @@
                 class="ff-roboto"
                 v-model="User.ConfirmPassword"
                 placeholder="Repita sua senha"
+                @blur="v$.User.ConfirmPassword.$touch"
               />
               <label class="ff-roboto">Confirmar Senha</label>
+              <span v-if="v$.User.ConfirmPassword.$errors.length != 0" class="message_error ff-roboto">
+                {{ v$.User.ConfirmPassword.$errors[0].$message }}
+              </span>
             </div>
           </div>
           <div class="register__form-checkbox">
-            <input id="terms" type="checkbox">
+            <input id="terms" v-model="checkedTerms" type="checkbox">
             <label for="terms" class="ff-roboto">Li e aceito os termos e condições deste cadastro.</label>
-            
           </div>
           <div class="register__form-btn-container">
             <button class="register__form-btn ff-roboto" type="submit">criar minha conta</button>
@@ -167,11 +208,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Banner from "../../Banner/Banner.vue";
-import { useVuelidate } from '@vuelidate/core'
-import { required, email, helpers } from '@vuelidate/validators'
 import User from '@/models/User'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, helpers, sameAs } from '@vuelidate/validators'
 import { useStore } from "@/store/index"
 import { REGISTER_USER } from "@/store/actions/UserActions";
+import swal from 'sweetalert';
+import {validateCpf} from "@/validations/ValidationCPF"
+import { greaterThan18 } from "@/validations/ValidationBirthDate";
+import { validatePhone } from "@/validations/ValidationPhone"
 
 export default defineComponent({
   name: "RegisterComponent",
@@ -181,20 +226,63 @@ export default defineComponent({
       UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
       User: {
       } as User,
+      checkedTerms: false
     };
   },
   methods: {
     async SendForms(){
+      if (!this.checkedTerms) {
+        swal({
+          text: "Confirme que leu nossos termos e condições",
+          buttons: [true, "Sair"],
+          icon: "warning"
+        })
+        return;
+      }
+
       const formValidity = await this.v$.$validate();
       
       if (!formValidity) {
         alert("Formulário inválido")
+        return;
       }
-      const response = await this.store.dispatch(REGISTER_USER, this.User)
-      console.log(response);
+      try{
+          const response = await this.store.dispatch(REGISTER_USER, this.User);
+          if (response.status == 201) {
+            swal({
+              icon: "success",
+              text:"Usuário cadastrado com sucesso",
+              buttons: [true, "Ok!"]
+            })
+            this.User = {} as User
+            this.v$.$reset();
+          }
+            
+          
+      }catch(erro){
+        swal({
+            text:"Usuário cadastrado com sucesso",
+            icon: "error",
+            buttons: [true, "Ok"]
+          })
+      }
       
-
-    }
+      
+    },
+    MaskPhone(): void{
+      var r = this.User.Phone.replace(/\D/g, "");
+      r = r.replace(/^0/, "");
+      if (r.length > 10) {
+        r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+      } else if (r.length > 5) {
+        r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+      } else if (r.length > 2) {
+        r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+      } else {
+        r = r.replace(/^(\d*)/, "($1");
+      }
+      this.User.Phone = r
+    },
   },
   validations(){
     return {
@@ -204,8 +292,35 @@ export default defineComponent({
           email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
           required: helpers.withMessage("O campo deverá ser obrigatório", required) 
         },
+        ConfirmEmail: {
+          email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          sameAsEmail: helpers.withMessage("O email deverá ser igual ao email digitado anteriormente", sameAs(this.User.Email))  
+        },
+        ConfirmPassword:{
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          sameAsPassword: helpers.withMessage("O senha deverá ser a mesma digitada anteriormente", sameAs(this.User.Password))
+        },
+        Password: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+        },
         Cpf: {
-          required: helpers.withMessage("O campo deverá ser obrigatório", required) 
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          validateCpf: helpers.withMessage("CPF inválido", validateCpf)
+        },
+        DtBirth: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          greaterThan18: helpers.withMessage("Deverá ser maior que 18 anos para se cadastrar", greaterThan18)
+        },
+        Phone: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          validatePhone: helpers.withMessage("Número inválido", validatePhone)
+        },
+        City: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required)
+        },
+        State:{
+          required: helpers.withMessage("O campo não poderá ser nulo", required)
         }
       },
     }

@@ -5,7 +5,7 @@
             <img class="header__logo-img" src="../../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas">
         </div>
         <div class="header__btns">
-            <button class="header__btns-register ff-roboto">Cadastre-se</button>
+            <router-link to="/cadastro" class="header__btns-register ff-roboto">Cadastre-se</router-link>
             <button class="header__btns-login ff-roboto">Login</button>
         </div>
     </header>
@@ -44,11 +44,12 @@ export default defineComponent({
     border-radius: 5px;
     background-color: var(--purple-primary);
     color: white;
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
     font-size: 1rem;
     text-transform: uppercase;
     font-weight: 500;
+    text-decoration: none;
 }
 .header__btns-login{
     background-color: transparent;

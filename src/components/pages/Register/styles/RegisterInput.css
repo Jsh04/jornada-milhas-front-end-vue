@@ -11,6 +11,7 @@
   padding: 15px 20px;
   width: inherit;
   font-size: 12px;
+  margin-bottom: 0.5rem;
 }
 
 .register__form-input input:focus, .register__form-input select:focus{
@@ -39,6 +40,7 @@
   padding: 0 .5rem;
   box-sizing: border-box;
 }
+
 
 .register__form-input input:focus + label,
 .register__form-input input:not(:placeholder-shown) + label{

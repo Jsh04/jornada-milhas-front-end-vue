@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders } from "axios"
+import axios from "axios"
 
 const HttpClient = axios.create({
     baseURL: "http://localhost:3000",
