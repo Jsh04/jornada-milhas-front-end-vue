@@ -1,52 +1,84 @@
 .register__form-input{
-    position: relative;
-  }
+    position: relative;  
+}
   
-  .register__form-input input{
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    outline: none;
-    padding: 1rem;
-    width: 250px;
-    font-size: 16px;
-    transition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    -webkit-appearance:none;
-  }
-  
-  .register__form-input input:focus{
-    border: 2px solid #3951b2;
-  }
-  
-  .register__form-input input::placeholder{
-    color:transparent;
-  }
-  .register__form-input label{
-    pointer-events: none;
-    position: absolute;
-  
-    left: 15px;
-    transition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    background-color: white;
-    padding: 5px;
-    box-sizing: border-box;
-  }
-  
-  .register__form-input input:required:invalid + label{
-    color: red;
-  }
-  .register__form-input input:focus:required:invalid{
-    border: 2px solid red;
-  }
-  .register__form-input input:required:invalid + label:before{
-    content: '*';
-  }
-  .register__form-input input:focus + label,
-  .register__form-input input:not(:placeholder-shown) + label{
-    font-size: 13px;
-    top: 0;
-    color: #3951b2;
-  }
+.register__form-input input, .register__form-input select{
+  border: none;
+  border: 2px solid #6750A4;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  outline: none;
+  padding: 15px 20px;
+  width: inherit;
+  font-size: 12px;
+}
+
+.register__form-input input:focus, .register__form-input select:focus{
+  border: 2px solid #6750A4;
+}
+
+.register__form-input input::placeholder, .register__form-input option:first-child{
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.035px;
+  color: #CAC4D0;
+}
+
+.register__form-input label{
+  pointer-events: none;
+  position: absolute;
+  top: -0.5rem;
+  left: 15px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; 
+  background-color: white;
+  padding: 0 .5rem;
+  box-sizing: border-box;
+}
+
+.register__form-input input:focus + label,
+.register__form-input input:not(:placeholder-shown) + label{
+  font-size: 13px;
+  color: #6750A4;
+}
+
+.register__form-checkbox{
+  margin-top: 2rem;
+  display: flex;
+  column-gap: 1rem;
+}
+
+.register__form-radios{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.register__form-radios-container{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.register__form-radios-container label {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+.register__form-genre{
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.register__form-genre-label{
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}

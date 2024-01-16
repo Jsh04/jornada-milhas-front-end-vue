@@ -1,14 +1,16 @@
 import Destination from "@/models/Destination";
 import { InjectionKey } from "vue";
 import { Store, createStore, useStore as vuexUseStore } from "vuex";
-import { StateDepoiment } from "./modules/Depoiment";
-import Depoiment from "@/models/Depoiment";
+import { StateDepoiment,depoiment } from "./modules/Depoiment";
+import { StateUser, user } from "./modules/User";
+import User from "@/models/User";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export interface State {
     destinys: Destination[],
     depoiment: StateDepoiment;
+    userState: StateUser
 }
 
 export const store = createStore<State>({
@@ -60,7 +62,14 @@ export const store = createStore<State>({
         ],
         depoiment: {
             depoiments: []
+        },
+        userState: {
+            user: {} as User
         }
+    },
+    modules:{
+        depoiment,
+        user
     }
 })
 
