@@ -2,11 +2,11 @@
 
     <header class="header">
         <div class="header__logo">
-            <img class="header__logo-img" src="../../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas">
+            <router-link to="/"><img class="header__logo-img" src="../../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas"></router-link>
         </div>
         <div class="header__btns">
             <router-link to="/cadastro" class="header__btns-register ff-roboto">Cadastre-se</router-link>
-            <button class="header__btns-login ff-roboto">Login</button>
+            <router-link class="ff-roboto header__btns-login" to="/login">Login</router-link>
         </div>
     </header>
 </template>
@@ -55,11 +55,12 @@ export default defineComponent({
     background-color: transparent;
     cursor: pointer;
     font-size: 1rem;
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     text-transform: uppercase;
     font-weight: 500;
     color: var(--purple-primary);
     border-radius: 5px;
     border: 1px solid rgba(121, 116, 126, 1);
+    text-decoration: none;
 }
 </style>
