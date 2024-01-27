@@ -13,14 +13,14 @@
                     
                     <form action="" class="login__forms" @submit.prevent="SendLoginUser()">
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" v-model="Login.Email" placeholder="Digite seu e-mail ou CPF" @blur="v$.Login.Email.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" id="email" v-model="Login.Email" placeholder="Digite seu e-mail ou CPF" @blur="v$.Login.Email.$touch"/>
                             <label class="ff-roboto">E-mail</label>
                             <span v-if="v$.Login.Email.$errors.length != 0"  style="margin: 0;" class="message_error ff-roboto">
                                 {{ v$.Login.Email.$errors[0].$message }}
                             </span>
                         </div>
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" v-model="Login.Password" placeholder="Digite sua senha"  @blur="v$.Login.Password.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" id="password" v-model="Login.Password" placeholder="Digite sua senha"  @blur="v$.Login.Password.$touch"/>
                             <label class="ff-roboto">Senha</label>
                             <span v-if="v$.Login.Password.$errors.length != 0" style="margin: 0;" class="message_error  ff-roboto">
                                 {{ v$.Login.Password.$errors[0].$message }}
@@ -45,7 +45,7 @@ import Banner from '../Banner/Banner.vue';
 import Login from '@/models/Login'
 import { useStore } from '@/store';
 import useVuelidate from '@vuelidate/core';
-import { required, email, helpers, sameAs } from '@vuelidate/validators';
+import { required, helpers } from '@vuelidate/validators';
 import swal from 'sweetalert';
 import { POST_LOGIN } from '@/store/actions/LoginActions';
 export default defineComponent({
@@ -69,17 +69,17 @@ export default defineComponent({
             }
             try {
                 const response = await this.store.dispatch(POST_LOGIN, this.Login);
-                console.log(response);
-                
-                if (response.status == 201) {
+                if (response.status == 200) {
                     swal({
                         icon: "success",
                         text:"Login feito com sucesso",
                         buttons: [true, "Ok!"]
                     })
-                    this.$router.push("/dashboard")
+                    this.$router.push("/dashboard");
                 }
             } catch (error) {
+                console.log(error);
+                
                 swal({
                     text:"Erro no login",
                     icon: "error",
@@ -107,6 +107,7 @@ export default defineComponent({
             v$: useVuelidate()
         }
     }
+
 });
 
 </script>

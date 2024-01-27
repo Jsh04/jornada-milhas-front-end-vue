@@ -6,6 +6,7 @@
         <Depoiments />
     </div>
     <Banner :url-image="urlImageBotton"/>
+    <ModalTraveler />
 </template>
 
 <script lang="ts">
@@ -15,6 +16,7 @@ import Banner from '../Banner/Banner.vue';
 import Filter from '../Filter/Filter.vue';
 import Destinations from '../Destinations/Destinations.vue';
 import Depoiments from '../Depoiments/Depoiments.vue';
+import ModalTraveler from '../modals/ModalTraveler.vue';
 
 export default defineComponent({
     name: "HomeComponent",
@@ -23,6 +25,7 @@ export default defineComponent({
     Filter,
     Destinations,
     Depoiments,
+    ModalTraveler
   },
   data() {
     return {

@@ -3,19 +3,41 @@ import { Module } from "vuex";
 import { State } from "..";
 import { POST_LOGIN } from "../actions/LoginActions";
 import HttpClient from "@/http/HttpClient";
+import LoginResponseDto from "@/interfaces/LoginResponseDTO";
+import { REGISTER_USER_LOGGED } from "../mutations/LoginMutations";
+import User from "@/models/User";
+
+
 
 export interface StateLogin{
     login: Login;
+    token: string,
+    User: User
 }
 
 export const LoginModule: Module<StateLogin, State> = {
     state: {
-        login: {} as Login
+        login: {} as Login,
+        token:'',
+        User: {} as User
+    },
+    mutations: {
+        [REGISTER_USER_LOGGED](state, data: LoginResponseDto){
+            state.token = data.token;
+            state.User = data.User;
+        },
+
     },
     actions: {
-        async [POST_LOGIN]({ commit }, login: Login){
-            const response = await HttpClient.post<Login>('/login', login);
+        async [POST_LOGIN](context, login: Login){
+            const response = await HttpClient.post<LoginResponseDto>('/login', login);
+            context.commit(REGISTER_USER_LOGGED, response.data);
             return response;
+        }
+    },
+    getters: {
+        getToken(state){
+            return state.token;
         }
     }
 }

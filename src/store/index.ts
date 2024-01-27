@@ -70,7 +70,9 @@ export const store = createStore<State>({
             user: {} as User
         },
         loginStateModule: {
-            login: {} as Login
+            login: {} as Login,
+            token: '',
+            User: {} as User
         }
     },
     modules:{

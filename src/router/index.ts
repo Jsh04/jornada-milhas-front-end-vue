@@ -19,7 +19,8 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/login',
-        component: LoginVue
+        component: LoginVue,
+        meta: { requiresAuth: false }
     }
 ]
 
@@ -27,5 +28,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
 
 export default router;

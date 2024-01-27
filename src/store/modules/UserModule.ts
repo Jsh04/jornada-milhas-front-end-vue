@@ -3,7 +3,6 @@ import { Module } from "vuex";
 import { State } from "..";
 import { REGISTER_USER } from "../actions/UserActions";
 import HttpClient from "@/http/HttpClient";
-import { AxiosResponse } from "axios";
 
 
 export interface StateUser{
@@ -16,7 +15,7 @@ export const user: Module<StateUser, State> = {
         user: {} as User
     },
     actions: {
-        async [REGISTER_USER]({ commit }, user: User){
+        async [REGISTER_USER](context, user: User){
             const response = await HttpClient.post("/users", {
                 user
             });
