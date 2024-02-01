@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jornada-milhas
+  labels:
+    name: jornada-milhas
+spec:
+  containers:
+  - name: jornada-milhas
+    image: jornada-milhas-vue:1.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
