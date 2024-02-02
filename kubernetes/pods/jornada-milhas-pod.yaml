@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: jornada-milhas
   labels:
-    name: jornada-milhas
+    app: jornada-milhas
 spec:
   containers:
   - name: jornada-milhas

@@ -4,18 +4,18 @@
             <p class="ff-roboto"> {{ title }} </p>
         </div>
         <div>
-            <p> {{ subTitle }}</p>
+            <p class="ff-roboto"> {{ subTitle }}</p>
         </div>
-        <div>
-            <span @click="ReduceNumber()"><i class="las la-plus-circle"></i></span>
-            <span>{{ count }}</span>
-            <span @click="count += 1"><i class="las la-minus-circle"></i></span>
+        <div class="filter__container-age-number">
+            <span @click="ReduceNumber()" class="filter__container-age-btn"><i class="las la-minus-circle" style="font-size: 20px;"></i></span>
+            <span class="ff-roboto">{{ count }}</span>
+            <span @click="count += 1" class="filter__container-age-btn"><i class="las la-plus-circle" style="font-size: 20px;"></i></span>
         </div>
     
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -42,7 +42,8 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: start;
-    row-gap: 0.5rem;
+    width: 140px;
+    row-gap: 1rem;
 }
 
 .filter__container-age-title p{
@@ -50,5 +51,20 @@ export default defineComponent({
     font-style: normal;
     font-weight: 500;
     line-height: 24px; 
+}
+
+.filter__container-age-number{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter__container-age-btn{
+    background-color: var(--gray-secondary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
 }
 </style>

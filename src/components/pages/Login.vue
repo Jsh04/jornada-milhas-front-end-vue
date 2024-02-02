@@ -75,7 +75,7 @@ export default defineComponent({
                         text:"Login feito com sucesso",
                         buttons: [true, "Ok!"]
                     })
-                    this.$router.push("/dashboard");
+                    this.$router.push("/");
                 }
             } catch (error) {
                 console.log(error);

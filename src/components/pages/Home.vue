@@ -16,7 +16,7 @@ import Banner from '../Banner/Banner.vue';
 import Filter from '../Filter/Filter.vue';
 import Destinations from '../Destinations/Destinations.vue';
 import Depoiments from '../Depoiments/Depoiments.vue';
-import ModalTraveler from '../modals/ModalTraveler.vue';
+import ModalTraveler from '@/components/modals/ModalTravaler/ModalTraveler.vue';
 
 export default defineComponent({
     name: "HomeComponent",
