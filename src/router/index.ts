@@ -2,6 +2,7 @@ import DescriptionVue from "@/components/pages/Description.vue";
 import Home from "@/components/pages/Home.vue";
 import LoginVue from "@/components/pages/Login.vue";
 import RegisterVue from "@/components/pages/Register/Register.vue";
+import RegisterAdminVue from "@/components/pages/RegisterAdmin/RegisterAdmin.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
@@ -21,6 +22,15 @@ const routes: RouteRecordRaw[] = [
         path: '/login',
         component: LoginVue,
         meta: { requiresAuth: false }
+    },
+    {
+        path: '/admin',
+        children: [
+            {
+                path: 'cadastro',
+                component: RegisterAdminVue
+            }
+        ]
     }
 ]
 

@@ -1,4 +1,5 @@
 import { Genre } from "./enums/EnumGenre";
+import { Role } from "./enums/EnumsRole";
 
 export default class User{
     Name = ''
@@ -12,4 +13,9 @@ export default class User{
     ConfirmEmail = ''
     Password = ''
     ConfirmPassword = ''
+    CodeEmployee = ''
+    Adress = ''
+    District = ''
+    Cep = ''
+    UserRole = Role.Limited
 }

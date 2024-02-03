@@ -7,7 +7,6 @@
             <div class="filter__container-search">
                 <div class="filter__container-input">
                     <input type="text" name="filter" id="filter" class="ff-roboto" placeholder="Origem">
-                    <i class="las la-search"></i>
                 </div>
                 <div class="filter__container-button">
                     <button class="ff-roboto" type="button">Buscar</button>
