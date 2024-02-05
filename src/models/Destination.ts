@@ -3,7 +3,7 @@ export default class Destination{
     Name = '';
     Price = 0.0;
     Subtitle = '';
-    Picture: Uint8Array = new Uint8Array();
+    Pictures: string[] = [];
     PictuteTest = ''
     DescriptionEnglish = ''
     DescriptionPortuguese = ''

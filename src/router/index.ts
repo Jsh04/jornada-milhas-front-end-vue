@@ -1,4 +1,6 @@
 import DescriptionVue from "@/components/pages/Description.vue";
+import DestinyRegisterVue from "@/components/pages/DestinyRegister/DestinyRegister.vue";
+import DestinyPageVue from "@/components/pages/DestinysPage/DestinyPage.vue";
 import Home from "@/components/pages/Home.vue";
 import LoginVue from "@/components/pages/Login.vue";
 import RegisterVue from "@/components/pages/Register/Register.vue";
@@ -29,6 +31,14 @@ const routes: RouteRecordRaw[] = [
             {
                 path: 'cadastro',
                 component: RegisterAdminVue
+            },
+            {
+                path: 'destino',
+                component: DestinyPageVue,
+            },
+            {
+                path: "destino/cadastro",
+                component: DestinyRegisterVue
             }
         ]
     }
