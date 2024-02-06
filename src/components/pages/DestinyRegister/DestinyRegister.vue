@@ -32,7 +32,8 @@
                             class="ff-roboto"
                             name="Name"
                             placeholder="Digite o preço do destino"
-                            v-model.trim="Destiny.Price"
+                            v-model.trim="Price"
+                            @keyup="MaskPrice()"
                             />
 
                             <label class="ff-roboto">Preço</label>
@@ -85,7 +86,8 @@ export default defineComponent({
     data() {
         return {
             filePond: null as FilePondeInstance.FilePond | null,
-            Destiny: {} as Destination 
+            Destiny: {} as Destination,
+            Price: ''
         }
     },
     components: { },
@@ -113,15 +115,17 @@ export default defineComponent({
                 })
             }
             this.Destiny.Pictures = await this.ReturnBase64Array()
-            console.log(this.Destiny.Pictures);
-            
         },
+
+        MaskPrice(){
+            this.Price = Util.FormatMoney(this.Price);
+        },
+
         async ReturnBase64Array(): Promise<string[]>{
             const arrayBase64: string[] = []
 
             this.filePond?.getFiles().forEach(fileItem => {
 
-                let stringBase64 = '';
                 const file = fileItem.file;
 
                 let reader = new FileReader();
