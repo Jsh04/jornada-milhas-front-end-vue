@@ -48,7 +48,7 @@ export default defineComponent({
     setup(){
         const store = useStore();
         return {
-            ListDestinys: computed(() => store.state.destinys)
+            ListDestinys: computed(() => store.state.destinyModule.Destinys) 
         }
     }
 })

@@ -30,7 +30,7 @@ import DestinationsCard from '../DestinationsCard/DestinationsCard.vue';
             const store = useStore()
             return {
                 store,
-                ListDestiantions: computed(() => store.state.destinys)
+                ListDestiantions: computed(() => store.state.destinyModule.Destinys)
             }
         }
     })

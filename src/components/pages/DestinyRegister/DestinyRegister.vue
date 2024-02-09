@@ -8,7 +8,7 @@
                 <form @submit.prevent="SendForms()" action="" class="register__form">
                     <div class="register__form-input-file ">
                         <label class="register__form-input-file-label ff-roboto" for="file">Imagens do destino</label>
-                        <input type="file" id="file" multiple accept=".png, .jpg, .jpeg">
+                        <input type="file" ref="inputFile" multiple accept=".png, .jpg, .jpeg">
                         
                     </div>
                     <div class="registerDestiny__container-fields">
@@ -19,10 +19,27 @@
                             class="ff-roboto"
                             name="Name"
                             placeholder="Digite o nome do destino"
+                            @blur="v$.Destiny.Name.$touch"
                             v-model.trim="Destiny.Name"/>
-
+                            
                             <label class="ff-roboto">Nome do Destino</label>
-                            <span class="message_error ff-roboto" >
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.Name.$errors" :key="index">
+                                {{ error.$message }}
+                            </span>
+                        </div>
+                        <div  class="register__form-input">
+                            <input
+                            style="width: calc(530px - 3rem)"
+                            type="text"
+                            class="ff-roboto"
+                            name="Name"
+                            placeholder="Digite um breve subtítulo"
+                            @blur="v$.Destiny.Subtitle.$touch"
+                            v-model.trim="Destiny.Subtitle"/>
+
+                            <label class="ff-roboto">Descreva um subtítulo</label>
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.Subtitle.$errors" :key="index">
+                                {{ error.$message }}
                             </span>
                         </div>
                         <div  class="register__form-input">
@@ -33,23 +50,27 @@
                             name="Name"
                             placeholder="Digite o preço do destino"
                             v-model.trim="Price"
+                            @blur="v$.Price.$touch"
                             @keyup="MaskPrice()"
                             />
 
                             <label class="ff-roboto">Preço</label>
-                            <span class="message_error ff-roboto" >
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.Price.$errors" :key="index">
+                                {{ error.$message }}
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea class="register__form-textarea" v-model="Destiny.DescriptionPortuguese" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
+                            <textarea @blur="v$.Destiny.DescriptionPortuguese.$touch"  class="register__form-textarea ff-roboto" v-model="Destiny.DescriptionPortuguese" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
                             <label class="ff-roboto">Descrição em Português</label>
-                            <span class="message_error ff-roboto" >
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.DescriptionPortuguese.$errors" :key="index">
+                                {{ error.$message }}
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea class="register__form-textarea" v-model="Destiny.DescriptionEnglish" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
+                            <textarea @blur="v$.Destiny.DescriptionEnglish.$touch" class="register__form-textarea ff-roboto" v-model="Destiny.DescriptionEnglish" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
                             <label class="ff-roboto">Descrição em Inglês</label>
-                            <span class="message_error ff-roboto" >
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.DescriptionEnglish.$errors" :key="index">
+                                {{ error.$message }}
                             </span>
                         </div>
                         
@@ -70,15 +91,17 @@
 
 import { defineComponent } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
-
+import { AxiosResponse } from 'axios';
 import 'filepond/dist/filepond.min.css';
 
 import * as FilePondeInstance from 'filepond';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import Destination from '@/models/Destination';
 import { useStore } from '@/store';
 import { decimal, helpers, required } from '@vuelidate/validators';
 import Util from '@/util/Util'
 import swal from 'sweetalert';
+import { DESTINATION_POST } from '@/store/actions/DestinyActions';
 
 
 export default defineComponent({
@@ -87,65 +110,105 @@ export default defineComponent({
         return {
             filePond: null as FilePondeInstance.FilePond | null,
             Destiny: {} as Destination,
-            Price: ''
+            Price: '',
+            Files: null
         }
     },
     components: { },
     validations(){
         return {
+            Price: {
+                    required: helpers.withMessage("O campo não poderá ser nulo", required)
+                },
             Destiny: {
                 Name: {
                     required: helpers.withMessage("O campo não poderá ser nulo", required)
                 },
-                Price: {
-                    decimal: helpers.withMessage("O campo deverá conter apenas caracteres numéricos", decimal),
+                Subtitle: {
+                    required: helpers.withMessage("O campo não poderá ser nulo", required)
+                },
+                DescriptionPortuguese: {
+                    required: helpers.withMessage("O campo não poderá ser nulo", required)
+                },
+                DescriptionEnglish: {
                     required: helpers.withMessage("O campo não poderá ser nulo", required)
                 }
             }
         }
     },
     methods: {
-        async SendForms(){
-            const formValidity = await this.v$.$validate();
-            if(!formValidity){
+        async SendForms(): Promise<void>{            
+            try {
+                const formValidity = await this.v$.$validate();                
+                if(!formValidity || this.filePond?.getFiles().length == 0){
+                    swal({
+                        text: "Formulário inválido",
+                        buttons: [true, 'Ok'],
+                        icon: 'error'
+                    })
+                    return;
+                }
+                this.Destiny.Pictures = await this.ReturnBase64Array();
+                
+                this.Destiny.Price = parseFloat(this.Price.replace("R$", "").replace(",", "."))
+                const response: AxiosResponse<Destination, any> = await this.store.dispatch(DESTINATION_POST, this.Destiny);
+                if (response.status >= 200) {
+                    swal({
+                        text: "Destino cadastrado com sucesso",
+                        buttons: [true, 'Ok'],
+                        icon: 'sucess'
+                    })
+                    this.v$.$reset();
+                }
+            } catch (error) {
                 swal({
-                    text: "Formulário inválid",
-                    buttons: [true, 'Ok'],
-                    icon: 'error'
-                })
+                        text: "Erro ao cadastrar Destino",
+                        buttons: [true, 'Ok'],
+                        icon: 'error'
+                    })
             }
-            this.Destiny.Pictures = await this.ReturnBase64Array()
         },
-
         MaskPrice(){
             this.Price = Util.FormatMoney(this.Price);
         },
-
         async ReturnBase64Array(): Promise<string[]>{
-            const arrayBase64: string[] = []
+            const arrayBase64: string[] = [];
+            const promises: Promise<void>[] = [];
 
             this.filePond?.getFiles().forEach(fileItem => {
-
                 const file = fileItem.file;
 
-                let reader = new FileReader();
-                reader.readAsDataURL(file as Blob);
-                reader.onloadend = () => { 
-                    arrayBase64.push(reader.result as string);
-                }
-            })
+                const promise = new Promise<void>((resolve, reject) => {
+                    let reader = new FileReader();
+                    reader.onloadend = () => { 
+                        let dataUrl = reader.result;
+                        arrayBase64.push(dataUrl as string);
+                        resolve();
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file as Blob);
+                });
 
+                promises.push(promise);
+            });
+
+            await Promise.all(promises);
+            
             return arrayBase64;
         }
 
     },
     mounted() {
-        const inputFile: Element | undefined  = document.getElementById("file")!;
+        const inputFile = this.$refs.inputFile as Element | undefined;
+
+        FilePondeInstance.registerPlugin(FilePondPluginFileValidateSize);
         this.filePond = FilePondeInstance.create(inputFile, {
-            labelIdle: '<span>Arraste ou procure as imagens dos destinos</span>',
+            labelIdle: '<span>Arraste ou procure as imagens do destino</span>',
             allowMultiple: true,
             labelFileLoadError: '<span>Erro ao carregar o arquivo</span>',
             maxFiles: 3,
+            maxFileSize:"1MB",
+            
         });
     },
     setup() {
