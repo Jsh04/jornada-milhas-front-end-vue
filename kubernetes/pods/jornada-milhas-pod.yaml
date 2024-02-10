@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: jornada-milhas
-    image: jornada-milhas-vue:1.0
+    image: jornada-milhas-vue:latest
     imagePullPolicy: IfNotPresent
     resources:
       limits:

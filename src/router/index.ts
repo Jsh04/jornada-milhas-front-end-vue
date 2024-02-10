@@ -1,5 +1,6 @@
 import DescriptionVue from "@/components/pages/Description.vue";
 import DestinyRegisterVue from "@/components/pages/DestinyRegister/DestinyRegister.vue";
+import DestinyTableVue from "@/components/pages/DestinyTable.vue";
 import DestinyPageVue from "@/components/pages/DestinysPage/DestinyPage.vue";
 import Home from "@/components/pages/Home.vue";
 import LoginVue from "@/components/pages/Login.vue";
@@ -39,6 +40,10 @@ const routes: RouteRecordRaw[] = [
             {
                 path: "destino/cadastro",
                 component: DestinyRegisterVue
+            },
+            {
+                path: "destino/listar-destino",
+                component: DestinyTableVue
             }
         ]
     }
