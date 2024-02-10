@@ -14,7 +14,12 @@
                             <th>Nome</th>
                             <th>Preço</th>
                         </tr>
-                    </thead>     
+                    </thead>
+                    <tbody>
+                        <tr >
+
+                        </tr>
+                    </tbody>     
                 </table>
             </div>
         </article>
@@ -22,30 +27,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { Api } from 'datatables.net-dt'
-import Datatable from 'datatables.net-dt'
+import { defineComponent, computed } from 'vue';
 import Destination from '@/models/Destination';
+import { useStore } from '@/store';
+import { DESTINATION_ALL_GET } from '@/store/actions/DestinyActions'
+
 export default defineComponent({
     name: "DestinyTableComponent",
     data() {
         return {
-            dataTable: {} as Api<Destination> 
+            
         }
     },
     methods: {
-        
+        async getDestinysFromApi(){
+            await  this.store.dispatch(DESTINATION_ALL_GET, {page: 0, size: 10});
+
+        }
     },
     
-    mounted() {
-        this.dataTable = new Datatable(".tableDestiny__table-content", {
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json",
-            },
-
-            
-        });
+    async mounted() {
+        await this.getDestinysFromApi()
+        console.log(this.ListDestination);
+        
     },
+    setup(){
+        const store = useStore();
+        return {
+            store,
+            ListDestination: computed(() => store.state.destinyModule.Destinys as Destination[]) 
+        }
+    }
 })
 </script>
 

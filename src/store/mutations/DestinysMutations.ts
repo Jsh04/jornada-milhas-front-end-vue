@@ -1,0 +1,1 @@
+export const [GET_LIST_DESTINYS] = "GET_LIST_DESTINYS"
