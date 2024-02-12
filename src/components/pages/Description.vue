@@ -17,16 +17,16 @@ export default defineComponent({
         return {
             urlImage: require("@/assets/Imagens/Banner-destino.png"),
             destiny: {
-                Id: 0,
-                Name: '',
-                PictuteTest: '',
-                Price: 0.0
+                id: 0,
+                name: '',
+                pictuteTest: '',
+                price: 0.0
             } as Destination | undefined
         }
     },
     mounted() {
         const id = Number(this.$route.params.id);
-        const destiny = this.ListDestinys.find(destiny => destiny.Id == id)
+        const destiny = this.ListDestinys.find(destiny => destiny.id == id)
         this.destiny = destiny;
     },
     setup() {

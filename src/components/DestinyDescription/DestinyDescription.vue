@@ -1,10 +1,10 @@
 <template>
     <section class="destiny-description">
         <article class="destiny-description__title">
-            <h2 class="ff-roboto">Descubra o {{Destiny?.Name}}</h2>
+            <h2 class="ff-roboto">Descubra o {{Destiny?.name}}</h2>
         </article>
         <article class="destiny-description__subtitle ff-roboto">
-            <h3>{{ Destiny?.Subtitle }}</h3>
+            <h3>{{ Destiny?.subtitle }}</h3>
         </article>
         <article class="destiny-description__details">
             <div class="destiny-description__img-container">
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="destiny-description__texts">
-                <p class="ff-roboto">{{ Destiny?.DescriptionEnglish }}</p>
-                <p class="ff-roboto ">{{ Destiny?.DescriptionPortuguese }}</p>
+                <p class="ff-roboto">{{ Destiny?.descriptionEnglish }}</p>
+                <p class="ff-roboto ">{{ Destiny?.descriptionPortuguese }}</p>
             </div>
         </article>
     </section>
@@ -38,7 +38,7 @@ export default defineComponent({
     methods: {
         DefineDestinyCurrent(): void{
             const id = Number(this.$route.params.id);
-            const destiny = this.ListDestinys.find(destiny => destiny.Id == id);
+            const destiny = this.ListDestinys.find(destiny => destiny.id == id);
             this.Destiny = destiny;
         }
     },

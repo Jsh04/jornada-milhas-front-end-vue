@@ -1,10 +1,10 @@
 export default class Destination{
-    Id = 0;
-    Name = '';
-    Price = 0.0;
-    Subtitle = '';
-    Pictures: string[] = [];
-    PictuteTest = ''
-    DescriptionEnglish = ''
-    DescriptionPortuguese = ''
+    id = 0;
+    name = '';
+    price = 0.0;
+    subtitle = '';
+    pictures: string[] = [];
+    pictuteTest = ''
+    descriptionEnglish = ''
+    descriptionPortuguese = ''
 }

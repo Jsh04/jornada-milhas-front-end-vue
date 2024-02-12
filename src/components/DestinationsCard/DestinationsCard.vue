@@ -2,11 +2,11 @@
     
     <article class="destinations-card">
         <div class="destinations-card__container-img">
-            <img :src="destination.PictuteTest" alt="" srcset="">
+            <img :src="destination.pictuteTest" alt="" srcset="">
         </div>
         <div class="destinations-card__container-info">
-            <p class="destinations-card__info-name ff-roboto">{{ destination.Name }}</p>
-            <p class="destinations-card__info-price ff-roboto">R$ {{ destination.Price }}</p>
+            <p class="destinations-card__info-name ff-roboto">{{ destination.name }}</p>
+            <p class="destinations-card__info-price ff-roboto">R$ {{ destination.price }}</p>
             <button class="destinations-card__info-show-details ff-roboto">ver detalhes</button>
         </div>
     </article>

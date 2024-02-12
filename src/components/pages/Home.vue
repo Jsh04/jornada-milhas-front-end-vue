@@ -1,6 +1,6 @@
 <template>
     <Banner :url-image="urlImageTop"/>
-    <div class="container">
+    <div class="container__jornada">
         <Filter />
         <Destinations />
         <Depoiments />

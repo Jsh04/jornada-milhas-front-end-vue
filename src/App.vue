@@ -34,7 +34,7 @@ export default defineComponent({
   font-family: 'Roboto', sans-serif;
 }
 
-.container{
+.container__jornada{
   padding: 0rem 10rem;
 }
 

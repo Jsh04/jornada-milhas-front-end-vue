@@ -20,7 +20,7 @@
                             name="Name"
                             placeholder="Digite o nome do destino"
                             @blur="v$.Destiny.Name.$touch"
-                            v-model.trim="Destiny.Name"/>
+                            v-model.trim="Destiny.name"/>
                             
                             <label class="ff-roboto">Nome do Destino</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.Name.$errors" :key="index">
@@ -35,7 +35,7 @@
                             name="Name"
                             placeholder="Digite um breve subtítulo"
                             @blur="v$.Destiny.Subtitle.$touch"
-                            v-model.trim="Destiny.Subtitle"/>
+                            v-model.trim="Destiny.subtitle"/>
 
                             <label class="ff-roboto">Descreva um subtítulo</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.Subtitle.$errors" :key="index">
@@ -60,14 +60,14 @@
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea @blur="v$.Destiny.DescriptionPortuguese.$touch"  class="register__form-textarea ff-roboto" v-model="Destiny.DescriptionPortuguese" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
+                            <textarea @blur="v$.Destiny.DescriptionPortuguese.$touch"  class="register__form-textarea ff-roboto" v-model="Destiny.descriptionPortuguese" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
                             <label class="ff-roboto">Descrição em Português</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.DescriptionPortuguese.$errors" :key="index">
                                 {{ error.$message }}
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea @blur="v$.Destiny.DescriptionEnglish.$touch" class="register__form-textarea ff-roboto" v-model="Destiny.DescriptionEnglish" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
+                            <textarea @blur="v$.Destiny.DescriptionEnglish.$touch" class="register__form-textarea ff-roboto" v-model="Destiny.descriptionEnglish" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
                             <label class="ff-roboto">Descrição em Inglês</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.DescriptionEnglish.$errors" :key="index">
                                 {{ error.$message }}
@@ -148,9 +148,9 @@ export default defineComponent({
                     })
                     return;
                 }
-                this.Destiny.Pictures = await this.ReturnBase64Array();
+                this.Destiny.pictures = await this.ReturnBase64Array();
                 
-                this.Destiny.Price = parseFloat(this.Price.replace("R$", "").replace(",", "."))
+                this.Destiny.price = parseFloat(this.Price.replace("R$", "").replace(",", "."))
                 const response: AxiosResponse<Destination, any> = await this.store.dispatch(DESTINATION_POST, this.Destiny);
                 if (response.status >= 200) {
                     swal({
