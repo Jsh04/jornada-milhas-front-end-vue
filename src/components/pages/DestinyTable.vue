@@ -20,8 +20,8 @@
                             <td>{{ destiny.id }}</td>
                             <td>{{ destiny.name }}</td>
                             <td>{{ ReturnMaskPrice(destiny.price) }}</td>
-                            <th></th>
-                            <th></th>
+                            <td @click="EditDestiny(destiny.id)" class="cell__click"><i style="font-size: 32px;" class="las la-edit "></i></td>
+                            <td @click="DeleteDestiny(destiny.id)" class="cell__click"><i style="font-size: 32px;" class="las la-trash"></i></td>
                         </tr>
                     </tbody>     
                 </table>
@@ -34,9 +34,10 @@
 import { defineComponent, computed } from 'vue';
 import Destination from '@/models/Destination';
 import { useStore } from '@/store';
-import { DESTINATION_ALL_GET } from '@/store/actions/DestinyActions'
+import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
 import swal from 'sweetalert';
 import Util from '@/util/Util';
+import { AxiosResponse } from 'axios';
 
 export default defineComponent({
     name: "DestinyTableComponent",
@@ -59,12 +60,33 @@ export default defineComponent({
         ReturnMaskPrice(price: number){
             const priceToConverted = price * 100;
             return Util.FormatMoney(priceToConverted.toString())
+        },
+        async DeleteDestiny(id: string){
+            try {
+                const response: AxiosResponse = await this.store.dispatch(DESTINATION_DELETE_BY_ID, id);
+                if(response.status == 204)
+                    swal({
+                        title: "Destino Deletado com sucesso",
+                        icon: 'sucess',
+                        buttons: [true, "Ok"]
+                    })
+                await this.getDestinysFromApi()
+            } catch (error) {
+                swal({
+                        title: "Erro ao deletar destino",
+                        icon: 'error',
+                        buttons: [true, "Ok"]
+                    })
+            }
+           
+        },
+        EditDestiny(id: string){
+            this.$router.push(`/admin/destino/editar/${id}`)
+            
         }
     },
     async mounted() {
         await this.getDestinysFromApi()
-
-        
     },
     setup(){
         const store = useStore();
@@ -92,5 +114,8 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
+}
+.cell__click{
+    cursor: pointer;
 }
 </style>

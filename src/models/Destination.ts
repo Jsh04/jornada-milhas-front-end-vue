@@ -1,5 +1,5 @@
 export default class Destination{
-    id = 0;
+    id = '';
     name = '';
     price = 0.0;
     subtitle = '';

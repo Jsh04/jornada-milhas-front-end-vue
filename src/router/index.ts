@@ -1,4 +1,5 @@
 import DescriptionVue from "@/components/pages/Description.vue";
+import DestinyEditVue from "@/components/pages/DestinyEdit/DestinyEdit.vue";
 import DestinyRegisterVue from "@/components/pages/DestinyRegister/DestinyRegister.vue";
 import DestinyTableVue from "@/components/pages/DestinyTable.vue";
 import DestinyPageVue from "@/components/pages/DestinysPage/DestinyPage.vue";
@@ -44,6 +45,10 @@ const routes: RouteRecordRaw[] = [
             {
                 path: "destino/listar-destino",
                 component: DestinyTableVue
+            },
+            {
+                path: "destino/editar/:id",
+                component: DestinyEditVue
             }
         ]
     }

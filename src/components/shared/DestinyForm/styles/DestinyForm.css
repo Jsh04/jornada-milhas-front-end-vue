@@ -1,0 +1,83 @@
+.registerDestiny{
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.registerDestiny__container{
+    width: 530px;
+    padding: 4rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 1px 2px 0px black;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.registerDestiny__title h2 {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    color: black;
+    text-align: center;
+  }
+
+  .register__form-input-file{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+  }
+
+  .register__form-input-file-label{
+    font-size: 16px;
+    color: black;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .registerDestiny__container-fields{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+  }
+
+  .register__form-textarea{
+    resize: none;
+    width: calc(530px - 2.5rem);
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 1rem;
+}
+.register__form-textarea::placeholder{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    color: #CAC4D0;
+    font-family: 'Roboto';
+
+}
+
+.register__form-btn-container{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .register__form-btn{
+    padding: 1rem 1rem;
+    background-color: var(--purple-primary);
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    text-transform: uppercase;
+    cursor: pointer;
+  }

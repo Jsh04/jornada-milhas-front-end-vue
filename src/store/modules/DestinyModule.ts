@@ -1,12 +1,13 @@
 import Destination from "@/models/Destination";
 import { Module } from "vuex";
 import { State } from "..";
-import { DESTINATION_ALL_GET, DESTINATION_POST } from "../actions/DestinyActions";
+import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID, DESTINATION_GET_BY_ID, DESTINATION_POST, DESTINATION_PUT_UPDATE } from "../actions/DestinyActions";
 import HttpClient from "@/http/HttpClient";
-import { GET_LIST_DESTINYS } from "../mutations/DestinysMutations";
+import { GET_DESTINATION_BY_ID_MUTATION, GET_LIST_DESTINYS } from "../mutations/DestinysMutations";
 
 export interface StateDestination{
     Destinys: Destination[];
+    DestinyEdit: Destination
 }
 
 
@@ -15,7 +16,7 @@ export const DestinyModule: Module<StateDestination, State> = {
     state: {
         Destinys: [
             {
-                id: 1,
+                id: '1',
                 name: 'Atacama',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Atacama.png'),
@@ -25,49 +26,58 @@ export const DestinyModule: Module<StateDestination, State> = {
                 
             } as Destination,
             {
-                id: 2,
+                id: '2',
                 name: 'Veneza',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Veneza.png')
             } as Destination,
             {
-                id: 3,
+                id: '3',
                 name: 'Patagonia',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Patagonia.png')
 
             } as Destination,
             {
-                id: 4,
+                id: '4',
                 name: 'Grand Canyon',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Grand-Canyon.png')
 
             } as Destination,
             {
-                id: 5,
+                id: '5',
                 name: 'Turquia',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Turquia.png')
             } as Destination,
             {
-                id: 6,
+                id: '6',
                 name: 'Cordilheira dos Andes',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Cordilheira-dos-Andes.png')
 
             } as Destination
         ],
+        DestinyEdit: {} as Destination
     },
     mutations: {
+        [GET_DESTINATION_BY_ID_MUTATION](state, destination: Destination){
+            state.DestinyEdit = destination
+        },
         [GET_LIST_DESTINYS](state, destinations: Destination[]){    
             state.Destinys = destinations;
         }
+        
     },
     actions: {
         async [DESTINATION_POST](context, destiny: Destination){
             const response = await HttpClient.post<Destination>('/destinos', destiny);
             return response;
+        },
+        async [DESTINATION_GET_BY_ID](context, id: string){
+            const response = await HttpClient.get<Destination>(`/destinos/${id}`);
+            context.commit(GET_DESTINATION_BY_ID_MUTATION, response.data)
         },
         async [DESTINATION_ALL_GET](context, params){
             const response = await HttpClient.get<Destination[]>('/destinos', {
@@ -77,6 +87,15 @@ export const DestinyModule: Module<StateDestination, State> = {
                 }
             }); 
             context.commit(GET_LIST_DESTINYS, response.data);
+        },
+        async [DESTINATION_PUT_UPDATE](context, objectUpdate){
+            const response = await HttpClient.put<Destination>(`/destinos/${objectUpdate.Id as string}`, objectUpdate.Destiny as Destination);
+            return response
+        },
+        async [DESTINATION_DELETE_BY_ID](context, id: string){
+            const response = await HttpClient.delete(`/destinos/${id}`)
+            return response;
         }
+        
     }
 }

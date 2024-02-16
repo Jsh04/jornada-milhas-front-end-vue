@@ -23,6 +23,10 @@ export default defineComponent({
 
 <style>
 
+*{
+  box-sizing: revert;
+}
+
 :root{
   --black-primary: #1D1B20;
   --purple-primary: #6750A4;
