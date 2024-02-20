@@ -8,19 +8,23 @@ import LoginVue from "@/components/pages/Login.vue";
 import RegisterVue from "@/components/pages/Register/Register.vue";
 import RegisterAdminVue from "@/components/pages/RegisterAdmin/RegisterAdmin.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import AuthorizationRoutes from "./AuthorizationRoutes";
 
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        component: Home
+        component: Home,
+        meta: { requiresAuth: false }
     },
     {
         path: '/descricao/:id',
-        component: DescriptionVue
+        component: DescriptionVue,
+        meta: { requiresAuth: false }
     },
     {
         path: '/cadastro',
-        component: RegisterVue
+        component: RegisterVue,
+        meta: { requiresAuth: false }
     },
     {
         path: '/login',
@@ -29,35 +33,41 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/admin',
+       
         children: [
             {
                 path: 'cadastro',
-                component: RegisterAdminVue
+                component: RegisterAdminVue,
+                meta: { requiresAuth: false } 
             },
             {
                 path: 'destino',
                 component: DestinyPageVue,
+                meta: { requiresAuth: true, roles: [2] },
             },
             {
                 path: "destino/cadastro",
-                component: DestinyRegisterVue
+                component: DestinyRegisterVue,
+                meta: { requiresAuth: true, roles: [2] },
             },
             {
                 path: "destino/listar-destino",
-                component: DestinyTableVue
+                component: DestinyTableVue,
+                meta: { requiresAuth: true, roles: [2] },
             },
             {
                 path: "destino/editar/:id",
-                component: DestinyEditVue
+                component: DestinyEditVue,
+                meta: { requiresAuth: true, roles: [2] },
             }
         ]
     }
 ]
-
 const router = createRouter({
     history: createWebHistory(),
     routes
 });
 
+AuthorizationRoutes(router);
 
 export default router;

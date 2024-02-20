@@ -313,9 +313,8 @@ export default defineComponent({
             })
             return;
         }
-
-        const formValidity = await this.v$.$validate();
         
+        const formValidity = await this.v$.$validate();
         if (!formValidity) {
             alert("Formulário inválido")
             return;
@@ -435,6 +434,11 @@ export default defineComponent({
               minLength: helpers.withMessage("O campo de CEP deverá ter no mínimo 8 caracteres", minLength(8))
             }
         },
+      }
+    },
+    mounted(){
+      if (!this.isAdminRegister) {
+        this.v$.User.CodeEmployee.$invalid = false
       }
     },
     setup() {
