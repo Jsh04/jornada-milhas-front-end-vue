@@ -1,8 +1,11 @@
 import axios from "axios";
 import { store } from "@/store";
 
+const isElasticSearch = true;
+const urlApi: string = isElasticSearch ? 'http://localhost:5045' : "http://localhost:3000";
+
 const HttpClient = axios.create({
-    baseURL: "http://localhost:5045",
+    baseURL: urlApi,
     headers: {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': "*"
