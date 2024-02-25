@@ -18,6 +18,7 @@
                             type="text"
                             class="ff-roboto"
                             name="Name"
+                            id="Name"
                             placeholder="Digite o nome do destino"
                             @blur="v$.Destiny.name.$touch"
                             v-model.trim="Destiny.name"/>
@@ -33,6 +34,7 @@
                             type="text"
                             class="ff-roboto"
                             name="Name"
+                            id="Subtitle"
                             placeholder="Digite um breve subtítulo"
                             @blur="v$.Destiny.subtitle.$touch"
                             v-model.trim="Destiny.subtitle"
@@ -49,6 +51,7 @@
                             type="text"
                             class="ff-roboto"
                             name="Name"
+                            id="Price"
                             placeholder="Digite o preço do destino"
                             v-model.trim="Price"
                             @blur="v$.Price.$touch"
@@ -61,14 +64,14 @@
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea @blur="v$.Destiny.descriptionPortuguese.$touch"  class="register__form-textarea ff-roboto" v-model="Destiny.descriptionPortuguese" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
+                            <textarea @blur="v$.Destiny.descriptionPortuguese.$touch"  class="register__form-textarea ff-roboto" id="DescriptionPortuguese" v-model="Destiny.descriptionPortuguese" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua portuguesa"></textarea>
                             <label class="ff-roboto">Descrição em Português</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.descriptionPortuguese.$errors" :key="index">
                                 {{ error.$message }}
                             </span>
                         </div>
                         <div  class="register__form-input">
-                            <textarea @blur="v$.Destiny.descriptionEnglish.$touch" class="register__form-textarea ff-roboto" v-model="Destiny.descriptionEnglish" id="" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
+                            <textarea @blur="v$.Destiny.descriptionEnglish.$touch" class="register__form-textarea ff-roboto" id="DescriptionEnglish" v-model="Destiny.descriptionEnglish" cols="30" rows="10" placeholder="Digite uma descrição do destino na língua inglesa"></textarea>
                             <label class="ff-roboto">Descrição em Inglês</label>
                             <span class="message_error ff-roboto" v-for="(error, index) in v$.Destiny.descriptionEnglish.$errors" :key="index">
                                 {{ error.$message }}
