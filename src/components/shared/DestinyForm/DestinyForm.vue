@@ -149,9 +149,6 @@ export default defineComponent({
         async SendForms(): Promise<void>{  
             let response: AxiosResponse = {} as AxiosResponse;  
             let textModal = '';        
-            
-            
-            
             try {
                 const formValidity = await this.v$.$validate();                
                 if(!formValidity || this.filePond?.getFiles().length == 0){

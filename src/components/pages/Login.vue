@@ -77,9 +77,7 @@ export default defineComponent({
                     })
                     this.$router.push("/");
                 }
-            } catch (error) {
-                console.log(error);
-                
+            } catch (error) {                
                 swal({
                     text:"Erro no login",
                     icon: "error",

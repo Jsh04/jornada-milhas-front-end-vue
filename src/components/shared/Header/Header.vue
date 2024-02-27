@@ -7,6 +7,7 @@
         <div class="header__btns">
             <router-link to="/cadastro" class="header__btns-register ff-roboto">Cadastre-se</router-link>
             <router-link class="ff-roboto header__btns-login" to="/login">Login</router-link>
+            <router-link v-if="store.getters.isLoginAdm" class="ff-roboto header__btns-adm" to="/admin/destino">Administrador</router-link>
         </div>
     </header>
 </template>
@@ -14,10 +15,14 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
+import { useStore } from '@/store';
 
 export default defineComponent({
     name: 'HeaderComponent',
-
+    setup(){
+        const store = useStore();
+        return {store}
+    }
 })
 
 
@@ -63,4 +68,19 @@ export default defineComponent({
     border: 1px solid rgba(121, 116, 126, 1);
     text-decoration: none;
 }
+.header__btns-adm{
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--purple-primary);
+    border-radius: 5px;
+    border: 1px solid rgba(121, 116, 126, 1);
+    text-decoration: none;
+    background-color: white;
+}
+    
+
+
 </style>
