@@ -2,35 +2,72 @@
     <section class="filter">
         <article class="filter__container">
             <div class="filter__container-title">
-                <h2 class="filter__container-title-content ff-roboto">Encontre seu próximo destino</h2>
+                <h2 class="filter__container-title-content ff-roboto">Passagens</h2>
+            </div>
+            <div class="filter__container-application">
+                <div class="filter__container-btns-go-back">
+                    <button type="button" :class="[ActiveGoAngBack ? 'btn-active' : 'btn-desactive']" id="goAndBack" @click="[ActiveGo = false, ActiveGoAngBack = true ]" class="ff-roboto" ><i v-show="ActiveGoAngBack" class="las la-check"></i><span >Ida e volta</span></button>
+                    <button type="button" :class="[ActiveGo ? 'btn-active' : 'btn-desactive']" id="go" @click="[ActiveGoAngBack = false, ActiveGo = true ]" class="ff-roboto"><i v-show="ActiveGo" class="las la-check"></i><span >Somente ida</span></button>
+                </div>
+                <div class="filter__container-button">
+                    <button type="button" class="ff-roboto">Aplicar Filtro</button>
+                </div>
             </div>
             <div class="filter__container-search">
-                <div class="filter__container-input">
-                    <input type="text" name="filter" id="filter" class="ff-roboto" placeholder="Origem">
+                <div class="filter__container-inputs">
+                    <div class="filter__container-inputs-content">
+                        <i class="las la-plane-departure f-style-icon"></i>
+                        <input type="text" class="ff-roboto" name="" id="" placeholder="Origem">
+                        <i class="las la-search f-style-icon"></i>
+                    </div>
+                    <i class="las la-sync f-style-icon"></i>
+                    <div class="filter__container-inputs-content">
+                        <i class="las la-plane-arrival f-style-icon"></i>
+                        <input type="text" class="ff-roboto" name="" id="" placeholder="Destino">
+                        <i class="las la-search f-style-icon"></i>
+                    </div>
+                </div>
+                <div class="filter__container-dates">
+                    <div class="filter__dates-input">
+                        <input
+                          type="date"
+                          class="ff-roboto"
+                          placeholder="XX/XX/XXXX"
+                        />
+                        <label class="ff-roboto">Data de ida</label>
+                    </div>
+                    <div class="filter__dates-input">
+                        <input
+                          type="date"
+                          class="ff-roboto"
+                          placeholder="XX/XX/XXXX"
+                        />
+                        <label class="ff-roboto">Data de volta</label>
+                    </div>
+
                 </div>
                 <div class="filter__container-button">
                     <button class="ff-roboto" type="button">Buscar</button>
                 </div>
             </div>
 
+
         </article>
     </section>
+    
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from 'vue'
-
 export default defineComponent({
     name: "FilterComponent",
     data() {
         return {
-
+            ActiveGoAngBack: false,
+            ActiveGo: true
         }
     },
-    methods:{
-
-    }    
 })
 
 </script>
@@ -52,13 +89,7 @@ export default defineComponent({
     line-height: 40px;
 }
 
-.filter__container-search{
-    display: flex;
-    align-items: center;
-    column-gap: 2rem;
-    margin-top: 2.5rem;
-    width: 100%;
-}
+
 
 .filter__container-input {
     background-color: transparent;
@@ -101,3 +132,5 @@ export default defineComponent({
 }
 
 </style>
+<style src="./styles/FilterSearch.css"></style>
+<style src="./styles/FilterApplication.css"></style>

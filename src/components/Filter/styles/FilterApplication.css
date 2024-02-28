@@ -1,0 +1,48 @@
+.filter__container-application{
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+    margin-top: 2.5rem;
+    width: 100%;
+}
+
+.filter__container-btns-go-back{
+    display: flex;
+    align-items: center;
+}
+
+.filter__container-btns-go-back button{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    color: black;
+    outline: none;
+    border: 1px solid #79747E;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    justify-content: center;
+}
+
+.filter__container-btns-go-back #goAndBack{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.filter__container-btns-go-back #go{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+}
+
+.btn-active{
+    background-color: #E8DEF8;
+}
+.btn-desactive{
+    background: transparent;
+
+}

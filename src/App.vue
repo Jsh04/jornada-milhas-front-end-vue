@@ -47,6 +47,10 @@ export default defineComponent({
   margin-top: 1rem;
 }
 
+.f-style-icon{
+  font-size: 20px;
+}
+
 .loader {
     width: 48px;
     height: 48px;

@@ -1,0 +1,85 @@
+.filter__container-search{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    justify-content: space-between;
+}
+
+
+.filter__container-inputs{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.filter__container-inputs-content{
+    border: 1px solid #79747E;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.filter__dates-input{
+    position: relative;  
+}
+
+
+.filter__container-inputs-content input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding-left: 1rem;
+}
+
+.filter__container-inputs-content input::placeholder{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    color: black;
+}
+
+.filter__dates-input input, .filter__dates-input select{
+    border: none;
+    border: 1px solid #79747E;
+    background-color: transparent;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    outline: none;
+    padding: 15px 20px;
+    width: inherit;
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .filter__dates-input input::placeholder, .filter__dates-input option:first-child{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.035px;
+    color: #CAC4D0;
+  }
+  
+
+.filter__dates-input label{
+    pointer-events: none;
+    position: absolute;
+    top: -0.5rem;
+    left: 15px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    background-color: var(--gray-primary);
+    padding: 0 .5rem;
+    box-sizing: border-box;
+  }
+
+.filter__container-dates{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+}
