@@ -80,7 +80,7 @@
                 v-model="User.cpf"
                 @blur="v$.User.cpf.$touch"
               />
-              <label class="ff-roboto">cpf</label>
+              <label class="ff-roboto">CPF</label>
               <span v-if="v$.User.cpf.$errors.length != 0" class="message_error ff-roboto">
                 {{ v$.User.cpf.$errors[0].$message }}
               </span>
@@ -389,10 +389,10 @@ export default defineComponent({
               email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
               required: helpers.withMessage("O campo deverá ser obrigatório", required) 
               },
-            codeEmployee: {
+            codeEmployee: this.isAdminRegister ? {
               required: helpers.withMessage("O campo deverá ser obrigatório", required),
               minLength: helpers.withMessage("O campo deverá ter no mínimo 8 caracteres", minLength(8))
-            },
+            } : {},
             
             confirmEmail: {
             email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
@@ -407,16 +407,16 @@ export default defineComponent({
             required: helpers.withMessage("O campo não poderá ser nulo", required),
             },
             cpf: {
-            required: helpers.withMessage("O campo deverá ser obrigatório", required),
-            validatecpf: helpers.withMessage("cpf inválido", validateCpf)
+              required: helpers.withMessage("O campo deverá ser obrigatório", required),
+              validatecpf: helpers.withMessage("cpf inválido", validateCpf)
             },
             dtBirth: {
-            required: helpers.withMessage("O campo não poderá ser nulo", required),
-            greaterThan18: helpers.withMessage("Deverá ser maior que 18 anos para se cadastrar", greaterThan18)
+              required: helpers.withMessage("O campo não poderá ser nulo", required),
+              greaterThan18: helpers.withMessage("Deverá ser maior que 18 anos para se cadastrar", greaterThan18)
             },
             phone: {
-            required: helpers.withMessage("O campo não poderá ser nulo", required),
-            validatephone: helpers.withMessage("Número inválido", validatePhone)
+              required: helpers.withMessage("O campo não poderá ser nulo", required),
+              validatephone: helpers.withMessage("Número inválido", validatePhone)
             },
             city: {
             required: helpers.withMessage("O campo não poderá ser nulo", required)
@@ -424,16 +424,16 @@ export default defineComponent({
             state:{
             required: helpers.withMessage("O campo não poderá ser nulo", required)
             },
-            adress: {
+            adress: this.isAdminRegister ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required)
-            },
-            district: {
+            } : {},
+            district: this.isAdminRegister ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required)
-            },
-            cep: {
+            } : {},
+            cep: this.isAdminRegister ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required),
               minLength: helpers.withMessage("O campo de CEP deverá ter no mínimo 8 caracteres", minLength(8))
-            }
+            }: {}
         },
       }
     },
