@@ -51,6 +51,16 @@ export default defineComponent({
   font-size: 20px;
 }
 
+.modal-active{
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+
+.modal-desactive{
+  transform: translateY(-700px);
+  transition: all 0.5s;
+}
+
 .loader {
     width: 48px;
     height: 48px;

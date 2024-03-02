@@ -9,7 +9,7 @@
         <div class="filter__container-age-number">
             <span @click="ReduceNumber()" class="filter__container-age-btn"><i class="las la-minus-circle" style="font-size: 20px;"></i></span>
             <span class="ff-roboto">{{ count }}</span>
-            <span @click="count += 1" class="filter__container-age-btn"><i class="las la-plus-circle" style="font-size: 20px;"></i></span>
+            <span @click="$emit('emitCount', count += 1, idIndex)" class="filter__container-age-btn"><i class="las la-plus-circle" style="font-size: 20px;"></i></span>
         </div>
     
     </div>
@@ -19,8 +19,11 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    props: ['title', 'subTitle'],
+    props: ['title', 'subTitle', "idIndex"],
+
     name: "FilterQuantityAgrComponent",
+
+    emits: ['emitCount'],
     data(){
         return {
             count: 0
@@ -31,7 +34,9 @@ export default defineComponent({
             if (this.count <= 0) 
                 this.count = 0
             else
-                this.count--
+                this.count--  
+
+            this.$emit('emitCount', this.count, this.idIndex)
         }
     }    
 })

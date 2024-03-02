@@ -9,9 +9,17 @@
                     <button type="button" :class="[ActiveGoAngBack ? 'btn-active' : 'btn-desactive']" id="goAndBack" @click="[ActiveGo = false, ActiveGoAngBack = true ]" class="ff-roboto" ><i v-show="ActiveGoAngBack" class="las la-check"></i><span >Ida e volta</span></button>
                     <button type="button" :class="[ActiveGo ? 'btn-active' : 'btn-desactive']" id="go" @click="[ActiveGoAngBack = false, ActiveGo = true ]" class="ff-roboto"><i v-show="ActiveGo" class="las la-check"></i><span >Somente ida</span></button>
                 </div>
-                <div class="filter__container-button">
-                    <button type="button" class="ff-roboto">Aplicar Filtro</button>
+                <div v-if="LengthOfArrayFilters == 0" class="filter__container-button">
+                    <button type="button" class="ff-roboto" @click="ShowModal()">Aplicar Filtro</button>
                 </div>
+                <template v-else >
+                    <div class="filter__container-description" v-for="(filter, index) in ListFilters" :key="index">
+                        <div class="ff-roboto">
+                            <i class="las la-check"></i>
+                            {{ ReturnCount(filter.Count) }} {{ filter.Name }}
+                        </div>
+                    </div>
+                </template>
             </div>
             <div class="filter__container-search">
                 <div class="filter__container-inputs">
@@ -59,13 +67,31 @@
 
 <script lang="ts">
 
+import FilterInterface from '@/interfaces/FilterInterface'
 import { defineComponent } from 'vue'
 export default defineComponent({
     name: "FilterComponent",
+    props: ['ListFilters'],
+    computed:{
+        LengthOfArrayFilters(): number{
+            return this.ListFilters.length
+        }
+    },
     data() {
         return {
             ActiveGoAngBack: false,
-            ActiveGo: true
+            ActiveGo: true,
+            ActiveModal: false,
+        }
+    },
+    methods: {
+        ShowModal(){
+            this.ActiveModal = !this.ActiveModal
+            this.$emit('active-modal-filter', this.ActiveModal)
+        },
+        ReturnCount(count: number | undefined){
+            if(count == undefined || count == 0) return ""
+            else return count
         }
     },
 })
@@ -129,6 +155,24 @@ export default defineComponent({
     color: white;
     background-color: var(--purple-primary);
     border: none;
+}
+
+.filter__container-description{
+    display: flex;
+    column-gap: 1rem;
+}
+.filter__container-description div{
+    padding: 0.35rem 0.5rem;
+    border-radius: 16px;
+    border: 1px solid #79747E;
+    cursor: pointer;
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; 
 }
 
 </style>

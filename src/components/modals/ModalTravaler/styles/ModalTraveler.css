@@ -1,5 +1,5 @@
 .modalTraveler{
-    position: absolute;
+    position: fixed;
     z-index: 1;
     top: 20%;
     left: 33%;
@@ -9,7 +9,6 @@
     min-height: 350px;
     border-radius: 10px;
     border: 1px solid black;
-
 }
 
 .modalTraveler__title h2{
@@ -49,13 +48,14 @@
     cursor: pointer;
     display: flex;
     column-gap: 0.5rem;
+    align-items: center;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 20px; 
 }
 .btn-active{
-    background-color: #FEF7FF;
+    background-color: #E8DEF8;
 }
 .btn-desactive{
     background-color: transparent;
@@ -92,3 +92,4 @@
     line-height: 24px; 
     cursor: pointer;
 }
+
