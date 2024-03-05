@@ -9,6 +9,7 @@ import RegisterVue from "@/components/pages/Register/Register.vue";
 import RegisterAdminVue from "@/components/pages/RegisterAdmin/RegisterAdmin.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import AuthorizationRoutes from "./AuthorizationRoutes";
+import About from "@/components/pages/AboutJornadaMilhas/About.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -29,6 +30,11 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/login',
         component: LoginVue,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/about",
+        component: About,
         meta: { requiresAuth: false }
     },
     {

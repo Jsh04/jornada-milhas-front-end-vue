@@ -5,6 +5,7 @@
             <router-link to="/"><img class="header__logo-img" src="../../../assets/Logo/Logo-branco.png" alt="Logo da Jornada Milhas"></router-link>
         </div>
         <div class="header__btns">
+            <router-link class="header__btns-links" to="/about">Sobre</router-link> 
             <router-link to="/cadastro" class="header__btns-register ff-roboto">Cadastre-se</router-link>
             <router-link class="ff-roboto header__btns-login" to="/login">Login</router-link>
             <router-link v-if="store.getters.isLoginAdm" class="ff-roboto header__btns-adm" to="/admin/destino">Administrador</router-link>
@@ -42,7 +43,8 @@ export default defineComponent({
 }
 .header__btns{
     display: flex;
-    column-gap: 1rem;
+    column-gap: 2.5rem;
+    align-items: center;
 }
 
 .header__btns-register{
@@ -79,6 +81,11 @@ export default defineComponent({
     border: 1px solid rgba(121, 116, 126, 1);
     text-decoration: none;
     background-color: white;
+}
+
+.header__btns-links{
+    text-decoration: none;
+    color: white;
 }
     
 
