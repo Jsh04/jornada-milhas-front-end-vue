@@ -26,7 +26,7 @@ export default defineComponent({
     left: 50%;
     width: 50px;
     height: 50px;
-    border: 2px solid black;
+    border: 4px solid black;
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: rotation 2s linear infinite;
