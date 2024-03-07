@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStore } from '../../store'
+import { useStore } from '@/store'
 import DestinationsCard from '../DestinationsCard/DestinationsCard.vue';
 
     export default defineComponent({

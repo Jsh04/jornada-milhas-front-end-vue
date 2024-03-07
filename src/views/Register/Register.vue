@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Banner from "../../Banner/Banner.vue";
+import Banner from "@/components/shared/Banner/Banner.vue";
 import FormRegister from "@/components/shared/FormRegister/FormRegister.vue"
 export default defineComponent({
   name: "RegisterComponent",

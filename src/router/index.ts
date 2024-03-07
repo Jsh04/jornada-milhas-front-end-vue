@@ -1,15 +1,16 @@
-import DescriptionVue from "@/components/pages/Description.vue";
-import DestinyEditVue from "@/components/pages/DestinyEdit/DestinyEdit.vue";
-import DestinyRegisterVue from "@/components/pages/DestinyRegister/DestinyRegister.vue";
-import DestinyTableVue from "@/components/pages/DestinyTable.vue";
-import DestinyPageVue from "@/components/pages/DestinysPage/DestinyPage.vue";
-import Home from "@/components/pages/Home.vue";
-import LoginVue from "@/components/pages/Login.vue";
-import RegisterVue from "@/components/pages/Register/Register.vue";
-import RegisterAdminVue from "@/components/pages/RegisterAdmin/RegisterAdmin.vue";
+
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import AuthorizationRoutes from "./AuthorizationRoutes";
-import About from "@/components/pages/AboutJornadaMilhas/About.vue";
+import Home from "@/views/Home.vue";
+import RegisterVue from "@/views/Register/Register.vue";
+import DescriptionVue from "@/views/Description.vue";
+import LoginVue from "@/views/Login.vue";
+import About from "@/views/AboutJornadaMilhas/About.vue";
+import RegisterAdminVue from "@/views/RegisterAdmin/RegisterAdmin.vue";
+import DestinyPageVue from "@/views/DestinysPage/DestinyPage.vue";
+import DestinyRegisterVue from "@/views/DestinyRegister/DestinyRegister.vue";
+import DestinyTableVue from "@/views/DestinyTable.vue";
+import DestinyEditVue from "@/views/DestinyEdit/DestinyEdit.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -74,6 +75,6 @@ const router = createRouter({
     routes
 });
 
-AuthorizationRoutes(router);
+// AuthorizationRoutes(router);
 
 export default router;

@@ -6,16 +6,16 @@
         <Depoiments />
     </div>
     <Banner :url-image="urlImageBotton"/>
-    <ModalTraveler @list-filters="GetListFilters" :ActiveModal="ActiveModal"/>
+    <ModalTraveler @list-filters="GetListFilters" :ActiveModal="ActiveModal" @desactive-modal="ActiveModalEvent"/>
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import Banner from '../Banner/Banner.vue';
-import Filter from '../Filter/Filter.vue';
-import Destinations from '../Destinations/Destinations.vue';
-import Depoiments from '../Depoiments/Depoiments.vue';
+import Banner from '@/components/shared/Banner/Banner.vue';
+import Filter from '@/components/shared/Filter/Filter.vue';
+import Destinations from '@/components/shared/Destinations/Destinations.vue';
+import Depoiments from '@/components/shared/Depoiments/Depoiments.vue';
 import ModalTraveler from '@/components/modals/ModalTravaler/ModalTraveler.vue';
 import FilterInterface from '@/interfaces/FilterInterface';
 

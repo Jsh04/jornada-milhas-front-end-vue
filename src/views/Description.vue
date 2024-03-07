@@ -5,10 +5,10 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import Banner from '../Banner/Banner.vue';
+import Banner from '@/components/shared/Banner/Banner.vue';
 import { useStore } from '@/store';
 import Destination from '@/models/Destination';
-import DestinyDescription from '../DestinyDescription/DestinyDescription.vue';
+import DestinyDescription from '@/components/shared/DestinyDescription/DestinyDescription.vue';
 
 export default defineComponent({
     name: "DescriptionComponent",

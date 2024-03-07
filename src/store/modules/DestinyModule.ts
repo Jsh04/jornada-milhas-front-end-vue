@@ -2,7 +2,7 @@ import Destination from "@/models/Destination";
 import { Module } from "vuex";
 import { State } from "..";
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID, DESTINATION_GET_BY_ID, DESTINATION_POST, DESTINATION_PUT_UPDATE } from "../actions/DestinyActions";
-import HttpClient from "@/http/HttpClient";
+import HttpClient from "@/services/http/HttpClient";
 import { GET_DESTINATION_BY_ID_MUTATION, GET_LIST_DESTINYS } from "../mutations/DestinysMutations";
 
 export interface StateDestination{

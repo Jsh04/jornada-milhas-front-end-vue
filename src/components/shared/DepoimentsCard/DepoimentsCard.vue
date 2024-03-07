@@ -17,7 +17,7 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import Depoiment from '../../models/Depoiment'
+import Depoiment from '@/models/Depoiment'
 
 export default defineComponent({
     name: "DepoimentsCardComponent",

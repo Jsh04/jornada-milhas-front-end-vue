@@ -2,7 +2,7 @@ import Login from "@/models/Login";
 import { Module } from "vuex";
 import { State } from "..";
 import { POST_LOGIN } from "../actions/LoginActions";
-import HttpClient from "@/http/HttpClient";
+import HttpClient from "@/services/http/HttpClient";
 import LoginResponseDto from "@/interfaces/LoginResponseDTO";
 import { REGISTER_USER_LOGGED } from "../mutations/LoginMutations";
 import User from "@/models/User";

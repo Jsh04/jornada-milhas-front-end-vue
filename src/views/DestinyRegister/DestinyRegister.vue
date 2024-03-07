@@ -26,4 +26,4 @@ export default defineComponent({
 
 
 </style>
-<style src="../../shared/FormRegister/styles/RegisterInput.css" ></style>
+<style src="@/components/shared/FormRegister/styles/RegisterInput.css" ></style>

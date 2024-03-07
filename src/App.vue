@@ -61,24 +61,38 @@ export default defineComponent({
   transition: all 0.5s;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px); /* Aplica o efeito de desfoque */
+  background-color: rgba(255, 255, 255, 0.5); /* Cor do fundo com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
 .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #FFF;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
+    animation: rotation 2s linear infinite;
+  }
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    } 
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+} 
 
 </style>

@@ -9,10 +9,10 @@
         <article class="destiny-description__details">
             <div class="destiny-description__img-container">
                 <div class="destiny-description__img">
-                    <img src="../../assets/Imagens/Atacama-destino1.jpg" alt="">
+                    <img src="../../../assets/Imagens/Atacama-destino1.jpg" alt="">
                 </div>
                 <div class="destiny-description__img">
-                    <img src="../../assets/Imagens/Atacama-destino2.png" alt="" srcset="">
+                    <img src="../../../assets/Imagens/Atacama-destino2.png" alt="" srcset="">
                 </div>
             </div>
             <div class="destiny-description__texts">

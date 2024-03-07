@@ -18,7 +18,7 @@
             
         </div>
         <div class="modalTraveler__container-btns">
-            <button type="button" class="modalTraveler__container-btns-cancel ff-roboto">Cancelar</button>
+            <button type="button" class="modalTraveler__container-btns-cancel ff-roboto" @click="$emit('desactive-modal', false)">Cancelar</button>
             <button type="button" class="modalTraveler__container-btns-sucess ff-roboto" @click="ApplyFilters()">Aplicar</button>
         </div>
     </div>

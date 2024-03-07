@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import Banner from '@/components/Banner/Banner.vue';
+import Banner from '@/components/shared/Banner/Banner.vue';
 import FormRegister from '@/components/shared/FormRegister/FormRegister.vue';
 
 import { defineComponent } from 'vue'

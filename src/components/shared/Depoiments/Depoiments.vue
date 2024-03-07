@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import DepoimentsCard from '../DepoimentsCard/DepoimentsCard.vue'
-import Depoiment from '../../models/Depoiment.js';
+import DepoimentsCard from '@/components/shared/DepoimentsCard/DepoimentsCard.vue'
+import Depoiment from '@/models/Depoiment.js';
 export default defineComponent({
     name: "DepoimentsComponent",
     components: {DepoimentsCard},

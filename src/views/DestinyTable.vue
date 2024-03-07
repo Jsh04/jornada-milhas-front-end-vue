@@ -1,4 +1,5 @@
 <template>
+    <Loader :isActive="isLoading" />
     <section class="tableDestiny">
         <article class="tableDestiny__container">
             <div class="tableDestiny__container-title">
@@ -36,18 +37,22 @@ import Destination from '@/models/Destination';
 import { useStore } from '@/store';
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
 import swal from 'sweetalert';
-import Util from '@/util/Util';
+import Util from '@/services/util/Util';
 import { AxiosResponse } from 'axios';
+import Loader from '@/components/shared/Loader.vue';
+
 
 export default defineComponent({
     name: "DestinyTableComponent",
+    components: { Loader },
     data() {
         return {
-            
+            isLoading: false
         }
     },
     methods: {
         async getDestinysFromApi(){
+            this.isLoading = true
             try {
                 await this.store.dispatch(DESTINATION_ALL_GET, {page: 0, size: 10});
             } catch (error) {
@@ -55,6 +60,8 @@ export default defineComponent({
                     icon:"error",
                     title: "Erro ao buscar destinos"
                 })
+            } finally {
+                this.isLoading = false
             }
         },
         ReturnMaskPrice(price: number){

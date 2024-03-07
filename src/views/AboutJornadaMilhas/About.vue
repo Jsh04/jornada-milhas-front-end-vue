@@ -10,8 +10,8 @@
         </article>
         <article class="description__container">
             <div class="description__container-imgs">
-                <img src="../../../assets/Imagens/Card-Turquia.png" alt="">
-                <img src="../../../assets/Imagens/Card-Atacama.png" alt="">
+                <img src="../../assets/Imagens/Card-Turquia.png" alt="">
+                <img src="../../assets/Imagens/Card-Atacama.png" alt="">
             </div>
             <div class="description__container-paragrafs">
                 <p class="ff-roboto">Embarque em uma jornada extraordinária com Jornada Milhas, onde cada quilômetro percorrido é uma promessa de novas descobertas e experiências inesquecíveis. Com asas que transcendem fronteiras e horizontes, nós da Jornada Milhas estamos aqui para transformar seus sonhos de viagem em realidade. De praias paradisíacas a metrópoles pulsantes, seja qual for o seu destino, deixe-nos guiá-lo pelo céu, onde cada voo é mais do que uma simples viagem, é uma oportunidade de criar memórias que durarão para sempre. Permita-se voar mais alto com Jornada Milhas e abrace o mundo com os braços abertos.</p>
@@ -79,6 +79,8 @@ export default defineComponent({
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    text-align: justify;
+    letter-spacing: 1px;
     
 }
 </style>

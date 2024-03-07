@@ -4,7 +4,7 @@
         <article class="login__container">
             <div class="login__container-content">
                 <div class="login__container-img">
-                    <img src="../../assets/Imagens/Simbolo-laranja.png" alt="" srcset="">
+                    <img src="../assets/Imagens/Simbolo-laranja.png" alt="" srcset="">
                 </div>
                 <div class="login__container-forms">
                     <div class="login__container-title">
@@ -27,7 +27,7 @@
                             </span>
                         </div>
                         <div class="login__form-btn">
-                            <button type="submit" class="ff-roboto">ACESSAR MINHA CONTA</button>
+                            <button type="submit" class="ff-roboto">ACESSAR MINHA CONTA<span v-if="loading" class="loader"></span></button>
                         </div>
                     </form>
                 </div>
@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Banner from '../Banner/Banner.vue';
+import Banner from '@/components/shared/Banner/Banner.vue';
 import Login from '@/models/Login'
 import { useStore } from '@/store';
 import useVuelidate from '@vuelidate/core';
@@ -54,18 +54,22 @@ export default defineComponent({
     data() {
         return {
             urlImage: require('@/assets/Imagens/3-Banner-Login.png'),
-            Login: {} as Login
+            Login: {} as Login,
+            loading: false
         }
     },
     methods: {
         async SendLoginUser(){
+            this.loadingApperance()
             const formValidity = await this.v$.$validate()
-            if (!formValidity) {
+            if (!formValidity){ 
                 swal({
                     text: "Formulário inválido",
                     buttons: [true, "Sair"],
                     icon: "error"
                 })
+                this.loading = true
+                return;
             }
             try {
                 const response = await this.store.dispatch(POST_LOGIN, this.Login);
@@ -83,7 +87,12 @@ export default defineComponent({
                     icon: "error",
                     buttons: [true, "Ok"]
                 })
+            } finally {
+                this.loading = false
             }
+        },
+        loadingApperance(){
+            this.loading = true
         }
     },
     validations(){
@@ -213,7 +222,11 @@ export default defineComponent({
     line-height: 24px;
     color: white;
     width: calc(530px / 2 - 4px);
-    height: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem;
     cursor: pointer;
 }
 
