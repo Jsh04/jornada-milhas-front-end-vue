@@ -21,7 +21,7 @@ jobs:
       run: docker build . --file Dockerfile --tag jornada-milhas-vue:latest
       
     - name : Docker Tag 
-      run: docker tag jornada-milhas-vue:latest ${{secrets.DOCKER_USER}}/adopet-front-angular:latest
+      run: docker tag jornada-milhas-vue:latest ${{secrets.DOCKER_USER}}/jornada-milhas-vue:latest
       
     - name : Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/adopet-front-angular:latest
+      run: docker push ${{secrets.DOCKER_USER}}/jornada-milhas-vue:latest
