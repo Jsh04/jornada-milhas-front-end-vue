@@ -3,7 +3,7 @@
       <main>
           <router-view></router-view>
       </main>
-  <Footer />
+  <Footer></Footer>
 </template>
 
 <script lang="ts">
