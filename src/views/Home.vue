@@ -1,6 +1,7 @@
 <template>
     <Banner :url-image="urlImageTop"/>
-    <div class="container__jornada">
+    <LoaderPassages v-if="LoadingSearch" :isActiveLoader="LoadingSearch"></LoaderPassages>
+    <div v-else class="container__jornada">
         <Filter @active-modal-filter="ActiveModalEvent" :ListFilters="ListFilters" />
         <Destinations />
         <Depoiments />
@@ -18,6 +19,7 @@ import Destinations from '@/components/shared/Destinations/Destinations.vue';
 import Depoiments from '@/components/shared/Depoiments/Depoiments.vue';
 import ModalTraveler from '@/components/modals/ModalTravaler/ModalTraveler.vue';
 import FilterInterface from '@/interfaces/FilterInterface';
+import LoaderPassages from '@/components/shared/LoaderPassages/LoaderPassages.vue';
 
 export default defineComponent({
     name: "HomeComponent",
@@ -26,14 +28,16 @@ export default defineComponent({
     Filter,
     Destinations,
     Depoiments,
-    ModalTraveler
+    ModalTraveler,
+    LoaderPassages
   },
   data() {
     return {
       urlImageBotton: require('@/assets/Imagens/2-Banner-homepage2.png'),
       urlImageTop: require('@/assets/Imagens/Banner-homepage.png'),
       ActiveModal: false,
-      ListFilters: [] as FilterInterface[]
+      ListFilters: [] as FilterInterface[],
+      LoadingSearch: false
     }
   },
   methods: {
