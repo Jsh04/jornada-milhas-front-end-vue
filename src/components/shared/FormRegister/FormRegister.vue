@@ -282,6 +282,7 @@ import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 import { AxiosResponse } from "axios";
+import Util from "@/services/util/Util";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -298,8 +299,7 @@ export default defineComponent({
     data() {
         return {
         UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
-        User: {
-        } as User,
+        User: {} as User,
         checkedTerms: false
         };
     },
@@ -366,20 +366,9 @@ export default defineComponent({
           this.User.city = response.data.localidade
           this.User.state = response.data.uf
         },
-        MaskPhone(): void{
-        var r = this.User.phone.replace(/\D/g, "");
-        r = r.replace(/^0/, "");
-        if (r.length > 10) {
-            r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-        } else if (r.length > 5) {
-            r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-        } else if (r.length > 2) {
-            r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-        } else {
-            r = r.replace(/^(\d*)/, "($1");
+        MaskPhone(){
+          this.User.phone = Util.MaskPhone(this.User.phone)  
         }
-        this.User.phone = r
-        },
     },
     validations(){
         return {

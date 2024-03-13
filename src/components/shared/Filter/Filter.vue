@@ -67,7 +67,6 @@
 
 <script lang="ts">
 
-import FilterInterface from '@/interfaces/FilterInterface'
 import { defineComponent } from 'vue'
 export default defineComponent({
     name: "FilterComponent",
