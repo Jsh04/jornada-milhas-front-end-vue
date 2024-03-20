@@ -11,12 +11,27 @@ import DestinyPageVue from "@/views/DestinysPage/DestinyPage.vue";
 import DestinyRegisterVue from "@/views/DestinyRegister/DestinyRegister.vue";
 import DestinyTableVue from "@/views/DestinyTable.vue";
 import DestinyEditVue from "@/views/DestinyEdit/DestinyEdit.vue";
+import TicketsPurchase from "@/views/TicketsPurchase/TicketsPurchase.vue";
+import MainSectionHome from "@/components/shared/MainSectionHome/MainSectionHome.vue";
 
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        component: Home,
-        meta: { requiresAuth: false }
+        components: {
+            default: Home,
+        },
+        meta: { requiresAuth: false },
+        children: [
+            {
+                path: '/',
+                component: MainSectionHome
+            },
+            {
+                path: '/passagens',
+                component: TicketsPurchase
+            },
+           
+        ]  
     },
     {
         path: '/descricao/:id',

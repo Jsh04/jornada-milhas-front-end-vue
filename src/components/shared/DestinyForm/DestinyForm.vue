@@ -101,7 +101,7 @@ import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import Destination from '@/models/Destination';
 import { useStore } from '@/store';
 import { helpers, required } from '@vuelidate/validators';
-import Util from '@/services/util/Util'
+import Util from '@/util/Util'
 import swal from 'sweetalert';
 import { DESTINATION_GET_BY_ID, DESTINATION_POST, DESTINATION_PUT_UPDATE } from '@/store/actions/DestinyActions';
 export default defineComponent({
@@ -264,4 +264,4 @@ export default defineComponent({
 })
 </script>
 
-<style src="./styles/DestinyForm.css" scoped></style>
+<style src="./styles/DestinyForm.css" scoped></style>@/util/Util

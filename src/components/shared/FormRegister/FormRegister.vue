@@ -282,7 +282,7 @@ import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 import { AxiosResponse } from "axios";
-import Util from "@/services/util/Util";
+import Util from "@/util/Util";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -439,3 +439,4 @@ export default defineComponent({
 <style src="./styles/Register.css" scoped></style>
 <style src="./styles/RegisterInput.css" scoped></style>
 
+@/util/Util

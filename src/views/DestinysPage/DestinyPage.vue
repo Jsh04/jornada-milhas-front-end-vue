@@ -1,6 +1,5 @@
 <template>
-<router-view>
-</router-view>
+
     <section class="destinyPage">
 
         <article class="destinyPage__menu">
@@ -16,7 +15,7 @@
                 <router-link to="/admin/destino/listar-destino" class="destinyPage__menu-item-content">Listar Destinos</router-link>
                 <i style="font-size: 32px;" class="las la-eye"></i>
             </div>
-        </article>
+        </article> 
     </section>
 
     
