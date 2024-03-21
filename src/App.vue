@@ -32,6 +32,7 @@ export default defineComponent({
   --purple-primary: #6750A4;
   --gray-primary: #F5F5F5;
   --gray-secondary: #e8e8e8;
+  --gray-terciary: #79747E;
 }
 
 .ff-roboto{

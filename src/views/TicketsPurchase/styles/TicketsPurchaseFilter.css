@@ -1,0 +1,36 @@
+.filter__container{
+    padding: 2rem 1rem;
+    border-radius: 16px;
+}
+
+.filter__container-clean{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter__container-title h2{
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; 
+}
+
+.filter__container-clean-btn button{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; 
+    color: #6750A4;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid var(--gray-terciary);
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.icon{
+    font-size: 24px;
+}
