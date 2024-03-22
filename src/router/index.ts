@@ -11,6 +11,7 @@ import DestinyPageVue from "@/views/DestinysPage/DestinyPage.vue";
 import DestinyRegisterVue from "@/views/DestinyRegister/DestinyRegister.vue";
 import DestinyTableVue from "@/views/DestinyTable.vue";
 import DestinyEditVue from "@/views/DestinyEdit/DestinyEdit.vue";
+import ConfirmMail from "@/views/ConfirmMail.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -26,6 +27,11 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/cadastro',
         component: RegisterVue,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: '/confirmarEmail/:idUser',
+        component: ConfirmMail,
         meta: { requiresAuth: false }
     },
     {

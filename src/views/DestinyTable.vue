@@ -37,7 +37,7 @@ import Destination from '@/models/Destination';
 import { useStore } from '@/store';
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
 import swal from 'sweetalert';
-import Util from '@/services/util/Util';
+import Util from '@/util/Util';
 import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
 
@@ -125,4 +125,4 @@ export default defineComponent({
 .cell__click{
     cursor: pointer;
 }
-</style>
+</style>@/util/Util

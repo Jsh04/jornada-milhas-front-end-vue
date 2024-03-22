@@ -37,7 +37,7 @@ export default defineComponent({
     },
     methods: {
         DefineDestinyCurrent(): void{
-            const id = this.$route.params.id;
+            const id = Number(this.$route.params.id);
             const destiny = this.ListDestinys.find(destiny => destiny.id == id);
             this.Destiny = destiny;
         }

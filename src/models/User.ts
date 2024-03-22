@@ -2,6 +2,7 @@ import { Genre } from "./enums/EnumGenre";
 import { Role } from "./enums/EnumsRole";
 
 export default class User{
+    id = 0
     name = ''
     dtBirth = ''
     genre = Genre.NotInfo

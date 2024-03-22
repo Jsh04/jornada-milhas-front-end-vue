@@ -17,7 +17,7 @@ export default defineComponent({
         return {
             urlImage: require("@/assets/Imagens/Banner-destino.png"),
             destiny: {
-                id: '0',
+                id: 0,
                 name: '',
                 pictuteTest: '',
                 price: 0.0
@@ -25,7 +25,7 @@ export default defineComponent({
         }
     },
     mounted() {
-        const id = this.$route.params.id;
+        const id = Number(this.$route.params.id);
         const destiny = this.ListDestinys.find(destiny => destiny.id == id)
         this.destiny = destiny;
     },

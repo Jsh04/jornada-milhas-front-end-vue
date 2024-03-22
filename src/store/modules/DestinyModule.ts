@@ -16,7 +16,7 @@ export const DestinyModule: Module<StateDestination, State> = {
     state: {
         Destinys: [
             {
-                id: '1',
+                id: 1,
                 name: 'Atacama',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Atacama.png'),
@@ -26,33 +26,33 @@ export const DestinyModule: Module<StateDestination, State> = {
                 
             } as Destination,
             {
-                id: '2',
+                id: 2,
                 name: 'Veneza',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Veneza.png')
             } as Destination,
             {
-                id: '3',
+                id: 3,
                 name: 'Patagonia',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Patagonia.png')
 
             } as Destination,
             {
-                id: '4',
+                id: 4,
                 name: 'Grand Canyon',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Grand-Canyon.png')
 
             } as Destination,
             {
-                id: '5',
+                id: 5,
                 name: 'Turquia',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Turquia.png')
             } as Destination,
             {
-                id: '6',
+                id: 6,
                 name: 'Cordilheira dos Andes',
                 price: 500.00,
                 pictuteTest: require('@/assets/Imagens/Card-Cordilheira-dos-Andes.png')

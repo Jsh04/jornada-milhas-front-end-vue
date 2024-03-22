@@ -282,7 +282,7 @@ import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 import { AxiosResponse } from "axios";
-import Util from "@/services/util/Util";
+import Util from "@/util/Util";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -324,7 +324,8 @@ export default defineComponent({
               this.User.userRole = Role.Admin
             else
               this.User.userRole = Role.Limited
-            const response = await this.store.dispatch(REGISTER_USER, this.User);
+            
+            const response: AxiosResponse<User> = await this.store.dispatch(REGISTER_USER, this.User);
             if (response.status == 201) {
                 swal({
                 icon: "success",
@@ -333,10 +334,8 @@ export default defineComponent({
                 })
                 this.User = {} as User
                 this.v$.$reset();
-                this.$router.push("/login")
+                this.$router.push({ params: {idUser: response.data.id}, path: '/confirmarEmail' })
             }
-                
-            
         }catch(erro){
             swal({
                 text:"Erro ao cadastrar usuário",
@@ -438,4 +437,3 @@ export default defineComponent({
 
 <style src="./styles/Register.css" scoped></style>
 <style src="./styles/RegisterInput.css" scoped></style>
-
