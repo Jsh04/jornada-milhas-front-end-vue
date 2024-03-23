@@ -3,33 +3,30 @@ import { Genre } from "@/models/enums/EnumGenre";
 import { Role } from "@/models/enums/EnumsRole";
 import { State, store, useStore } from "@/store";
 import { REGISTER_USER } from "@/store/actions/UserActions";
+import Util from "@/util/Util";
 import { AxiosResponse } from "axios";
-import swal from "sweetalert";
 import { Store } from "vuex";
 
-export default class UserService{
+export default class  UserService{
 
-    readonly urlUser: string = "/usuarios";
-    store: Store<State>
+    private store: Store<State>
 
     constructor(){
         this.store = useStore();
     }
 
-    public async RegisterUser(user: User, isAdmin: boolean): Promise<void>{
+    public async RegisterUser(user: User, isAdmin: boolean): Promise<User | undefined>{
         try{
             
             user = this.ValidationTypeFormUser(isAdmin, user)
             user = this.ValidationGenreUser(user);
             const response: AxiosResponse<User> = await store.dispatch(REGISTER_USER, user);
+            return response.data;
             
         }catch(erro){
-            swal({
-                text:"Erro ao cadastrar usuário",
-                icon: "error",
-                buttons: [true, "Ok"]
-            })
-          }
+            Util.ShowAlert(undefined, "error", "Erro ao cadastrar usuário", [true, "Ok"]);
+            return undefined;
+        }
     }
 
     private ValidationTypeFormUser(isAdmin: boolean, user: User): User{

@@ -1,3 +1,6 @@
+import swal from "sweetalert";
+import { ButtonList } from "sweetalert/typings/modules/options/buttons";
+
 export default class Util {
 
     public static FormatMoney(value: string): string{
@@ -54,6 +57,15 @@ export default class Util {
             r = r.replace(/^(\d*)/, "($1");
         }
         return r;
+    }
+
+    public static ShowAlert(title?: string, icon?: string, text?: string, buttons?:  ButtonList | (string | boolean)[] | undefined){
+        swal({
+            text,
+            buttons,
+            icon,
+            title
+            })
     }
 }
 

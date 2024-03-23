@@ -10,7 +10,9 @@
 import { defineComponent } from 'vue';
 import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
-import UserService from '@/services/UserService/UserService'
+import UserService from '@/services/UserService/UserService';
+import CepService from '@/services/CepService/CepService';
+
 export default defineComponent({
   name: 'App',
   components: {
@@ -19,7 +21,8 @@ export default defineComponent({
   },
   provide(){
     return {
-      userService: new UserService()
+      userService: new UserService(),
+      cepService: new CepService()
     }
   }
   

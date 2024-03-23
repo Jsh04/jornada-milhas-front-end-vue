@@ -12,6 +12,7 @@
               type="text"
               class="ff-roboto"
               name="name"
+              id="name"
               placeholder="Digite seu nome completo"
               :class="[v$.User.name.$errors.length > 0 ? 'register__input_erro' : '']"
               v-model.trim="User.name"
@@ -27,7 +28,7 @@
               style="width: calc(530px - 3rem)"
               type="text"
               class="ff-roboto"
-              name="name"
+              id="codeEmployee"
               placeholder="Digite seu nome completo"
               :class="[v$.User.codeEmployee.$errors.length > 0 ? 'register__input_erro' : '']"
               v-model.trim="User.codeEmployee"
@@ -46,6 +47,7 @@
                 type="date"
                 class="ff-roboto"
                 placeholder="XX/XX/XXXX"
+                id="dtBirth"
                 v-model="User.dtBirth"
                 @blur="v$.User.dtBirth.$touch"
               />
@@ -76,6 +78,7 @@
                 style="width: calc((530px / 2) - 3rem)"
                 type="text"
                 class="ff-roboto"
+                id="cpf"
                 placeholder="XXX.XXX.XXX-XX"
                 v-model="User.cpf"
                 @blur="v$.User.cpf.$touch"
@@ -91,6 +94,7 @@
                 type="text"
                 class="ff-roboto"
                 placeholder="Digite seu telefone"
+                id="phone"
                 v-model="User.phone"
                 maxlength="15"
                 @blur="v$.User.phone.$touch"
@@ -107,6 +111,7 @@
                 type="text"
                 class="ff-roboto"
                 placeholder="Digite seu CEP"
+                id="cep"
                 v-model="User.cep"
                 minlength="8"
                 maxlength="9"
@@ -123,6 +128,7 @@
                 type="text"
                 class="ff-roboto"
                 placeholder="Digite seu cidade"
+                id="city"
                 v-model="User.city"
                 @blur="v$.User.city.$touch"
               />
@@ -132,7 +138,7 @@
               </span>
             </div>
             <div class="register__form-input">
-              <select v-model="User.state" style="width: calc((530px / 2) - 6px)" class="ff-roboto" @blur="v$.User.state.$touch" :disabled="isAdminRegister">
+              <select v-model="User.state" id="state" style="width: calc((530px / 2) - 6px)" class="ff-roboto" @blur="v$.User.state.$touch" :disabled="isAdminRegister">
                 <option value="0">Selecione o estado</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -172,6 +178,7 @@
                 type="text"
                 class="ff-roboto"
                 placeholder="Seu endereço"
+                id="address"
                 v-model="User.adress"
                 @blur="v$.User.adress.$touch"
                 :disabled="isAdminRegister"
@@ -187,6 +194,7 @@
                 type="text"
                 class="ff-roboto"
                 placeholder="Seu bairro"
+                id="district"
                 v-model="User.district"
                 :disabled="isAdminRegister"
                 @blur="[v$.User.district.$touch]"
@@ -201,6 +209,8 @@
                 style="width: calc((530px / 2) - 3rem)"
                 type="email"
                 class="ff-roboto"
+                id="email"
+                name="email"
                 v-model="User.email"
                 placeholder="Digite seu e-mail"
                 @blur="v$.User.email.$touch"
@@ -208,7 +218,7 @@
               />
               <label class="ff-roboto">E-mail</label>
               <span v-if="v$.User.email.$errors.length != 0" class="message_error ff-roboto">
-                {{ v$.User.Email.$errors[0].$message }}
+                {{ v$.User.email.$errors[0].$message }}
               </span>
             </div>
             <div class="register__form-input">
@@ -216,6 +226,8 @@
                 style="width: calc((530px / 2) - 3rem)"
                 type="email"
                 class="ff-roboto"
+                name="confirmEmail"
+                id="confirmEmail"
                 placeholder="Digite seu e-mail novamente"
                 v-model="User.confirmEmail"
                 @blur="v$.User.confirmEmail.$touch"
@@ -231,6 +243,7 @@
                 type="password"
                 class="ff-roboto"
                 v-model="User.password"
+                id="password"
                 placeholder="Digite sua senha"
                 @blur="v$.User.password.$touch"
               />
@@ -245,6 +258,7 @@
                 type="password"
                 class="ff-roboto"
                 v-model="User.confirmPassword"
+                id="confirmPassword"
                 placeholder="Repita sua senha"
                 @blur="v$.User.confirmPassword.$touch"
               />
@@ -271,20 +285,17 @@
 
 import { defineComponent, inject } from "vue";
 import User from '../../../models/User'
-import { Role } from '@/models/enums/EnumsRole'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, sameAs, minLength} from '@vuelidate/validators'
 import { useStore } from "../../../store"
-import { REGISTER_USER, GET_INFO_ADRESS } from "../../../store/actions/UserActions";
-import swal from 'sweetalert';
 import {validateCpf} from "../../../validations/ValidationCPF"
 import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 import { AxiosResponse } from "axios";
 import Util from "@/util/Util";
-import { Genre } from "@/models/enums/EnumGenre";
 import UserService from "@/services/UserService/UserService";
+import CepService from "@/services/CepService/CepService";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -308,11 +319,7 @@ export default defineComponent({
     methods: {
         async SendForms(){
         if (!this.checkedTerms) {
-            swal({
-            text: "Confirme que leu nossos termos e condições",
-            buttons: [true, "Sair"],
-            icon: "warning"
-            })
+            Util.ShowAlert("Confirme que leu nossas condições", "warning", "", [true, "Sair"] )
             return;
         }
         
@@ -321,28 +328,26 @@ export default defineComponent({
             alert("Formulário inválido")
             return;
         }
-        
+
+        const data = await this.userService?.RegisterUser(this.User, this.isAdminRegister);
+        if (data != undefined) {
+          this.$router.push(`/confirmarEmail/${data.id}`);
+          this.v$.$reset();
+        }
+
         },
         async GetInfoAdress(){
-          const cepConverted = this.User.cep.replace(/\D/g, "");
-          try {
-            const response: AxiosResponse<CepResponseDTO, any> = 
-              await this.store.dispatch(GET_INFO_ADRESS, cepConverted);
-            this.FillInputsAdress(response);
-            
-          } catch (error) {
-            swal({
-              title: "Não foi possível recuperar os dados do CEP",
-              icon: "error",
-              buttons: [true, "Ok"]
-            })
-          }
+          const data = await this.cepService?.RequestGetViaCep(this.User.cep);
+          
+          if (data != undefined) this.FillInputsAdress(data);
+          
         },
-        FillInputsAdress(response: AxiosResponse<CepResponseDTO, any>){
-          this.User.adress = response.data.logradouro
-          this.User.district = response.data.bairro
-          this.User.city = response.data.localidade
-          this.User.state = response.data.uf
+
+        FillInputsAdress(data: CepResponseDTO ){
+          this.User.adress = data.logradouro
+          this.User.district = data.bairro
+          this.User.city = data.localidade
+          this.User.state = data.uf
         },
         MaskPhone(){
           this.User.phone = Util.MaskPhone(this.User.phone)  
@@ -407,10 +412,13 @@ export default defineComponent({
     setup() {
         const store = useStore()
         const userService: UserService | undefined = inject<UserService>('userService');
+        const cepService: CepService | undefined = inject<CepService>('cepService');
+
         return { 
-        v$: useVuelidate(),
-        store,
-        userService
+          v$: useVuelidate(),
+          store,
+          userService,
+          cepService
         }
     },
 })
