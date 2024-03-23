@@ -28,12 +28,12 @@ export default defineComponent({
 
         const store = useStore();
         const router = useRouter();
-        const route = useRoute();
+
         const idUser = ref(0);
 
         async function SendBtn(): Promise<void>{
             try {
-                const response = await store.dispatch(CONFIRM_MAIL);
+                const response = await store.dispatch(CONFIRM_MAIL, idUser.value);
                 changeRouterConfirmMail(response.data)
             } catch (error) {
                 swal({
@@ -62,10 +62,7 @@ export default defineComponent({
         }
     },
     mounted() {
-        const idUser = this.$route.params.idUser
-        console.log(idUser);
-        
-        
+        this.idUser = Number(this.$route.params.idUser);
     },
 })
 </script>

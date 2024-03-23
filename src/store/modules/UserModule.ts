@@ -2,7 +2,7 @@ import User from "@/models/User";
 import { Module } from "vuex";
 import { State } from "..";
 import { GET_INFO_ADRESS, REGISTER_USER } from "../actions/UserActions";
-import HttpClient from "@/services/http/HttpClient";
+import HttpClient from "@/util/http/HttpClient";
 import axios from "axios";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 

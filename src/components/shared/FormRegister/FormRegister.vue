@@ -269,7 +269,7 @@
 
 <script lang="ts">
 
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import User from '../../../models/User'
 import { Role } from '@/models/enums/EnumsRole'
 import { useVuelidate } from '@vuelidate/core'
@@ -283,6 +283,8 @@ import { validatePhone } from "../../../validations/ValidationPhone";
 import CepResponseDTO from "@/interfaces/CepResponseDTO";
 import { AxiosResponse } from "axios";
 import Util from "@/util/Util";
+import { Genre } from "@/models/enums/EnumGenre";
+import UserService from "@/services/UserService/UserService";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -319,30 +321,7 @@ export default defineComponent({
             alert("Formulário inválido")
             return;
         }
-        try{
-            if (this.isAdminRegister) 
-              this.User.userRole = Role.Admin
-            else
-              this.User.userRole = Role.Limited
-            
-            const response: AxiosResponse<User> = await this.store.dispatch(REGISTER_USER, this.User);
-            if (response.status == 201) {
-                swal({
-                icon: "success",
-                text:"Usuário cadastrado com sucesso",
-                buttons: [true, "Ok!"]
-                })
-                this.User = {} as User
-                this.v$.$reset();
-                this.$router.push({ params: {idUser: response.data.id}, path: '/confirmarEmail' })
-            }
-        }catch(erro){
-            swal({
-                text:"Erro ao cadastrar usuário",
-                icon: "error",
-                buttons: [true, "Ok"]
-            })
-          }
+        
         },
         async GetInfoAdress(){
           const cepConverted = this.User.cep.replace(/\D/g, "");
@@ -427,9 +406,11 @@ export default defineComponent({
     },
     setup() {
         const store = useStore()
+        const userService: UserService | undefined = inject<UserService>('userService');
         return { 
         v$: useVuelidate(),
-        store
+        store,
+        userService
         }
     },
 })

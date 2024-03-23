@@ -2,7 +2,7 @@ import Login from "@/models/Login";
 import { Module } from "vuex";
 import { State } from "..";
 import { CONFIRM_MAIL, POST_LOGIN } from "../actions/LoginActions";
-import HttpClient from "@/services/http/HttpClient";
+import HttpClient from "@/util/http/HttpClient";
 import LoginResponseDto from "@/interfaces/LoginResponseDTO";
 import { REGISTER_USER_LOGGED } from "../mutations/LoginMutations";
 import User from "@/models/User";
@@ -36,9 +36,8 @@ export const LoginModule: Module<StateLogin, State> = {
             context.commit(REGISTER_USER_LOGGED, response.data);
             return response;
         },
-        async [CONFIRM_MAIL](context){
-            const response = await HttpClient.get('/confirmMail')
-
+        async [CONFIRM_MAIL](context, id: number){
+            const response = await HttpClient.get(`login/confirmMail/${id}`)
             return response;
         }
     },

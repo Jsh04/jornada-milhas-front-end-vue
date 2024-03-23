@@ -10,17 +10,21 @@
 import { defineComponent } from 'vue';
 import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
-
+import UserService from '@/services/UserService/UserService'
 export default defineComponent({
   name: 'App',
   components: {
     Header,
     Footer
   },
+  provide(){
+    return {
+      userService: new UserService()
+    }
+  }
   
 });
 </script>
-
 <style>
 
 *{
