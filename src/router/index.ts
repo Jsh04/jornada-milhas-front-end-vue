@@ -12,6 +12,7 @@ import DestinyRegisterVue from "@/views/DestinyRegister/DestinyRegister.vue";
 import DestinyTableVue from "@/views/DestinyTable.vue";
 import DestinyEditVue from "@/views/DestinyEdit/DestinyEdit.vue";
 import ConfirmMail from "@/views/ConfirmMail.vue";
+import AcknowledgmentConfirmMail from "@/views/AcknowledgmentConfirmMail.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -32,6 +33,11 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/confirmarEmail/:idUser',
         component: ConfirmMail,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: '/sendConfirmMail/:idUser',
+        component: AcknowledgmentConfirmMail,
         meta: { requiresAuth: false }
     },
     {
