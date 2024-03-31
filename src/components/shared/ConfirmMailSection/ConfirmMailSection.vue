@@ -93,7 +93,7 @@ export default defineComponent({
     },
     async mounted() {
         this.idUser = Number(this.$route.params.idUser);
-        await this.RequestConfirmMail(this.idUser)
+        if(!this.isConfirmMail) await this.RequestConfirmMail(this.idUser)
     },
 })
 </script>
