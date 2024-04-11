@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import FilterQuantityAgr from '@/components/shared/FilterQuantityAge/FilterQuantityAge.vue'
-import FilterInterface from '@/interfaces/FilterInterface';
+import FilterInterface from '@/interfaces/DTOs/FilterInterface';
     export default defineComponent({
         name: "ModalComponent",
         components: { 

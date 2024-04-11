@@ -3,8 +3,7 @@
     <LoaderPassages v-if="LoadingSearch" :isActiveLoader="LoadingSearch"></LoaderPassages>
     <div v-else class="container__jornada">
         <Filter @active-modal-filter="ActiveModalEvent" :ListFilters="ListFilters" />
-        <Destinations />
-        <Depoiments />
+        <router-view></router-view>
     </div>
     <Banner :url-image="urlImageBotton"/>
     <ModalTraveler @list-filters="GetListFilters" :ActiveModal="ActiveModal" @desactive-modal="ActiveModalEvent"/>
@@ -15,10 +14,8 @@
 import { defineComponent } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
 import Filter from '@/components/shared/Filter/Filter.vue';
-import Destinations from '@/components/shared/Destinations/Destinations.vue';
-import Depoiments from '@/components/shared/Depoiments/Depoiments.vue';
 import ModalTraveler from '@/components/modals/ModalTravaler/ModalTraveler.vue';
-import FilterInterface from '@/interfaces/FilterInterface';
+import FilterInterface from '@/interfaces/DTOs/FilterInterface';
 import LoaderPassages from '@/components/shared/LoaderPassages/LoaderPassages.vue';
 
 export default defineComponent({
@@ -26,8 +23,6 @@ export default defineComponent({
     components: {
     Banner,
     Filter,
-    Destinations,
-    Depoiments,
     ModalTraveler,
     LoaderPassages
   },

@@ -1,5 +1,5 @@
 <template>
-    <section class="register">
+  <section class="register">
     <article class="register__container">
       <div class="register__title">
         <h2 class="ff-roboto">{{ title }}</h2>
@@ -19,24 +19,38 @@
               @blur="v$.User.name.$touch"
             />
             <label class="ff-roboto">Nome</label>
-            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.name.$errors" :key="index">
+            <span
+              class="message_error ff-roboto"
+              v-for="(error, index) in v$.User.name.$errors"
+              :key="index"
+            >
               {{ error.$message }}
             </span>
           </div>
-          <div style="margin-top: 2rem;" class="register__form-input" v-if="isAdminRegister">
+          <div
+            style="margin-top: 2rem"
+            class="register__form-input"
+            v-if="isAdminRegister"
+          >
             <input
               style="width: calc(530px - 3rem)"
               type="text"
               class="ff-roboto"
               id="codeEmployee"
               placeholder="Digite seu nome completo"
-              :class="[v$.User.codeEmployee.$errors.length > 0 ? 'register__input_erro' : '']"
+              :class="[
+                v$.User.codeEmployee.$errors.length > 0 ? 'register__input_erro' : '',
+              ]"
               v-model.trim="User.codeEmployee"
               minlength="8"
               @blur="v$.User.codeEmployee.$touch"
             />
             <label class="ff-roboto">Código do Funcionário</label>
-            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.codeEmployee.$errors" :key="index">
+            <span
+              class="message_error ff-roboto"
+              v-for="(error, index) in v$.User.codeEmployee.$errors"
+              :key="index"
+            >
               {{ error.$message }}
             </span>
           </div>
@@ -52,26 +66,48 @@
                 @blur="v$.User.dtBirth.$touch"
               />
               <label class="ff-roboto">Data de nascimento</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.dtBirth.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.dtBirth.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
             <div class="register__form-genre">
-                <label class="ff-roboto register__form-genre-label">Gênero</label>
-                <div class="register__form-radios">
-                    <div class="register__form-radios-container">
-                      <label for="female" class="ff-roboto">Feminino</label>
-                      <input type="radio" v-model="User.genre" value="Female" name="genre" id="female">
-                    </div>
-                    <div class="register__form-radios-container">
-                      <label for="male" class="ff-roboto">Masculino</label>
-                      <input type="radio" v-model="User.genre" value="Male" name="genre" id="male">
-                    </div>
-                    <div class="register__form-radios-container">
-                      <label for="notInfo" class="ff-roboto">Prefiro não informar</label>
-                      <input type="radio" v-model="User.genre" value="NotInfo" name="genre" id="notInfo">
-                    </div>
+              <label class="ff-roboto register__form-genre-label">Gênero</label>
+              <div class="register__form-radios">
+                <div class="register__form-radios-container">
+                  <label for="female" class="ff-roboto">Feminino</label>
+                  <input
+                    type="radio"
+                    v-model="User.genre"
+                    value="Female"
+                    name="genre"
+                    id="female"
+                  />
                 </div>
+                <div class="register__form-radios-container">
+                  <label for="male" class="ff-roboto">Masculino</label>
+                  <input
+                    type="radio"
+                    v-model="User.genre"
+                    value="Male"
+                    name="genre"
+                    id="male"
+                  />
+                </div>
+                <div class="register__form-radios-container">
+                  <label for="notInfo" class="ff-roboto">Prefiro não informar</label>
+                  <input
+                    type="radio"
+                    v-model="User.genre"
+                    value="NotInfo"
+                    name="genre"
+                    id="notInfo"
+                  />
+                </div>
+              </div>
             </div>
             <div class="register__form-input">
               <input
@@ -84,7 +120,10 @@
                 @blur="v$.User.cpf.$touch"
               />
               <label class="ff-roboto">CPF</label>
-              <span v-if="v$.User.cpf.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.cpf.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.cpf.$errors[0].$message }}
               </span>
             </div>
@@ -101,7 +140,10 @@
                 @keyup="MaskPhone()"
               />
               <label class="ff-roboto">Telefone</label>
-              <span v-if="v$.User.phone.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.phone.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.phone.$errors[0].$message }}
               </span>
             </div>
@@ -118,7 +160,11 @@
                 @blur="[v$.User.cep.$touch, GetInfoAdress()]"
               />
               <label class="ff-roboto">CEP</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.cep.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.cep.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
@@ -133,7 +179,11 @@
                 @blur="v$.User.city.$touch"
               />
               <label class="ff-roboto">Cidade</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.city.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.city.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
@@ -168,7 +218,11 @@
                 <option value="SE">Sergipe</option>
               </select>
               <label class="ff-roboto">Estado</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.state.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.state.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
@@ -184,7 +238,11 @@
                 :disabled="isAdminRegister"
               />
               <label class="ff-roboto">Endereço</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.adress.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.adress.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
@@ -200,7 +258,11 @@
                 @blur="[v$.User.district.$touch]"
               />
               <label class="ff-roboto">Bairro</label>
-              <span class="message_error ff-roboto" v-for="(error, index) in v$.User.district.$errors" :key="index">
+              <span
+                class="message_error ff-roboto"
+                v-for="(error, index) in v$.User.district.$errors"
+                :key="index"
+              >
                 {{ error.$message }}
               </span>
             </div>
@@ -214,7 +276,6 @@
                 v-model="User.email"
                 placeholder="Digite seu e-mail"
                 @blur="v$.User.email.$touch"
-                
               />
               <label class="ff-roboto">E-mail</label>
               <span v-if="v$.User.email.$errors.length != 0" class="message_error ff-roboto">
@@ -233,7 +294,10 @@
                 @blur="v$.User.confirmEmail.$touch"
               />
               <label class="ff-roboto">Confirmar e-mail</label>
-              <span v-if="v$.User.confirmEmail.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.confirmEmail.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.confirmEmail.$errors[0].$message }}
               </span>
             </div>
@@ -248,7 +312,10 @@
                 @blur="v$.User.password.$touch"
               />
               <label class="ff-roboto">Senha</label>
-              <span v-if="v$.User.password.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.password.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.Password.$errors[0].$message }}
               </span>
             </div>
@@ -263,17 +330,24 @@
                 @blur="v$.User.confirmPassword.$touch"
               />
               <label class="ff-roboto">Confirmar Senha</label>
-              <span v-if="v$.User.confirmPassword.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.confirmPassword.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.ConfirmPassword.$errors[0].$message }}
               </span>
             </div>
           </div>
           <div class="register__form-checkbox">
-            <input id="terms" v-model="checkedTerms" type="checkbox">
-            <label for="terms" class="ff-roboto">Li e aceito os termos e condições deste cadastro.</label>
+            <input id="terms" v-model="checkedTerms" type="checkbox" />
+            <label for="terms" class="ff-roboto"
+              >Li e aceito os termos e condições deste cadastro.</label
+            >
           </div>
           <div class="register__form-btn-container">
-            <button class="register__form-btn ff-roboto" type="submit">criar minha conta</button>
+            <button class="register__form-btn ff-roboto" type="submit">
+              criar minha conta
+            </button>
           </div>
         </form>
       </div>
@@ -291,7 +365,7 @@ import { useStore } from "../../../store"
 import {validateCpf} from "../../../validations/ValidationCPF"
 import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
-import CepResponseDTO from "@/interfaces/CepResponseDTO";
+import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
 import { AxiosResponse } from "axios";
 import Util from "@/util/Util";
 import UserService from "@/services/UserService/UserService";
@@ -363,46 +437,67 @@ export default defineComponent({
               },
             codeEmployee: this.isAdminRegister ? {
               required: helpers.withMessage("O campo deverá ser obrigatório", required),
-              minLength: helpers.withMessage("O campo deverá ter no mínimo 8 caracteres", minLength(8))
-            } : {},
-            
-            confirmEmail: {
-            email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
-            required: helpers.withMessage("O campo deverá ser obrigatório", required),
-            sameAsEmail: helpers.withMessage("O email deverá ser igual ao email digitado anteriormente", sameAs(this.User.email))  
-            },
-            confirmPassword:{
-            required: helpers.withMessage("O campo deverá ser obrigatório", required),
-            sameAsPassword: helpers.withMessage("O senha deverá ser a mesma digitada anteriormente", sameAs(this.User.password))
-            },
-            password: {
-            required: helpers.withMessage("O campo não poderá ser nulo", required),
-            },
-            cpf: {
-              required: helpers.withMessage("O campo deverá ser obrigatório", required),
-              validatecpf: helpers.withMessage("cpf inválido", validateCpf)
-            },
-            dtBirth: {
+              minLength: helpers.withMessage(
+                "O campo deverá ter no mínimo 8 caracteres",
+                minLength(8)
+              ),
+            }
+          : {},
+
+        confirmEmail: {
+          email: helpers.withMessage(
+            "O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com",
+            email
+          ),
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          sameAsEmail: helpers.withMessage(
+            "O email deverá ser igual ao email digitado anteriormente",
+            sameAs(this.User.email)
+          ),
+        },
+        confirmPassword: {
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          sameAsPassword: helpers.withMessage(
+            "O senha deverá ser a mesma digitada anteriormente",
+            sameAs(this.User.password)
+          ),
+        },
+        password: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+        },
+        cpf: {
+          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          validatecpf: helpers.withMessage("cpf inválido", validateCpf),
+        },
+        dtBirth: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          greaterThan18: helpers.withMessage(
+            "Deverá ser maior que 18 anos para se cadastrar",
+            greaterThan18
+          ),
+        },
+        phone: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          validatephone: helpers.withMessage("Número inválido", validatePhone),
+        },
+        city: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+        },
+        state: {
+          required: helpers.withMessage("O campo não poderá ser nulo", required),
+        },
+        adress: this.isAdminRegister
+          ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required),
-              greaterThan18: helpers.withMessage("Deverá ser maior que 18 anos para se cadastrar", greaterThan18)
-            },
-            phone: {
+            }
+          : {},
+        district: this.isAdminRegister
+          ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required),
-              validatephone: helpers.withMessage("Número inválido", validatePhone)
-            },
-            city: {
-            required: helpers.withMessage("O campo não poderá ser nulo", required)
-            },
-            state:{
-            required: helpers.withMessage("O campo não poderá ser nulo", required)
-            },
-            adress: this.isAdminRegister ? {
-              required: helpers.withMessage("O campo não poderá ser nulo", required)
-            } : {},
-            district: this.isAdminRegister ? {
-              required: helpers.withMessage("O campo não poderá ser nulo", required)
-            } : {},
-            cep: this.isAdminRegister ? {
+            }
+          : {},
+        cep: this.isAdminRegister
+          ? {
               required: helpers.withMessage("O campo não poderá ser nulo", required),
               minLength: helpers.withMessage("O campo de CEP deverá ter no mínimo 8 caracteres", minLength(8))
             }: {}
