@@ -1,4 +1,4 @@
-import CepResponseDTO from "@/interfaces/CepResponseDTO";
+import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
 import { State, useStore } from "@/store";
 import { GET_INFO_ADRESS } from "@/store/actions/UserActions";
 import Util from "@/util/Util";
