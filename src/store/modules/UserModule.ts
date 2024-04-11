@@ -4,7 +4,7 @@ import { State } from "..";
 import { GET_INFO_ADRESS, REGISTER_USER } from "../actions/UserActions";
 import HttpClient from "@/services/http/HttpClient";
 import axios from "axios";
-import CepResponseDTO from "@/interfaces/CepResponseDTO";
+import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
 
 
 export interface StateUser{

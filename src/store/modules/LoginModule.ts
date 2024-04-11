@@ -3,7 +3,7 @@ import { Module } from "vuex";
 import { State } from "..";
 import { POST_LOGIN } from "../actions/LoginActions";
 import HttpClient from "@/services/http/HttpClient";
-import LoginResponseDto from "@/interfaces/LoginResponseDTO";
+import LoginResponseDto from "@/interfaces/DTOs/LoginResponseDTO";
 import { REGISTER_USER_LOGGED } from "../mutations/LoginMutations";
 import User from "@/models/User";
 import { Role } from "@/models/enums/EnumsRole";

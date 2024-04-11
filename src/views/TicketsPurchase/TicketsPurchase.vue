@@ -9,30 +9,10 @@
                     <button class="ff-roboto"><i class="las icon la-backspace"></i>LIMPAR</button>
                 </div>
             </div>
-            <div class="filter__container-stops">
-                <div>
-                    <h3>Paradas</h3>
-                </div>
-                <div>
-                    <div>
-                        <label for="direct"></label>
-                        <input type="checkbox" id="direct">
-                    </div>
-                    <div>
-                        <label for="direct"></label>
-                        <input type="checkbox" id="direct">
-                    </div>
-                    <div>
-                        <label for="direct"></label>
-                        <input type="checkbox" id="direct">
-                    </div>
-                    <div>
-                        <label for="direct"></label>
-                        <input type="checkbox" id="direct">
-                    </div>
-                    
-                </div>
-            </div>
+            <FilterContainerCheckbox :ListCheckboxFilter="ListCheckboxFilterStops" :title="titleStops" />
+            <hr />
+            <FilterContainerCheckbox :ListCheckboxFilter="ListCheckboxFilterCompanies" :title="titleCompanies"/>
+            <hr />  
         </article>
         
         <article class="cards__container">
@@ -46,14 +26,31 @@
 </template>
 
 <script lang="ts">
+import FilterContainerCheckbox from '@/components/shared/FilterContainerCheckbox/FilterContainerCheckbox.vue';
+import ICheckboxFilter from '@/interfaces/ICheckboxFilter';
 import { defineComponent } from 'vue'
-
 export default defineComponent({
     name:"TicketsPurchaseComponent",
-
+    components: {FilterContainerCheckbox},
+    data() {
+        return {
+            titleStops: "Paradas",
+            ListCheckboxFilterStops: [
+                {idCheckbox: 'direct', labelTitle: "Direto"},
+                {idCheckbox: 'oneConnection', labelTitle: "1 conexão"},
+                {idCheckbox: 'twoConnection', labelTitle: "2 paradas"},
+                {idCheckbox: 'moreTwoConnection', labelTitle: "3 paradas"},
+            ] as ICheckboxFilter[],
+            titleCompanies: "Companhias",
+            ListCheckboxFilterCompanies: [
+                {idCheckbox: 'latam', labelTitle: "Latam"},
+                {idCheckbox: 'gol', labelTitle: "Gol"},
+                {idCheckbox: 'azul', labelTitle: "Azul"},
+                {idCheckbox: 'avianca', labelTitle: "Avianca"},
+            ] as ICheckboxFilter[],
+        }
+    },
     setup () {
-        
-
         return {}
     }
 })
@@ -91,4 +88,4 @@ export default defineComponent({
 }
 
 </style>
-<style src="./styles/TicketsPurchaseFilter.css"></style>
+<style src="./styles/TicketsPurchaseFilter.css" scoped></style>

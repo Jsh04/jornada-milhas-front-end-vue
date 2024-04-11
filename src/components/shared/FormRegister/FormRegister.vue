@@ -280,7 +280,7 @@ import swal from 'sweetalert';
 import {validateCpf} from "../../../validations/ValidationCPF"
 import { greaterThan18 } from "../../../validations/ValidationBirthDate";
 import { validatePhone } from "../../../validations/ValidationPhone";
-import CepResponseDTO from "@/interfaces/CepResponseDTO";
+import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
 import { AxiosResponse } from "axios";
 import Util from "@/util/Util";
 
