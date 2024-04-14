@@ -1,5 +1,5 @@
 .filter__container{
-    padding: 2rem 1rem;
+    padding: 2rem 2.25rem;
     border-radius: 16px;
 }
 
@@ -33,4 +33,23 @@
 
 .icon{
     font-size: 24px;
+}
+
+.filter__container-btn{
+    margin-top: 3rem;
+}
+
+.filter__container-btn button{
+    border-radius: 5px;
+    background-color: var(--purple-primary);
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0.75rem;
+    color: white;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    text-transform: uppercase;
 }

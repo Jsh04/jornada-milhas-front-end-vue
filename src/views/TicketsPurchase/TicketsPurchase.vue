@@ -12,7 +12,30 @@
             <FilterContainerCheckbox :ListCheckboxFilter="ListCheckboxFilterStops" :title="titleStops" />
             <hr />
             <FilterContainerCheckbox :ListCheckboxFilter="ListCheckboxFilterCompanies" :title="titleCompanies"/>
-            <hr />  
+            <hr />
+            <div class="filter__container-price">
+                <div class="filter__container-price-title">
+                    <h5 class="ff-roboto">Preço</h5>
+                </div>
+                <div class="filter__container-price-input">
+                    <div class="filter__container-price-input-values">
+                        <div class="filter__container-price-value">
+                            <p class="ff-roboto">De</p>
+                            <p class="ff-roboto">R$200</p>	
+                        </div>
+                        <div class="filter__container-price-value">
+                            <p class="ff-roboto" style="text-align: end;">Até</p>
+                            <p class="ff-roboto">R$1500</p>	
+                        </div>
+                    </div>
+                    <div class="filter__container-price-input-container">
+                        <input type="range" name="" min="200" max="1500" id="">
+                    </div>
+                </div>
+            </div>
+            <div class="filter__container-btn">
+                <button class="ff-roboto">Aplicar</button>
+            </div>  
         </article>
         
         <article class="cards__container">
@@ -66,9 +89,10 @@ export default defineComponent({
     "filter container container container"
     "filter container container container";
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 200px);
+    grid-template-rows: repeat(4, auto);
     padding: 1rem;
     margin-top: 3rem;
+    gap: 1rem;
 
 }
 
@@ -89,3 +113,4 @@ export default defineComponent({
 
 </style>
 <style src="./styles/TicketsPurchaseFilter.css" scoped></style>
+<style src="./styles/TicketsPurchaseFilterPrice.css" scoped></style>

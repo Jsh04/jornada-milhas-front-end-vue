@@ -12,8 +12,8 @@
                 <p class="ff-roboto">Categoria</p>
             </div>
             <div class="modalTraveler__container-categoria-btns">
-                <button :class="[ActiveEconomic ? 'btn-active' : 'btn-desactive']" @click="ChooseCategory('economic')" type="button" class="ff-roboto"><i class="las la-check"></i><span>Econômica</span></button>
-                <button :class="[ActiveExecutive ? 'btn-active' : 'btn-desactive']" @click="ChooseCategory('executive')" type="button" class="ff-roboto"><i class="las la-check"></i><span>Executiva</span></button>
+                <button :class="[ActiveEconomic ? 'btn-active' : 'btn-desactive']" @click="() => {ActiveEconomic = true, ActiveExecutive = false}" type="button" class="ff-roboto"><i class="las la-check"></i><span>Econômica</span></button>
+                <button :class="[ActiveExecutive ? 'btn-active' : 'btn-desactive']" @click="() => {ActiveExecutive = true, ActiveEconomic = false}" type="button" class="ff-roboto"><i class="las la-check"></i><span>Executiva</span></button>
             </div>
             
         </div>
@@ -72,15 +72,6 @@ import FilterInterface from '@/interfaces/DTOs/FilterInterface';
             }
         },
         methods: {
-            ChooseCategory(typeBtn: string){
-                if (typeBtn == 'economic') {
-                    this.ActiveEconomic = true
-                    this.ActiveExecutive = false
-                }else{
-                    this.ActiveExecutive = true
-                    this.ActiveEconomic = false
-                }
-            },
             ApplyFilters(){
                 
                 this.verifyCountFilters();

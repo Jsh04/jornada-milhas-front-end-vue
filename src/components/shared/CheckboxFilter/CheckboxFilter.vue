@@ -80,10 +80,10 @@ export default defineComponent({
 .custom-label:after {
     content: "";
     position: absolute;
-    left: 7px;
-    top: 4px;
+    left: 10px;
+    top: 5px;
     width: 5px;
-    height: 10px;
+    height: 12px;
     border: solid white; /* Cor da seta */
     border-width: 0 2px 2px 0; /* Tamanho e direção da seta */
     transform: rotate(45deg); /* Rotaciona a seta para formar uma seta para cima */
