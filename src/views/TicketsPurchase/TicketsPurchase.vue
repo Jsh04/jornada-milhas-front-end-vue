@@ -126,10 +126,10 @@ export default defineComponent({
             ] as ICheckboxFilter[],
             titleCompanies: "Companhias",
             ListCheckboxFilterCompanies: [
-                {idCheckbox: 'latam', labelTitle: "Latam"},
-                {idCheckbox: 'gol', labelTitle: "Gol"},
-                {idCheckbox: 'azul', labelTitle: "Azul"},
-                {idCheckbox: 'avianca', labelTitle: "Avianca"},
+                {idCheckbox: 'compania1', labelTitle: "Compania1"},
+                {idCheckbox: 'compania2', labelTitle: "Compania2"},
+                {idCheckbox: 'compania3', labelTitle: "Compania3"},
+                {idCheckbox: 'compania4', labelTitle: "Compania4"},
             ] as ICheckboxFilter[],
 
             ListCardRecommendation: [
