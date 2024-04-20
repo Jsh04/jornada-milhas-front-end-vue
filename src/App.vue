@@ -47,7 +47,7 @@ export default defineComponent({
 }
 
 .container__jornada{
-  padding: 0rem 10rem;
+  padding: 0rem 15rem;
 }
 
 .message_error{

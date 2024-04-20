@@ -39,11 +39,16 @@
         </article>
         
         <article class="cards__container">
-            <p>cards</p>
+            <RecommendationCard v-for="(content, index) in ListCardRecommendation" 
+            :key="index" 
+            :title="content.title" 
+            :value="content.value" 
+            :time="content.time" 
+            :BackGround="content.BackGround" />
         </article>
 
         <article class="info-travel__container"> 
-            <p>container</p>
+            
         </article>
     </section>
 </template>
@@ -51,10 +56,11 @@
 <script lang="ts">
 import FilterContainerCheckbox from '@/components/shared/FilterContainerCheckbox/FilterContainerCheckbox.vue';
 import ICheckboxFilter from '@/interfaces/ICheckboxFilter';
-import { defineComponent } from 'vue'
+import RecommendationCard from '@/components/shared/RecommendationCard/RecommendationCard.vue';
+import { defineComponent } from 'vue';
 export default defineComponent({
     name:"TicketsPurchaseComponent",
-    components: {FilterContainerCheckbox},
+    components: {FilterContainerCheckbox,RecommendationCard},
     data() {
         return {
             titleStops: "Paradas",
@@ -71,6 +77,12 @@ export default defineComponent({
                 {idCheckbox: 'azul', labelTitle: "Azul"},
                 {idCheckbox: 'avianca', labelTitle: "Avianca"},
             ] as ICheckboxFilter[],
+
+            ListCardRecommendation: [
+                {title: "Menor preço", value: 430, time: "12h de viagem", BackGround: 'background-color: #F5F5F5;'},
+                {title: "Recomendado", value: 500, time: "6h de viagem" , BackGround: 'background-color: #ECE6F0;'},
+                {title: "Menor tempo", value: 780, time: "2h de viagem", BackGround: 'background-color: #F7F2FA;'},
+            ]
         }
     },
     setup () {
@@ -89,10 +101,10 @@ export default defineComponent({
     "filter container container container"
     "filter container container container";
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(4, 235px);
     padding: 1rem;
     margin-top: 3rem;
-    gap: 1rem;
+    gap: 2rem;
 
 }
 
@@ -103,12 +115,17 @@ export default defineComponent({
 
 .cards__container{
     grid-area: cards;
-    background-color: blue;
+    display: flex;
+    align-items: start;
+    column-gap: 1.5rem;
 }
 
 .info-travel__container{
     grid-area: container;
-    background-color: green;
+    height: 50%;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+    border-radius: 8px;
+    display: flex;
 }
 
 </style>
