@@ -48,7 +48,53 @@
         </article>
 
         <article class="info-travel__container"> 
-            
+            <div class="info-travel__describe-container">
+                <div class="info-travel__describe-title">
+                    <h3>Ida e Volta</h3>
+                </div>
+                <hr />
+                <div class="info-travel__destinys">
+                    <ContainerTextCustom :text="DestinyFromTest" :title="titleFrom"/>
+                    <ContainerTextCustom :text="DestinyToTest" :title="titleTo"/>
+                </div>
+                <hr />
+                <div class="info-travel__time">
+                    <ContainerTextCustom :text="DateFrom" :title="titleDateFrom"/>
+                    <ContainerTextCustom :text="DateTo" :title="titleDateTo"/>
+                </div>
+            </div>
+            <div class="info-travel__payment-container">
+                <div class="info-travel__payment-price">
+                    <span class="ff-roboto">R$500</span>
+                </div>
+                <div class="info-travel__payment-describe">
+                    <TextDescribePayment :describe="'1 adulto, econômica'" :value="'R$420'"/>
+                    <TextDescribePayment :describe="'Taxa de embarque'" :value="'R$60'"/>
+                    <hr>
+                    <div class="info-travel__payment-total">
+                        <span class="ff-roboto">
+                            <strong>Total</strong>
+                        </span>
+                        <span class="ff-roboto">
+                            <strong>R$500</strong>
+                        </span>
+                    </div>
+                    <div class="info-travel__payment-methods" >
+                        <span>
+                            10% de desconto no Pix
+                        </span>
+                        <span>
+                            ou
+                        </span>
+                        <span>
+                            12x no cartão de crédito
+                        </span>
+                    </div>
+                </div>
+                <div class="info-travel__payment-btn">
+                    <button class="ff-roboto">Comprar</button>
+                </div>
+            </div>
         </article>
     </section>
 </template>
@@ -57,10 +103,18 @@
 import FilterContainerCheckbox from '@/components/shared/FilterContainerCheckbox/FilterContainerCheckbox.vue';
 import ICheckboxFilter from '@/interfaces/ICheckboxFilter';
 import RecommendationCard from '@/components/shared/RecommendationCard/RecommendationCard.vue';
+import ContainerTextCustom from '@/components/shared/ContainerTextCustom/ContainerTextCustom.vue';
+import TextDescribePayment from '@/components/shared/TextDescribePayment.vue'
 import { defineComponent } from 'vue';
 export default defineComponent({
     name:"TicketsPurchaseComponent",
-    components: {FilterContainerCheckbox,RecommendationCard},
+    components: 
+    {
+        FilterContainerCheckbox,
+        RecommendationCard,
+        ContainerTextCustom,
+        TextDescribePayment
+    },
     data() {
         return {
             titleStops: "Paradas",
@@ -82,7 +136,15 @@ export default defineComponent({
                 {title: "Menor preço", value: 430, time: "12h de viagem", BackGround: 'background-color: #F5F5F5;'},
                 {title: "Recomendado", value: 500, time: "6h de viagem" , BackGround: 'background-color: #ECE6F0;'},
                 {title: "Menor tempo", value: 780, time: "2h de viagem", BackGround: 'background-color: #F7F2FA;'},
-            ]
+            ],
+            titleFrom: 'Origem',
+            titleTo: 'Destino',
+            DestinyFromTest: 'Rio de Janeiro (RJ)',
+            DestinyToTest: 'Belo Horizonte (BH)',
+            titleDateFrom: 'Ida',
+            DateFrom: '12/02',
+            titleDateTo: 'Volta',
+            DateTo: '15/04',
         }
     },
     setup () {
@@ -120,14 +182,10 @@ export default defineComponent({
     column-gap: 1.5rem;
 }
 
-.info-travel__container{
-    grid-area: container;
-    height: 50%;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
-    border-radius: 8px;
-    display: flex;
-}
+
+
 
 </style>
 <style src="./styles/TicketsPurchaseFilter.css" scoped></style>
 <style src="./styles/TicketsPurchaseFilterPrice.css" scoped></style>
+<style src="./styles/TicketsPurchaseInfoTraveler.css" scoped></style>

@@ -97,9 +97,9 @@ import FilterInterface from '@/interfaces/DTOs/FilterInterface';
                 if (this.CountAge.Adult != 0) 
                     this.ListFiltersEmit.push(this.MoutingObj(this.idAdult, this.CountAge.Adult));
 
-                else if(this.CountAge.Children != 0)
+                if(this.CountAge.Children != 0)
                     this.ListFiltersEmit.push(this.MoutingObj(this.idChildren, this.CountAge.Children));
-                else if(this.CountAge.Babies != 0)
+                if(this.CountAge.Babies != 0)
                     this.ListFiltersEmit.push(this.MoutingObj(this.idBabys, this.CountAge.Babies));
             },
 
