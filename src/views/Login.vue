@@ -13,14 +13,14 @@
                     
                     <form action="" class="login__forms" @submit.prevent="SendLoginUser()">
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" id="email" v-model="Login.Email" placeholder="Digite seu e-mail ou CPF" @blur="v$.Login.Email.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" id="email" v-model="Login.email" placeholder="Digite seu e-mail ou CPF" @blur="v$.Login.Email.$touch"/>
                             <label class="ff-roboto">E-mail</label>
-                            <span v-if="v$.Login.Email.$errors.length != 0"  style="margin: 0;" class="message_error ff-roboto">
+                            <span v-if="ReturnExistErrorInEmail"  style="margin: 0;" class="message_error ff-roboto">
                                 {{ v$.Login.Email.$errors[0].$message }}
                             </span>
                         </div>
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" id="password" v-model="Login.Password" placeholder="Digite sua senha"  @blur="v$.Login.Password.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" id="password" v-model="Login.password" placeholder="Digite sua senha"  @blur="v$.Login.Password.$touch"/>
                             <label class="ff-roboto">Senha</label>
                             <span v-if="v$.Login.Password.$errors.length != 0" style="margin: 0;" class="message_error  ff-roboto">
                                 {{ v$.Login.Password.$errors[0].$message }}
@@ -42,25 +42,27 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
-import Login from '@/models/Login'
-import { useStore } from '@/store';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
-import swal from 'sweetalert';
-import { POST_LOGIN } from '@/store/actions/LoginActions';
+import LoginInputModel from '@/application/InputModels/LoginInputModel';
 export default defineComponent({
     name: "LoginComponent",
     components: { Banner },
     data() {
         return {
             urlImage: require('@/assets/Imagens/3-Banner-Login.png'),
-            Login: {} as Login,
+            Login: {} as LoginInputModel,
             loading: false
+        }
+    },
+    computed: {
+        ReturnExistErrorInEmail(){
+            return this.v$.Login.Email.$errors.length != 0
         }
     },
     methods: {
         async SendLoginUser(){
-            this.loadingApperance()
+            this.loading = true
             const formValidity = await this.v$.$validate()
             if (!formValidity){ 
                 swal({
@@ -91,9 +93,6 @@ export default defineComponent({
                 this.loading = false
             }
         },
-        loadingApperance(){
-            this.loading = true
-        }
     },
     validations(){
         return {

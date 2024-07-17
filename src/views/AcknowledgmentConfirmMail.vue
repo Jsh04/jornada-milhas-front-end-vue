@@ -6,8 +6,6 @@
 import { defineComponent } from 'vue'
 import ConfirmMailSection from '../components/shared/ConfirmMailSection/ConfirmMailSection.vue';
 
-ConfirmMailSection
-
 export default defineComponent({
     components: {ConfirmMailSection},
     data() {
@@ -19,7 +17,3 @@ export default defineComponent({
 
 })
 </script>
-
-<style scoped>
-
-</style>

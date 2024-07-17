@@ -1,7 +1,7 @@
-import User from "@/models/User";
+import User from "@/domain/users/User";
 import { Genre } from "@/models/enums/EnumGenre";
 import { Role } from "@/models/enums/EnumsRole";
-import { State, store, useStore } from "@/store";
+import { State, useStore } from "@/store";
 import { REGISTER_USER } from "@/store/actions/UserActions";
 import Util from "@/util/Util";
 import { AxiosResponse } from "axios";
@@ -20,27 +20,17 @@ export default class  UserService{
             
             user = this.ValidationTypeFormUser(isAdmin, user)
             user = this.ValidationGenreUser(user);
-            const response: AxiosResponse<User> = await store.dispatch(REGISTER_USER, user);
+            const response: AxiosResponse<User> = await this.store.dispatch(REGISTER_USER, user);
             return response.data;
-            
         }catch(erro){
             Util.ShowAlert(undefined, "error", "Erro ao cadastrar usuário", [true, "Ok"]);
             return undefined;
         }
     }
-
-    private ValidationTypeFormUser(isAdmin: boolean, user: User): User{
-        if (isAdmin) 
-            user.userRole = Role.Admin
-        else
-            user.userRole = Role.Limited
-
-            return user;
-    }
-
+    
     private ValidationGenreUser(user: User){
-        if (user.genre.toString() == "Male") 
-        user.genre = Genre.Male;
+        if (user.getGenre().toString() == "Male") 
+        user.setGenre(Genre.Male);
       else if(user.genre.toString() == "Female")
         user.genre = Genre.Female;
       else 

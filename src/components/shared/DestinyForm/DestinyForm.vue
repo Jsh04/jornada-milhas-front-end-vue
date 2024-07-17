@@ -98,7 +98,7 @@ import 'filepond/dist/filepond.min.css';
 
 import * as FilePondeInstance from 'filepond';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-import Destination from '@/models/Destination';
+import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
 import { helpers, required } from '@vuelidate/validators';
 import Util from '@/util/Util'
@@ -203,9 +203,6 @@ export default defineComponent({
                 this.filePond?.addFile(Util.returnByteArrayFile(picture));
             })
         },
-
-
-
         async ReturnBase64Array(): Promise<string[]>{
             const arrayBase64: string[] = [];
             const promises: Promise<void>[] = [];
@@ -249,10 +246,6 @@ export default defineComponent({
             await this.getDestinyEdit();
             this.v$.$touch
         }
-            
-        
-            
-        
     },
     setup() {
         const store = useStore();

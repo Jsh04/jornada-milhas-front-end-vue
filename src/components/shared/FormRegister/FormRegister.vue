@@ -358,14 +358,14 @@
 <script lang="ts">
 
 import { defineComponent, inject } from "vue";
-import User from '../../../models/User'
+import User from '../../../domain/users/User'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, sameAs, minLength} from '@vuelidate/validators'
 import { useStore } from "../../../store"
-import {validateCpf} from "../../../validations/ValidationCPF"
-import { greaterThan18 } from "../../../validations/ValidationBirthDate";
-import { validatePhone } from "../../../validations/ValidationPhone";
-import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
+import {validateCpf} from "../../../common/validations/ValidationCPF"
+import { greaterThan18 } from "../../../common/validations/ValidationBirthDate";
+import { validatePhone } from "../../../common/validations/ValidationPhone";
+import CepResponseDTO from "@/infraestruture/DTOs/CepDto";
 import { AxiosResponse } from "axios";
 import Util from "@/util/Util";
 import UserService from "@/services/UserService/UserService";

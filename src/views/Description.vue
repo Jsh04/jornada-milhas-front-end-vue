@@ -7,7 +7,7 @@
 import { defineComponent, computed } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
 import { useStore } from '@/store';
-import Destination from '@/models/Destination';
+import Destination from '@/domain/entities/Destination';
 import DestinyDescription from '@/components/shared/DestinyDescription/DestinyDescription.vue';
 
 export default defineComponent({

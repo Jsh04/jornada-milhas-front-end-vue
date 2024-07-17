@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
-import Destination from '@/models/Destination';
+import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
 import swal from 'sweetalert';
