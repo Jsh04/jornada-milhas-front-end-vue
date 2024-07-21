@@ -13,17 +13,17 @@
                     
                     <form action="" class="login__forms" @submit.prevent="SendLoginUser()">
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" id="email" v-model="Login.email" placeholder="Digite seu e-mail ou CPF" @blur="v$.Login.Email.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="text" class="ff-roboto" id="email" v-model="login.email" placeholder="Digite seu e-mail ou CPF" @blur="v$.login.email.$touch"/>
                             <label class="ff-roboto">E-mail</label>
-                            <span v-if="ReturnExistErrorInEmail"  style="margin: 0;" class="message_error ff-roboto">
-                                {{ v$.Login.Email.$errors[0].$message }}
+                            <span v-if="v$.login.email.$errors.length != 0"  style="margin: 0;" class="message_error ff-roboto">
+                                {{ v$.login.email.$errors[0].$message }}
                             </span>
                         </div>
                         <div class="login__form-input">
-                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" id="password" v-model="Login.password" placeholder="Digite sua senha"  @blur="v$.Login.Password.$touch"/>
+                            <input style="width: calc((530px / 2) - 3rem)" type="password" class="ff-roboto" id="password" v-model="login.password" placeholder="Digite sua senha"  @blur="v$.login.password.$touch"/>
                             <label class="ff-roboto">Senha</label>
-                            <span v-if="v$.Login.Password.$errors.length != 0" style="margin: 0;" class="message_error  ff-roboto">
-                                {{ v$.Login.Password.$errors[0].$message }}
+                            <span v-if="v$.login.password.$errors.length" style="margin: 0;" class="message_error  ff-roboto">
+                                {{ v$.login.password.$errors[0].$message }}
                             </span>
                         </div>
                         <div class="login__form-btn">
@@ -40,76 +40,74 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 import LoginInputModel from '@/application/InputModels/LoginInputModel';
+
+import Util from '@/util/Util';
+import PostLoginUser from '@/application/useCases/PostLoginUser/PostLoginUser';
 export default defineComponent({
     name: "LoginComponent",
     components: { Banner },
     data() {
         return {
             urlImage: require('@/assets/Imagens/3-Banner-Login.png'),
-            Login: {} as LoginInputModel,
+            login: {} as LoginInputModel,
             loading: false
         }
     },
-    computed: {
-        ReturnExistErrorInEmail(){
-            return this.v$.Login.Email.$errors.length != 0
-        }
-    },
     methods: {
+        async validityFormsLogin(){
+            const formValidity = await this.v$.$validate();
+            if (formValidity)
+                return true;
+
+            Util.ShowAlert('', 'error', "Formulário inválido", [true, "Sair"])
+            
+            return false;
+        },
         async SendLoginUser(){
-            this.loading = true
-            const formValidity = await this.v$.$validate()
-            if (!formValidity){ 
-                swal({
-                    text: "Formulário inválido",
-                    buttons: [true, "Sair"],
-                    icon: "error"
-                })
-                this.loading = true
+            console.log(this.login);
+            
+            this.loading = true;
+            
+            if (!this.validityFormsLogin()) {
+                this.loading = false
                 return;
             }
+
+            await this.RequestToLoginUser()
+        },
+        async RequestToLoginUser(){
             try {
-                const response = await this.store.dispatch(POST_LOGIN, this.Login);
-                if (response.status == 200) {
-                    swal({
-                        icon: "success",
-                        text:"Login feito com sucesso",
-                        buttons: [true, "Ok!"]
-                    })
-                    this.$router.push("/");
-                }
+                console.log(this.useCaseLoginUser)
+                await this.useCaseLoginUser?.execute(this.login);
             } catch (error) {                
-                swal({
-                    text:"Erro no login",
-                    icon: "error",
-                    buttons: [true, "Ok"]
-                })
+                Util.ShowAlert('Erro em login', 'error', "Verifique as credencias e tente novamente", [true, "Sair"])
             } finally {
                 this.loading = false
             }
-        },
+        }
     },
     validations(){
         return {
-            Login: {
-                Email: {
+            login: {
+                email: {
                     required: helpers.withMessage("Campo não pode ser nulo", required)
                 },
-                Password: {
+                password: {
                     required: helpers.withMessage("O campo não poderá ser nulo", required),
                 }
             }
         }
     },
     setup() {
-        const store = useStore()
+        const useCaseLoginUser = inject<PostLoginUser>('PostLoginUser');
+
         return {
-            store,
+            useCaseLoginUser,
             v$: useVuelidate()
         }
     }

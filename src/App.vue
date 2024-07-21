@@ -10,8 +10,10 @@
 import { defineComponent } from 'vue';
 import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
-import UserService from '@/services/UserService/UserService';
-import CepService from '@/services/CepService/CepService';
+import { container } from 'tsyringe';
+import DependencyInjection from "./configuration/dependecyInjection/DependencyInjection";
+import { InjectionTokenUseCasePostLoginToUser } from './configuration/dependecyInjection/InjectionTokens';
+
 
 export default defineComponent({
   name: 'App',
@@ -21,11 +23,12 @@ export default defineComponent({
   },
   provide(){
     return {
-      userService: new UserService(),
-      cepService: new CepService()
+      PostLoginUser: container.resolve(InjectionTokenUseCasePostLoginToUser)
     }
+  },
+  setup() {
+    DependencyInjection.addDependencyInjectionConfig();
   }
-  
 });
 </script>
 <style>

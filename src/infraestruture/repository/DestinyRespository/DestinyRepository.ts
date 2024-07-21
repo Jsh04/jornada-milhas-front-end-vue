@@ -1,14 +1,17 @@
 import PaginationResultResponse from "@/common/results/PaginationResult";
-import Depoiment from "@/domain/Depoiment";
+import { InjectionTokenAxiosClient } from "@/configuration/dependecyInjection/InjectionTokens";
+import Depoiment from "@/domain/entities/Depoiment";
+import AxiosClient from "@/infraestruture/api/HttpClient";
 import { AxiosInstance } from "axios";
+import { inject, injectable } from "tsyringe";
 
-
+@injectable()
 export class DepoimentRepository{
 
     private readonly httpClient: AxiosInstance;
 
-    constructor(httpClient: AxiosInstance){
-        this.httpClient = httpClient;
+    constructor(@inject(InjectionTokenAxiosClient) httpClient: AxiosClient){
+        this.httpClient = httpClient.getInstance();
     }
 
     public async GetAllDepoiments(size = 10, page = 1): Promise<PaginationResultResponse<Depoiment[]>>{

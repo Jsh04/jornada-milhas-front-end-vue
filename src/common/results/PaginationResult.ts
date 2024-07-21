@@ -3,5 +3,5 @@ export default interface PaginationResultResponse<TData>{
     pageSize: number;
     totalCount: number;
     totalPages: number;
-    data: TData
+    data: TData[]
 }

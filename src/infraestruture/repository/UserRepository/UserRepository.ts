@@ -1,18 +1,16 @@
-import ILoginRepository from "@/common/data/ILoginRequest";
+
 import PaginationResultResponse from "@/common/results/PaginationResult";
 import User from "@/domain/entities/users/User";
 import IUserRepository from "@/domain/interfaces/IUserRepository";
-import LoginDto from "@/infraestruture/DTOs/LoginDto";
+import { injectable } from "tsyringe";
 
-export default  class UserRepository implements ILoginRepository, IUserRepository{
-
-
-    getAllUsers(page: number, size: number): Promise<PaginationResultResponse<User[]>> {
-        throw new Error("Method not implemented.");
-    }
+@injectable() 
+class UserRepository implements IUserRepository{
     
-    postUserToLogin(email: string, password: string): Promise<LoginDto> {
+    getAllUsers(page: number, size: number): Promise<PaginationResultResponse<User>> {
         throw new Error("Method not implemented.");
     }
 
 }
+
+export default UserRepository;

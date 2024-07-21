@@ -1,5 +1,6 @@
 
-import UserLimited from "@/domain/users/UserLimited";
+
+import UserLimited from "@/domain/entities/users/UserLimited";
 import { useStore } from "@/store";
 import { Router } from "vue-router";
 

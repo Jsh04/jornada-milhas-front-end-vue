@@ -1,13 +1,14 @@
 import Address from "@/common/valueObjects/Address";
-import { Genre } from "../enums/EnumGenre";
+
 import { Phone } from "@/common/valueObjects/Phone";
 import { Cpf } from "@/common/valueObjects/Cpf";
+import { EnumGenre } from "@/domain/enums/EnumGenre";
 
 export default abstract class User{
     protected readonly id: number = 0;
     protected name: string;
     protected dtBirth: Date;
-    protected genre: Genre;
+    protected genre: EnumGenre;
     protected phone: Phone
     protected cpf: Cpf;
     protected email = ''
@@ -18,7 +19,7 @@ export default abstract class User{
 
     constructor(name = '', Address: Address, 
     dtBirth: Date, 
-    genre: Genre, 
+    genre: EnumGenre, 
     phone: Phone, 
     cpf: Cpf){
         this.name = name;

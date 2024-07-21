@@ -1,4 +1,4 @@
-import User from "@/domain/users/entities/User"
+import User from "@/domain/entities/users/User"
 
 export default interface LoginDto {
     token: string
