@@ -233,7 +233,7 @@
                 class="ff-roboto"
                 placeholder="Seu endereço"
                 id="address"
-                v-model="User.adress"
+                v-model="User.address"
                 @blur="v$.User.adress.$touch"
                 :disabled="isAdminRegister"
               />
@@ -358,18 +358,17 @@
 <script lang="ts">
 
 import { defineComponent, inject } from "vue";
-import User from '../../../models/User'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers, sameAs, minLength} from '@vuelidate/validators'
 import { useStore } from "../../../store"
-import {validateCpf} from "../../../validations/ValidationCPF"
-import { greaterThan18 } from "../../../validations/ValidationBirthDate";
-import { validatePhone } from "../../../validations/ValidationPhone";
-import CepResponseDTO from "@/interfaces/DTOs/CepResponseDTO";
-import { AxiosResponse } from "axios";
+import {validateCpf} from "../../../common/validations/ValidationCPF"
+import { greaterThan18 } from "../../../common/validations/ValidationBirthDate";
+import { validatePhone } from "../../../common/validations/ValidationPhone";
+import CepResponseDTO from "@/application/DTOs/CepDto";
 import Util from "@/util/Util";
 import UserService from "@/services/UserService/UserService";
 import CepService from "@/services/CepService/CepService";
+import IUserInputModel from "@/application/InputModels/IUserInputModel";
 
 export default defineComponent({
     name: "RegisterComponent",
@@ -386,7 +385,7 @@ export default defineComponent({
     data() {
         return {
         UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
-        User: {} as User,
+        User: {} as IUserInputModel,
         checkedTerms: false
         };
     },
@@ -403,25 +402,12 @@ export default defineComponent({
             return;
         }
 
-        const data = await this.userService?.RegisterUser(this.User, this.isAdminRegister);
-        if (data != undefined) {
-          this.$router.push(`/confirmarEmail/${data.id}`);
-          this.v$.$reset();
-        }
+        // const data = await this.userService?.RegisterUser(this.User, this.isAdminRegister);
+        // if (data != undefined) {
+        //   this.$router.push(`/confirmarEmail/${data.id}`);
+        //   this.v$.$reset();
+        // }
 
-        },
-        async GetInfoAdress(){
-          const data = await this.cepService?.RequestGetViaCep(this.User.cep);
-          
-          if (data != undefined) this.FillInputsAdress(data);
-          
-        },
-
-        FillInputsAdress(data: CepResponseDTO ){
-          this.User.adress = data.logradouro
-          this.User.district = data.bairro
-          this.User.city = data.localidade
-          this.User.state = data.uf
         },
         MaskPhone(){
           this.User.phone = Util.MaskPhone(this.User.phone)  

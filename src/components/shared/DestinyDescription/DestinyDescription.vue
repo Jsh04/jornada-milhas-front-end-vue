@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import Destination from '@/models/Destination';
+import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
 import { defineComponent, computed } from 'vue';
 

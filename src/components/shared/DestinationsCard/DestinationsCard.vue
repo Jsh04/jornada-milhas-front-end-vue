@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import Destination from '@/models/Destination';
+import Destination from '@/domain/entities/Destination';
 import { defineComponent } from 'vue'
 
     export default defineComponent({

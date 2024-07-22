@@ -1,4 +1,4 @@
-export default interface CepResponseDTO{
+export default interface CepDto{
     cep: string,
     logradouro: string,
     bairro: string,

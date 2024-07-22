@@ -1,9 +1,10 @@
-import Destination from "@/models/Destination";
+
 import { Module } from "vuex";
 import { State } from "..";
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID, DESTINATION_GET_BY_ID, DESTINATION_POST, DESTINATION_PUT_UPDATE } from "../actions/DestinyActions";
-import HttpClient from "@/util/http/HttpClient";
+import HttpClient from "@/infraestruture/api/HttpClient";
 import { GET_DESTINATION_BY_ID_MUTATION, GET_LIST_DESTINYS } from "../mutations/DestinysMutations";
+import Destination from "@/domain/entities/Destination";
 
 export interface StateDestination{
     Destinys: Destination[];
@@ -71,31 +72,5 @@ export const DestinyModule: Module<StateDestination, State> = {
         
     },
     actions: {
-        async [DESTINATION_POST](context, destiny: Destination){
-            const response = await HttpClient.post<Destination>('/destinos', destiny);
-            return response;
-        },
-        async [DESTINATION_GET_BY_ID](context, id: string){
-            const response = await HttpClient.get<Destination>(`/destinos/${id}`);
-            context.commit(GET_DESTINATION_BY_ID_MUTATION, response.data)
-        },
-        async [DESTINATION_ALL_GET](context, params){
-            const response = await HttpClient.get<Destination[]>('/destinos', {
-                params: {
-                    page: params.page as number,
-                    size: params.size as number
-                }
-            }); 
-            context.commit(GET_LIST_DESTINYS, response.data);
-        },
-        async [DESTINATION_PUT_UPDATE](context, objectUpdate){
-            const response = await HttpClient.put<Destination>(`/destinos/${objectUpdate.Id as string}`, objectUpdate.Destiny as Destination);
-            return response
-        },
-        async [DESTINATION_DELETE_BY_ID](context, id: string){
-            const response = await HttpClient.delete(`/destinos/${id}`)
-            return response;
-        }
-        
     }
 }
