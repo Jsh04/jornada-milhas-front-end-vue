@@ -45,9 +45,8 @@ import Banner from '@/components/shared/Banner/Banner.vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 import LoginInputModel from '@/application/InputModels/LoginInputModel';
-
-import Util from '@/util/Util';
 import PostLoginUser from '@/application/useCases/PostLoginUser/PostLoginUser';
+import SweetAlert from '@/common/alert/SweetAlert';
 export default defineComponent({
     name: "LoginComponent",
     components: { Banner },
@@ -64,13 +63,10 @@ export default defineComponent({
             if (formValidity)
                 return true;
 
-            Util.ShowAlert('', 'error', "Formulário inválido", [true, "Sair"])
-            
+            SweetAlert.showAlertWithError("Formulário inválido", 'Verifique as credencias e tente novamente', [true, "Sair"])
             return false;
         },
         async SendLoginUser(){
-            console.log(this.login);
-            
             this.loading = true;
             
             if (!this.validityFormsLogin()) {
@@ -82,10 +78,9 @@ export default defineComponent({
         },
         async RequestToLoginUser(){
             try {
-                console.log(this.useCaseLoginUser)
                 await this.useCaseLoginUser?.execute(this.login);
             } catch (error) {                
-                Util.ShowAlert('Erro em login', 'error', "Verifique as credencias e tente novamente", [true, "Sair"])
+                SweetAlert.showAlertWithError('Erro em login', "Verifique as credencias e tente novamente", [true, "Sair"])
             } finally {
                 this.loading = false
             }
@@ -105,7 +100,6 @@ export default defineComponent({
     },
     setup() {
         const useCaseLoginUser = inject<PostLoginUser>('PostLoginUser');
-
         return {
             useCaseLoginUser,
             v$: useVuelidate()

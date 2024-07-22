@@ -58,14 +58,5 @@ export default class Util {
         }
         return r;
     }
-
-    public static ShowAlert(title?: string, icon?: string, text?: string, buttons?:  ButtonList | (string | boolean)[] | undefined){
-        swal({
-            text,
-            buttons,
-            icon,
-            title
-            })
-    }
 }
 
