@@ -1,27 +1,23 @@
 
 import { InjectionKey } from "vue";
 import { Store, createStore, useStore as vuexUseStore } from "vuex";
-import { StateDepoiment, depoimentModule } from "./modules/DepoimentModule";
-import { StateUser, user } from "./modules/UserModule";
-import { LoginModule, StateLogin } from "./modules/LoginModule";
+import { StateDepoiment, DepoimentModule } from "./modules/DepoimentModule";
+import { StateUser, UserModule } from "./modules/UserModule";
 import { DestinyModule, StateDestination } from "./modules/DestinyModule";
-
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export interface State {
-    destinyModule: StateDestination;
-    depoimentModule: StateDepoiment;
-    userStateModule: StateUser,
-    loginStateModule: StateLogin,
+    DestinyModule: StateDestination;
+    DepoimentModule: StateDepoiment;
+    UserStateModule: StateUser,
 }
 
 export const store = createStore<State>({
     modules:{
-        depoimentModule, 
-        userStateModule: user, 
-        loginStateModule: LoginModule, 
-        destinyModule: DestinyModule,
+        DepoimentModule, 
+        UserStateModule: UserModule, 
+        DestinyModule: DestinyModule,
     },
 })
 
