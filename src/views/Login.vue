@@ -46,7 +46,7 @@ import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 import LoginInputModel from '@/application/InputModels/LoginInputModel';
 import PostLoginUser from '@/application/useCases/PostLoginUser/PostLoginUser';
-import SweetAlert from '@/common/alert/SweetAlert';
+import IAlertModal from '@/application/interfaces/IAlertModal';
 export default defineComponent({
     name: "LoginComponent",
     components: { Banner },
@@ -63,7 +63,7 @@ export default defineComponent({
             if (formValidity)
                 return true;
 
-            SweetAlert.showAlertWithError("Formulário inválido", 'Verifique as credencias e tente novamente', [true, "Sair"])
+                this.alertModal?.addAlertModalError("Formulário inválido", 'Verifique as credencias e tente novamente')
             return false;
         },
         async SendLoginUser(){
@@ -80,7 +80,7 @@ export default defineComponent({
             try {
                 await this.useCaseLoginUser?.execute(this.login);
             } catch (error) {                
-                SweetAlert.showAlertWithError('Erro em login', "Verifique as credencias e tente novamente", [true, "Sair"])
+                this.alertModal?.addAlertModalSuccess('Erro em login', "Verifique as credencias e tente novamente")
             } finally {
                 this.loading = false
             }
@@ -100,9 +100,11 @@ export default defineComponent({
     },
     setup() {
         const useCaseLoginUser = inject<PostLoginUser>('PostLoginUser');
+        const alertModal = inject<IAlertModal>("AlertModal");
         return {
             useCaseLoginUser,
-            v$: useVuelidate()
+            v$: useVuelidate(),
+            alertModal
         }
     }
 

@@ -30,8 +30,10 @@ import Util from '@/util/Util';
 import { useStore } from '../../../store';
 import { CONFIRM_MAIL } from '../../../store/actions/LoginActions';
 import { SEND_REQUEST_CONFIRM_MAIL } from '../../../store/actions/UserActions';
-import { defineComponent, ref } from 'vue'
+import { defineComponent, inject, ref } from 'vue'
 import { useRouter } from 'vue-router';
+import IAlertModal from '@/application/interfaces/IAlertModal';
+import AlertModalSweet from '@/infraestruture/alerts/AlertModal';
 
 
 export default defineComponent({
@@ -50,10 +52,10 @@ export default defineComponent({
             type: String
         }
     },
-    setup (props, context,) {
+    setup (props, context) {
         const store = useStore();
         const router = useRouter();
-
+        const alertModal = inject<IAlertModal>("AlertModal");
         const idUser = ref(0);
 
         async function SendBtn(): Promise<void>{
@@ -61,7 +63,7 @@ export default defineComponent({
                 const response = await store.dispatch(CONFIRM_MAIL, idUser.value);
                 changeRouterConfirmMail(response.data)
             } catch (error) {
-                Util.ShowAlert("Erro ao verificar a confirmação de E-mail", "error", "", undefined)
+                alertModal?.addAlertModalError("Erro ao verificar a confirmação de E-mail", "Tente novamente mais tarde");
             }
             
         }
@@ -69,11 +71,10 @@ export default defineComponent({
         async function RequestConfirmMail(idUser: number){
             try {
                 const response = await store.dispatch(SEND_REQUEST_CONFIRM_MAIL, idUser);
-                if (response.status == 204) Util.ShowAlert("E-mail confirmado com sucesso", "sucess", "Basta apenas clicar no botão abaixo para prosseguir", ["Ok", true]);
-                
+                if (response.status == 204) alertModal?.addAlertModalSuccess("E-mail confirmado com sucesso","Basta apenas clicar no botão abaixo para prosseguir");
                 
             } catch (error) {
-                Util.ShowAlert("Erro ao confirmar E-mail, tente novamente", "error", "", ["Sair", true])
+                alertModal?.addAlertModalError("Erro ao confirmar E-mail, tente novamente","");
             }
         }
 
@@ -81,7 +82,7 @@ export default defineComponent({
             if (isConfirmMail) 
                 router.push('/')
             else
-                Util.ShowAlert("Você ainda não confirmou o E-mail",'error', "", [])
+                alertModal?.addAlertModalError("Você ainda não confirmou o E-mail", "")
         }
 
         return {

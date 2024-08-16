@@ -17,7 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(destiny, index) in ListDestination" :key="index" >
+                        <tr v-for="(destiny, index) in ListDestinies" :key="index" >
                             <td>{{ destiny.id }}</td>
                             <td>{{ destiny.name }}</td>
                             <td>{{ ReturnMaskPrice(destiny.price) }}</td>
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
 import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
@@ -40,14 +40,27 @@ import swal from 'sweetalert';
 import Util from '@/util/Util';
 import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
+import IAlertModal from '@/application/interfaces/IAlertModal';
+import IDestinyService from '@/application/interfaces/services/IDestinyService';
 
 
 export default defineComponent({
     name: "DestinyTableComponent",
     components: { Loader },
+    computed: {
+        ListDestinies(): Destination[] {
+            const list = this.destinyService?.getAllDestinies(this.page, this.size);
+            if (!list) 
+                return []
+
+            return list;
+        }
+    },
     data() {
         return {
-            isLoading: false
+            isLoading: false,
+            page: 1,
+            size: 10
         }
     },
     methods: {
@@ -56,10 +69,7 @@ export default defineComponent({
             try {
                 await this.store.dispatch(DESTINATION_ALL_GET, {page: 0, size: 10});
             } catch (error) {
-                swal({
-                    icon:"error",
-                    title: "Erro ao buscar destinos"
-                })
+                this.alertModal?.addAlertModalError("Erro ao buscar destinos", "Tente novamente mais tarde");
             } finally {
                 this.isLoading = false
             }
@@ -68,7 +78,7 @@ export default defineComponent({
             const priceToConverted = price * 100;
             return Util.FormatMoney(priceToConverted.toString())
         },
-        async DeleteDestiny(id: string){
+        async DeleteDestiny(id: number){
             try {
                 const response: AxiosResponse = await this.store.dispatch(DESTINATION_DELETE_BY_ID, id);
                 if(response.status == 204)
@@ -87,7 +97,7 @@ export default defineComponent({
             }
            
         },
-        EditDestiny(id: string){
+        EditDestiny(id: number){
             this.$router.push(`/admin/destino/editar/${id}`)
             
         }
@@ -97,9 +107,12 @@ export default defineComponent({
     },
     setup(){
         const store = useStore();
+        const alertModal = inject<IAlertModal>("AlertModal");
+        const destinyService = inject<IDestinyService>("DestinyService");
         return {
             store,
-            ListDestination: computed(() => store.state.destinyModule.Destinys as Destination[]) 
+            alertModal,
+            destinyService
         }
     }
 })
@@ -125,4 +138,4 @@ export default defineComponent({
 .cell__click{
     cursor: pointer;
 }
-</style>@/util/Util
+</style>

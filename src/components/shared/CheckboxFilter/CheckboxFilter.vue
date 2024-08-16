@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="checkbox" class="custom-checkbox" :id="idCheckbox">
+        <input type="checkbox"  class="custom-checkbox" :id="idCheckbox">
         <label :for="idCheckbox" class="custom-label ff-roboto">{{ titleLabel }}</label>
     </div>
 </template>
@@ -18,13 +18,7 @@ export default defineComponent({
         titleLabel: {
             type: String,
             required: true
-        }
-    },
-    
-    data() {
-        return {
-            
-        }
+        },
     },
 });
 </script>

@@ -2,7 +2,7 @@ import CepDto from "@/application/DTOs/CepDto";
 import ICepRequest from "../../application/interfaces/ICepRequest";
 import { AxiosInstance } from "axios";
 import { inject, injectable } from "tsyringe";
-import { InjectionTokenAxiosClient, InjectionTokenCepRequest } from "@/configuration/dependecyInjection/InjectionTokens";
+import { InjectionTokenAxiosClient} from "@/configuration/dependecyInjection/InjectionTokens";
 import AxiosClient from "../api/HttpClient";
 
 @injectable()

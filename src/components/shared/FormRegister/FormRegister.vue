@@ -14,7 +14,9 @@
               name="name"
               id="name"
               placeholder="Digite seu nome completo"
-              :class="[v$.User.name.$errors.length > 0 ? 'register__input_erro' : '']"
+              :class="[
+                v$.User.name.$errors.length > 0 ? 'register__input_erro' : '',
+              ]"
               v-model.trim="User.name"
               @blur="v$.User.name.$touch"
             />
@@ -39,7 +41,9 @@
               id="codeEmployee"
               placeholder="Digite seu nome completo"
               :class="[
-                v$.User.codeEmployee.$errors.length > 0 ? 'register__input_erro' : '',
+                v$.User.codeEmployee.$errors.length > 0
+                  ? 'register__input_erro'
+                  : '',
               ]"
               v-model.trim="User.codeEmployee"
               minlength="8"
@@ -98,7 +102,9 @@
                   />
                 </div>
                 <div class="register__form-radios-container">
-                  <label for="notInfo" class="ff-roboto">Prefiro não informar</label>
+                  <label for="notInfo" class="ff-roboto"
+                    >Prefiro não informar</label
+                  >
                   <input
                     type="radio"
                     v-model="User.genre"
@@ -188,7 +194,14 @@
               </span>
             </div>
             <div class="register__form-input">
-              <select v-model="User.state" id="state" style="width: calc((530px / 2) - 6px)" class="ff-roboto" @blur="v$.User.state.$touch" :disabled="isAdminRegister">
+              <select
+                v-model="User.state"
+                id="state"
+                style="width: calc((530px / 2) - 6px)"
+                class="ff-roboto"
+                @blur="v$.User.state.$touch"
+                :disabled="isAdminRegister"
+              >
                 <option value="0">Selecione o estado</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -278,7 +291,10 @@
                 @blur="v$.User.email.$touch"
               />
               <label class="ff-roboto">E-mail</label>
-              <span v-if="v$.User.email.$errors.length != 0" class="message_error ff-roboto">
+              <span
+                v-if="v$.User.email.$errors.length != 0"
+                class="message_error ff-roboto"
+              >
                 {{ v$.User.email.$errors[0].$message }}
               </span>
             </div>
@@ -356,73 +372,94 @@
 </template>
 
 <script lang="ts">
-
 import { defineComponent, inject } from "vue";
-import { useVuelidate } from '@vuelidate/core'
-import { required, email, helpers, sameAs, minLength} from '@vuelidate/validators'
-import { useStore } from "../../../store"
-import {validateCpf} from "../../../common/validations/ValidationCPF"
+import { useVuelidate } from "@vuelidate/core";
+import {
+  required,
+  email,
+  helpers,
+  sameAs,
+  minLength,
+} from "@vuelidate/validators";
+import { useStore } from "../../../store";
+import { validateCpf } from "../../../common/validations/ValidationCPF";
 import { greaterThan18 } from "../../../common/validations/ValidationBirthDate";
 import { validatePhone } from "../../../common/validations/ValidationPhone";
-import CepResponseDTO from "@/application/DTOs/CepDto";
 import Util from "@/util/Util";
-import UserService from "@/services/UserService/UserService";
-import CepService from "@/services/CepService/CepService";
 import IUserInputModel from "@/application/InputModels/IUserInputModel";
+import IAlertModal from "@/application/interfaces/IAlertModal";
+import { ALERT_MODAL } from "@/common/constants/InjectionKeySerivices";
 
 export default defineComponent({
-    name: "RegisterComponent",
-    props: {
-      isAdminRegister: {
-        type: Boolean,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
+  name: "RegisterComponent",
+  props: {
+    isAdminRegister: {
+      type: Boolean,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
+      User: {} as IUserInputModel,
+      checkedTerms: false,
+    };
+  },
+  methods: {
+    async SendForms() {
+      if (!this.checkedTerms) {
+        this.alertModal?.addAlertModalWarning("Confirme que leu nossas condições",  "");
+        return;
       }
-    },
-    data() {
-        return {
-        UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
-        User: {} as IUserInputModel,
-        checkedTerms: false
-        };
-    },
-    methods: {
-        async SendForms(){
-        if (!this.checkedTerms) {
-            Util.ShowAlert("Confirme que leu nossas condições", "warning", "", [true, "Sair"] )
-            return;
-        }
-        
-        const formValidity = await this.v$.$validate();
-        if (!formValidity) {
-            alert("Formulário inválido")
-            return;
-        }
 
-        // const data = await this.userService?.RegisterUser(this.User, this.isAdminRegister);
-        // if (data != undefined) {
-        //   this.$router.push(`/confirmarEmail/${data.id}`);
-        //   this.v$.$reset();
-        // }
+      const formValidity = await this.v$.$validate();
+      if (!formValidity) {
+        alert("Formulário inválido");
+        return;
+      }
 
+      // const data = await this.userService?.RegisterUser(this.User, this.isAdminRegister);
+      // if (data != undefined) {
+      //   this.$router.push(`/confirmarEmail/${data.id}`);
+      //   this.v$.$reset();
+      // }
+    },
+    GetInfoAdress(){
+      console.log('test');
+    },
+    MaskPhone() {
+      this.User.phone = Util.MaskPhone(this.User.phone);
+    },
+  },
+  validations() {
+    return {
+      User: {
+        name: {
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
         },
-        MaskPhone(){
-          this.User.phone = Util.MaskPhone(this.User.phone)  
-        }
-    },
-    validations(){
-        return {
-        User: {
-            name: { required: helpers.withMessage("O campo não poderá ser nulo", required) },
-            email: {
-              email: helpers.withMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com", email),
-              required: helpers.withMessage("O campo deverá ser obrigatório", required) 
-              },
-            codeEmployee: this.isAdminRegister ? {
-              required: helpers.withMessage("O campo deverá ser obrigatório", required),
+        email: {
+          email: helpers.withMessage(
+            "O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com",
+            email
+          ),
+          required: helpers.withMessage(
+            "O campo deverá ser obrigatório",
+            required
+          ),
+        },
+        codeEmployee: this.isAdminRegister
+          ? {
+              required: helpers.withMessage(
+                "O campo deverá ser obrigatório",
+                required
+              ),
               minLength: helpers.withMessage(
                 "O campo deverá ter no mínimo 8 caracteres",
                 minLength(8)
@@ -435,74 +472,106 @@ export default defineComponent({
             "O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com",
             email
           ),
-          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          required: helpers.withMessage(
+            "O campo deverá ser obrigatório",
+            required
+          ),
           sameAsEmail: helpers.withMessage(
             "O email deverá ser igual ao email digitado anteriormente",
             sameAs(this.User.email)
           ),
         },
         confirmPassword: {
-          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          required: helpers.withMessage(
+            "O campo deverá ser obrigatório",
+            required
+          ),
           sameAsPassword: helpers.withMessage(
             "O senha deverá ser a mesma digitada anteriormente",
             sameAs(this.User.password)
           ),
         },
         password: {
-          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
         },
         cpf: {
-          required: helpers.withMessage("O campo deverá ser obrigatório", required),
+          required: helpers.withMessage(
+            "O campo deverá ser obrigatório",
+            required
+          ),
           validatecpf: helpers.withMessage("cpf inválido", validateCpf),
         },
         dtBirth: {
-          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
           greaterThan18: helpers.withMessage(
             "Deverá ser maior que 18 anos para se cadastrar",
             greaterThan18
           ),
         },
         phone: {
-          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
           validatephone: helpers.withMessage("Número inválido", validatePhone),
         },
         city: {
-          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
         },
         state: {
-          required: helpers.withMessage("O campo não poderá ser nulo", required),
+          required: helpers.withMessage(
+            "O campo não poderá ser nulo",
+            required
+          ),
         },
         adress: this.isAdminRegister
           ? {
-              required: helpers.withMessage("O campo não poderá ser nulo", required),
+              required: helpers.withMessage(
+                "O campo não poderá ser nulo",
+                required
+              ),
             }
           : {},
         district: this.isAdminRegister
           ? {
-              required: helpers.withMessage("O campo não poderá ser nulo", required),
+              required: helpers.withMessage(
+                "O campo não poderá ser nulo",
+                required
+              ),
             }
           : {},
         cep: this.isAdminRegister
           ? {
-              required: helpers.withMessage("O campo não poderá ser nulo", required),
-              minLength: helpers.withMessage("O campo de CEP deverá ter no mínimo 8 caracteres", minLength(8))
-            }: {}
-        },
-      }
-    },
-    setup() {
-        const store = useStore()
-        const userService: UserService | undefined = inject<UserService>('userService');
-        const cepService: CepService | undefined = inject<CepService>('cepService');
-
-        return { 
-          v$: useVuelidate(),
-          store,
-          userService,
-          cepService
-        }
-    },
-})
+              required: helpers.withMessage(
+                "O campo não poderá ser nulo",
+                required
+              ),
+              minLength: helpers.withMessage(
+                "O campo de CEP deverá ter no mínimo 8 caracteres",
+                minLength(8)
+              ),
+            }
+          : {},
+      },
+    };
+  },
+  setup() {
+    const alertModal = inject<IAlertModal>(ALERT_MODAL);
+    return {
+      v$: useVuelidate(),
+      alertModal
+    };
+  },
+});
 </script>
 
 <style src="./styles/Register.css" scoped></style>

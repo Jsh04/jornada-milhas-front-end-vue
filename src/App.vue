@@ -12,7 +12,9 @@ import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
 import { container } from 'tsyringe';
 import DependencyInjection from "./configuration/dependecyInjection/DependencyInjection";
-import { InjectionTokenUseCasePostLoginToUser } from './configuration/dependecyInjection/InjectionTokens';
+import { InjectionTokenAlertModal, InjectionTokenUseCasePostLoginToUser } from './configuration/dependecyInjection/InjectionTokens';
+import IAlertModal from './application/interfaces/IAlertModal';
+import PostLoginUser from './application/useCases/PostLoginUser/PostLoginUser';
 
 
 export default defineComponent({
@@ -23,7 +25,8 @@ export default defineComponent({
   },
   provide(){
     return {
-      PostLoginUser: container.resolve(InjectionTokenUseCasePostLoginToUser)
+      PostLoginUser: container.resolve<PostLoginUser>(InjectionTokenUseCasePostLoginToUser),
+      AlertModal: container.resolve<IAlertModal>(InjectionTokenAlertModal),
     }
   },
   setup() {
