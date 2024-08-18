@@ -40,7 +40,7 @@ import swal from 'sweetalert';
 import Util from '@/util/Util';
 import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
-import IAlertModal from '@/application/interfaces/IAlertModal';
+import IAlertModal from '@/application/interfaces/alert/IAlertModal';
 import IDestinyService from '@/application/interfaces/services/IDestinyService';
 
 

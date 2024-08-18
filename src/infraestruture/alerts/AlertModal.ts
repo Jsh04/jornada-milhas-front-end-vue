@@ -1,9 +1,8 @@
-import IAlertModal from "@/application/interfaces/IAlertModal";
+import IAlertModal from "@/application/interfaces/alert/IAlertModal";
 import { injectable } from "tsyringe";
-
+import swal from "sweetalert";
 @injectable()
 export default class AlertModalSweet implements IAlertModal {
-
     addAlertModalSuccess(title: string, text: string): void {
         swal({
             text,

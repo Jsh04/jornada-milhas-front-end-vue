@@ -387,7 +387,7 @@ import { greaterThan18 } from "../../../common/validations/ValidationBirthDate";
 import { validatePhone } from "../../../common/validations/ValidationPhone";
 import Util from "@/util/Util";
 import IUserInputModel from "@/application/InputModels/IUserInputModel";
-import IAlertModal from "@/application/interfaces/IAlertModal";
+import IAlertModal from "@/application/interfaces/alert/IAlertModal";
 import { ALERT_MODAL } from "@/common/constants/InjectionKeySerivices";
 
 export default defineComponent({

@@ -12,8 +12,8 @@ import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
 import { container } from 'tsyringe';
 import DependencyInjection from "./configuration/dependecyInjection/DependencyInjection";
-import { InjectionTokenAlertModal, InjectionTokenUseCasePostLoginToUser } from './configuration/dependecyInjection/InjectionTokens';
-import IAlertModal from './application/interfaces/IAlertModal';
+import { InjectionTokenAlertModal, InjectionTokenLoginController } from './configuration/dependecyInjection/InjectionTokens';
+import IAlertModal from './application/interfaces/alert/IAlertModal';
 import PostLoginUser from './application/useCases/PostLoginUser/PostLoginUser';
 
 
@@ -25,7 +25,7 @@ export default defineComponent({
   },
   provide(){
     return {
-      PostLoginUser: container.resolve<PostLoginUser>(InjectionTokenUseCasePostLoginToUser),
+      LoginController: container.resolve<PostLoginUser>(InjectionTokenLoginController),
       AlertModal: container.resolve<IAlertModal>(InjectionTokenAlertModal),
     }
   },

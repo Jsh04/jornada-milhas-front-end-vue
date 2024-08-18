@@ -1,5 +1,5 @@
 import CepDto from "@/application/DTOs/CepDto";
-import ICepRequest from "../../application/interfaces/ICepRequest";
+import ICepRequest from "../../application/interfaces/services/ICepRequest";
 import { AxiosInstance } from "axios";
 import { inject, injectable } from "tsyringe";
 import { InjectionTokenAxiosClient} from "@/configuration/dependecyInjection/InjectionTokens";

@@ -1,5 +1,4 @@
-import swal from "sweetalert";
-import { ButtonList } from "sweetalert/typings/modules/options/buttons";
+
 
 export default class Util {
 

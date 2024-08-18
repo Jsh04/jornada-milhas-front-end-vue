@@ -26,14 +26,12 @@
 </template>
 
 <script lang="ts">
-import Util from '@/util/Util';
 import { useStore } from '../../../store';
 import { CONFIRM_MAIL } from '../../../store/actions/LoginActions';
 import { SEND_REQUEST_CONFIRM_MAIL } from '../../../store/actions/UserActions';
 import { defineComponent, inject, ref } from 'vue'
 import { useRouter } from 'vue-router';
-import IAlertModal from '@/application/interfaces/IAlertModal';
-import AlertModalSweet from '@/infraestruture/alerts/AlertModal';
+import IAlertModal from '@/application/interfaces/alert/IAlertModal';
 
 
 export default defineComponent({
@@ -52,7 +50,7 @@ export default defineComponent({
             type: String
         }
     },
-    setup (props, context) {
+    setup () {
         const store = useStore();
         const router = useRouter();
         const alertModal = inject<IAlertModal>("AlertModal");
