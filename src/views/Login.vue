@@ -111,10 +111,10 @@ export default defineComponent({
     async RequestToLoginUser() {
         const result = await this.loginController.MakeLoginUser(this.login);
         if (result.success) {
-            this.alertModal?.addAlertModalSuccess("Usuário logado com sucesso", "");
+            this.alertModal.addAlertModalSuccess("Usuário logado com sucesso", "");
         }else{
             const error = result?.Errors[0];
-            this.alertModal?.addAlertModalError("Erro no login", error.message);
+            this.alertModal.addAlertModalError("Erro no login", error.message);
         }
     },
   },
@@ -132,11 +132,19 @@ export default defineComponent({
   },
   setup() {
     const loginController = inject<LoginController>("LoginController");
-
-    if (!loginController) 
-        throw new Error("Erro na instância do controller");
-
     const alertModal = inject<IAlertModal>("AlertModal");
+
+    if (!loginController) {
+      alert('Aplicação indisponivel, tente novamente mais tarde');
+      throw new Error("Erro na instância do controller");
+    }
+        
+    if (!alertModal) {
+        alert('Aplicação indisponivel, tente novamente mais tarde');
+        throw new Error("Erro na instância do Modal");
+    }
+
+    
 
     return {
       loginController,

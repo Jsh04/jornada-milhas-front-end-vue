@@ -2,11 +2,15 @@ import { container } from "tsyringe";
 import { InjectionTokenAlertModal, 
     InjectionTokenAxiosClient, 
     InjectionTokenCepRequest, 
+    InjectionTokenDestinyRepository, 
     InjectionTokenLoginController, 
     InjectionTokenLoginRequest, 
+    InjectionTokenStoreDestination, 
+    InjectionTokenStoreObj, 
+    InjectionTokenStoreUser, 
     InjectionTokenTokenService, 
     InjectionTokenUseCasePostLoginToUser 
-} from "./InjectionTokens";
+} from "../constants/InjectionTokens";
 import CepRequest from "@/infraestruture/gateway/CepRequest";
 import AxiosClient from "@/infraestruture/api/HttpClient";
 import ILoginRequest from "@/application/interfaces/services/ILoginRequest";
@@ -19,6 +23,16 @@ import ITokenService from "@/application/interfaces/services/ITokenService";
 import TokenService from "@/infraestruture/services/TokenService";
 import IPostLoginUser from "@/application/interfaces/useCases/IPostLoginUser";
 import LoginController from "@/presentation/LoginController";
+import IStoreService from "@/application/interfaces/services/IStoreService";
+import { StateUser } from "@/store/modules/UserModule";
+import StoreUser from "@/infraestruture/store/StoreUser";
+import { State, useStore } from "@/store";
+import { Store } from "vuex";
+import IDestinyRepository from "@/domain/interfaces/IDestinyRepository";
+import { DestinyRepository } from "@/infraestruture/repository/DestinyRespository/DestinyRepository";
+import { StateDestination } from "@/store/modules/DestinyModule";
+import StoreDestination from "@/infraestruture/store/StoreDestination";
+
 
 export default class DependencyInjection {
 
@@ -26,6 +40,7 @@ export default class DependencyInjection {
         this.addDependenciesInjectionInfraestruture();
         this.addDependenciesInjectionApplication();
         this.addDependenciesInjectionPresentation();
+        this.addDependenciesInjectionStores();
     }
 
     private static addDependenciesInjectionApplication(){
@@ -38,8 +53,14 @@ export default class DependencyInjection {
 
     private static addDependenciesInjectionInfraestruture(){
         container.registerSingleton<AxiosClient>(InjectionTokenAxiosClient, AxiosClient);
+        container.register<Store<State>>(InjectionTokenStoreObj, {useValue: useStore()});
         container.register<ILoginRequest>(InjectionTokenLoginRequest, { useClass: LoginRequest});
-        
+        container.register<IDestinyRepository>(InjectionTokenDestinyRepository, {useClass: DestinyRepository})
+    }
+
+    private static addDependenciesInjectionStores(){
+        container.register<IStoreService<StateUser>>(InjectionTokenStoreUser, { useClass: StoreUser })
+        container.register<IStoreService<StateDestination>>(InjectionTokenStoreDestination, {useClass: StoreDestination})
     }
 
     private static addDependenciesInjectionPresentation(){

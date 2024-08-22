@@ -6,3 +6,10 @@ export const InjectionTokenAlertModal = "IAlertModal"
 export const InjectionTokenTokenService = "ITokenService";
 
 export const InjectionTokenLoginController = "LoginController";
+
+export const InjectionTokenStoreUser = "IStoreServiceUser";
+export const InjectionTokenStoreDestination = "IStoreServiceDestination"
+
+export const InjectionTokenStoreObj = "Store";
+
+export const InjectionTokenDestinyRepository = "IDestinyRepository"

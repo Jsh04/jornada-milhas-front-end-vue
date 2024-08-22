@@ -41,7 +41,6 @@ import Util from '@/util/Util';
 import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';
-import IDestinyService from '@/application/interfaces/services/IDestinyService';
 
 
 export default defineComponent({
@@ -108,7 +107,6 @@ export default defineComponent({
     setup(){
         const store = useStore();
         const alertModal = inject<IAlertModal>("AlertModal");
-        const destinyService = inject<IDestinyService>("DestinyService");
         return {
             store,
             alertModal,

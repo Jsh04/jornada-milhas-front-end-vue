@@ -2,7 +2,7 @@
 import { Module } from "vuex";
 import { State } from "..";
 
-import { GET_DESTINATION_BY_ID_MUTATION, GET_LIST_DESTINYS } from "../mutations/DestinysMutations";
+import { GET_DESTINATION_BY_ID_MUTATION, LIST_DESTINYS } from "../mutations/DestinysMutations";
 import Destination from "@/domain/entities/Destination";
 
 export interface StateDestination{
@@ -65,11 +65,9 @@ export const DestinyModule: Module<StateDestination, State> = {
         [GET_DESTINATION_BY_ID_MUTATION](state, destination: Destination){
             state.DestinyEdit = destination
         },
-        [GET_LIST_DESTINYS](state, destinations: Destination[]){    
+        [LIST_DESTINYS](state, destinations: Destination[]){    
             state.Destinys = destinations;
         }
         
     },
-    actions: {
-    }
 }

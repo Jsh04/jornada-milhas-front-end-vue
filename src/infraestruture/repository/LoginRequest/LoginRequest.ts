@@ -3,7 +3,7 @@ import ILoginRequest from "@/application/interfaces/services/ILoginRequest";
 import Error from "@/common/errors/Error";
 import IProblemDetails from "@/common/errors/IProblemDetails";
 import { ResultValue } from "@/common/results/Result";
-import { InjectionTokenAxiosClient } from "@/configuration/dependecyInjection/InjectionTokens";
+import { InjectionTokenAxiosClient } from "@/configuration/constants/InjectionTokens";
 import AxiosClient from "@/infraestruture/api/HttpClient";
 import { AxiosError, AxiosInstance } from "axios";
 import { inject, injectable } from "tsyringe";

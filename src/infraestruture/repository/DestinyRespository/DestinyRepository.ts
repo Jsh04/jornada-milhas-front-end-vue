@@ -1,12 +1,14 @@
 import PaginationResultResponse from "@/common/results/PaginationResult";
-import { InjectionTokenAxiosClient } from "@/configuration/dependecyInjection/InjectionTokens";
-import Depoiment from "@/domain/entities/Depoiment";
+import { InjectionTokenAxiosClient } from "@/configuration/constants/InjectionTokens";
+
+import Destination from "@/domain/entities/Destination";
+import IDestinyRepository from "@/domain/interfaces/IDestinyRepository";
 import AxiosClient from "@/infraestruture/api/HttpClient";
 import { AxiosInstance } from "axios";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
-export class DepoimentRepository{
+export class DestinyRepository implements IDestinyRepository{
 
     private readonly httpClient: AxiosInstance;
 
@@ -14,14 +16,16 @@ export class DepoimentRepository{
         this.httpClient = httpClient.getInstance();
     }
 
-    public async GetAllDepoiments(size = 10, page = 1): Promise<PaginationResultResponse<Depoiment[]>>{
-        const response = await this.httpClient.get<PaginationResultResponse<Depoiment[]>>('/depoiment', {
+    public async getAllDestinies(page: number, size: number): Promise<PaginationResultResponse<Destination>> {
+        const response = await this.httpClient.get<PaginationResultResponse<Destination>>('/destiny', {
             params: {
                 size,
                 page
             }
-        })
+        });
         return response.data;
     }
+
+
 }
 

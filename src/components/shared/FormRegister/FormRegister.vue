@@ -381,7 +381,6 @@ import {
   sameAs,
   minLength,
 } from "@vuelidate/validators";
-import { useStore } from "../../../store";
 import { validateCpf } from "../../../common/validations/ValidationCPF";
 import { greaterThan18 } from "../../../common/validations/ValidationBirthDate";
 import { validatePhone } from "../../../common/validations/ValidationPhone";

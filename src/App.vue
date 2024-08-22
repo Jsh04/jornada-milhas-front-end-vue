@@ -12,7 +12,7 @@ import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
 import { container } from 'tsyringe';
 import DependencyInjection from "./configuration/dependecyInjection/DependencyInjection";
-import { InjectionTokenAlertModal, InjectionTokenLoginController } from './configuration/dependecyInjection/InjectionTokens';
+import { InjectionTokenAlertModal, InjectionTokenLoginController } from './configuration/constants/InjectionTokens';
 import IAlertModal from './application/interfaces/alert/IAlertModal';
 import PostLoginUser from './application/useCases/PostLoginUser/PostLoginUser';
 

@@ -1,8 +1,7 @@
 import ILoginInputModel from "@/application/InputModels/ILoginInputModel";
-import IUserInputModel from "@/application/InputModels/IUserInputModel";
 import IPostLoginUser from "@/application/interfaces/useCases/IPostLoginUser";
 import { Result } from "@/common/results/Result";
-import { InjectionTokenUseCasePostLoginToUser } from "@/configuration/dependecyInjection/InjectionTokens";
+import { InjectionTokenUseCasePostLoginToUser } from "@/configuration/constants/InjectionTokens";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
