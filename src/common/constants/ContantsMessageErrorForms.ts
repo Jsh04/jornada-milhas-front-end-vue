@@ -1,0 +1,1 @@
+export const FieldShouldBeNotNull = "O campo deverá ser obrigatório"
