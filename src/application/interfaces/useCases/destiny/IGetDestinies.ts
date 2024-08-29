@@ -1,8 +1,8 @@
-import IReadableUseCase from "@/common/interfaces/useCases/IReadableUseCase";
-import PaginationResultResponse from "@/common/results/PaginationResult";
+
+
 import Destination from "@/domain/entities/Destination";
 
-export default interface IGetDestinies extends IReadableUseCase<Destination> {
+export default interface IGetAllDestinies  {
 
-    getAllDestinationsBy(): PaginationResultResponse<Destination>
+    getAllDestinations(size: number, page: number): Promise<Destination[]>;
 }

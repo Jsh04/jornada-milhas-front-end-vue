@@ -2,6 +2,7 @@ import { container } from "tsyringe";
 import { InjectionTokenAlertModal, 
     InjectionTokenAxiosClient, 
     InjectionTokenCepRequest, 
+    InjectionTokenDestinyController, 
     InjectionTokenDestinyRepository, 
     InjectionTokenLoginController, 
     InjectionTokenLoginRequest, 
@@ -9,6 +10,7 @@ import { InjectionTokenAlertModal,
     InjectionTokenStoreObj, 
     InjectionTokenStoreUser, 
     InjectionTokenTokenService, 
+    InjectionTokenUseCaseGetAllDestinies, 
     InjectionTokenUseCasePostLoginToUser 
 } from "../constants/InjectionTokens";
 import CepRequest from "@/infraestruture/gateway/CepRequest";
@@ -32,6 +34,9 @@ import IDestinyRepository from "@/domain/interfaces/IDestinyRepository";
 import { DestinyRepository } from "@/infraestruture/repository/DestinyRespository/DestinyRepository";
 import { StateDestination } from "@/store/modules/DestinyModule";
 import StoreDestination from "@/infraestruture/store/StoreDestination";
+import IGetAllDestinies from "@/application/interfaces/useCases/destiny/IGetDestinies";
+import GetAllDestinies from "@/application/useCases/GetDestinys/GetAllDestinies";
+import { DestinyController } from "@/presentation/DestinyController";
 
 
 export default class DependencyInjection {
@@ -45,10 +50,14 @@ export default class DependencyInjection {
 
     private static addDependenciesInjectionApplication(){
         container.register<ICepRequest>(InjectionTokenCepRequest, { useClass: CepRequest });
-        container.register(InjectionTokenUseCasePostLoginToUser, PostLoginUser);
         container.register<IAlertModal>(InjectionTokenAlertModal, { useClass: AlertModalSweet });
         container.register<ITokenService>(InjectionTokenTokenService, { useClass: TokenService});
+       this.addDependenciesInjectionUseCases();
+    }
+
+    private static addDependenciesInjectionUseCases(){
         container.register<IPostLoginUser>(InjectionTokenUseCasePostLoginToUser, { useClass: PostLoginUser });
+        container.register<IGetAllDestinies>(InjectionTokenUseCaseGetAllDestinies, { useClass: GetAllDestinies })
     }
 
     private static addDependenciesInjectionInfraestruture(){
@@ -65,5 +74,6 @@ export default class DependencyInjection {
 
     private static addDependenciesInjectionPresentation(){
         container.registerSingleton(InjectionTokenLoginController, LoginController);
+        container.registerSingleton(InjectionTokenDestinyController, DestinyController);
     }
 }

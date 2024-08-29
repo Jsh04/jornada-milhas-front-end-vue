@@ -35,43 +35,31 @@
 import { defineComponent, inject } from 'vue';
 import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
-import { DESTINATION_ALL_GET, DESTINATION_DELETE_BY_ID } from '@/store/actions/DestinyActions'
 import swal from 'sweetalert';
 import Util from '@/util/Util';
 import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';
+import { DestinyController } from '@/presentation/DestinyController';
 
 
 export default defineComponent({
     name: "DestinyTableComponent",
     components: { Loader },
     computed: {
-        ListDestinies(): Destination[] {
-            const list = this.destinyService?.getAllDestinies(this.page, this.size);
-            if (!list) 
-                return []
-
-            return list;
-        }
+        
     },
     data() {
         return {
             isLoading: false,
             page: 1,
-            size: 10
+            size: 10,
+            ListDestinies: [] as Destination[]
         }
     },
     methods: {
         async getDestinysFromApi(){
-            this.isLoading = true
-            try {
-                await this.store.dispatch(DESTINATION_ALL_GET, {page: 0, size: 10});
-            } catch (error) {
-                this.alertModal?.addAlertModalError("Erro ao buscar destinos", "Tente novamente mais tarde");
-            } finally {
-                this.isLoading = false
-            }
+            this.ListDestinies = await this.destinyController.getAllDestinies(this.size, this.page);
         },
         ReturnMaskPrice(price: number){
             const priceToConverted = price * 100;
@@ -107,10 +95,14 @@ export default defineComponent({
     setup(){
         const store = useStore();
         const alertModal = inject<IAlertModal>("AlertModal");
+        const destinyController = inject<DestinyController>("DestinyController");
+        if (!destinyController) 
+            throw new Error("Instância não pode ser iniciada, tente novamente mais tarde");
+        
         return {
             store,
             alertModal,
-            destinyService
+            destinyController
         }
     }
 })
