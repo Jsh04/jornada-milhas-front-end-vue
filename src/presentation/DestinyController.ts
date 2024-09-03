@@ -6,7 +6,10 @@ import { inject, injectable } from "tsyringe";
 @injectable()
 export class DestinyController{
 
-    constructor(@inject(InjectionTokenUseCaseGetAllDestinies) private getAllDestiniesUseCase: IGetAllDestinies){}
+    constructor(@inject(InjectionTokenUseCaseGetAllDestinies) 
+    private getAllDestiniesUseCase: IGetAllDestinies,
+    private getDestinyById: IGetDestinyById
+){}
 
     async getAllDestinies(size = 10, page = 1){
         const destinations = await this.getAllDestiniesUseCase.getAllDestinations(size, page);
@@ -14,7 +17,7 @@ export class DestinyController{
     }
 
     async getDestinyById(id: number): Promise<Destination>{
-        return Promise.resolve();
+        
     }
 
     async deleteDestinyById(id: number){

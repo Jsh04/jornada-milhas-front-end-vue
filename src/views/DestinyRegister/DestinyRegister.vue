@@ -4,6 +4,7 @@
 
 <script lang="ts">
 
+
 import DestinyForm from '@/components/shared/DestinyForm/DestinyForm.vue';
 import { defineComponent } from 'vue';
 

@@ -98,11 +98,9 @@ import 'filepond/dist/filepond.min.css';
 
 import * as FilePondeInstance from 'filepond';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-import Destination from '@/domain/entities/Destination';
-import { useStore } from '@/store';
 import { helpers, required } from '@vuelidate/validators';
-import Util from '@/util/Util'
 import swal from 'sweetalert';
+import Destination from '@/domain/entities/Destination';
 export default defineComponent({
     props: {
         isEdit: {
@@ -161,11 +159,7 @@ export default defineComponent({
                 this.Destiny.pictures = await this.ReturnBase64Array();
                 this.Destiny.price = parseFloat(this.Price.replace("R$", "").replace(",", "."))
 
-                if (this.isEdit) {
-                    const id = this.$route.params.id;
-                    response = await this.store.dispatch(DESTINATION_PUT_UPDATE, {Destiny: this.Destiny, Id: id});
-                }else
-                    response = await this.store.dispatch(DESTINATION_POST, this.Destiny);
+               
                 
                 if (response.status >= HttpStatusCode.NoContent) 
                     textModal = "Destino atualizado com sucesso"
