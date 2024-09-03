@@ -96,6 +96,7 @@ export default defineComponent({
         const store = useStore();
         const alertModal = inject<IAlertModal>("AlertModal");
         const destinyController = inject<DestinyController>("DestinyController");
+
         if (!destinyController) 
             throw new Error("Instância não pode ser iniciada, tente novamente mais tarde");
         
