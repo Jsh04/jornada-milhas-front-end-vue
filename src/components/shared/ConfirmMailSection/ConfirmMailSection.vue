@@ -27,8 +27,6 @@
 
 <script lang="ts">
 import { useStore } from '../../../store';
-import { CONFIRM_MAIL } from '../../../store/actions/LoginActions';
-import { SEND_REQUEST_CONFIRM_MAIL } from '../../../store/actions/UserActions';
 import { defineComponent, inject, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';

@@ -1,7 +1,8 @@
+import DestinyDto from "@/application/DTOs/DestinyDto";
 import Error from "@/common/errors/Error";
 import IProblemDetails from "@/common/errors/IProblemDetails";
 import PaginationResultResponse from "@/common/results/PaginationResult";
-import { Result } from "@/common/results/Result";
+import { Result, ResultValue } from "@/common/results/Result";
 import { InjectionTokenAxiosClient } from "@/configuration/constants/InjectionTokens";
 
 import Destination from "@/domain/entities/Destination";
@@ -20,6 +21,19 @@ export class DestinyRepository implements IDestinyRepository{
     constructor(@inject(InjectionTokenAxiosClient) httpClient: AxiosClient){
         this.httpClient = httpClient.getInstance();
     }
+    
+    async getDestinyById(id: number): Promise<ResultValue<Destination>> {
+        try {
+            const getByIdPath = this.endPointApi + `/${id}`;
+            const response = await this.httpClient.get<Destination>(getByIdPath);
+            return ResultValue.Ok(response.data);
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            const errorObj = axiosError.response?.data as IProblemDetails;
+            const result = ResultValue.FailWithError<Destination>(new Error(errorObj.Detail, errorObj.Title));
+            return result;
+        }
+    }
 
     public async deleteDestinyById(destinyId: number): Promise<Result> {
         try {
@@ -32,8 +46,6 @@ export class DestinyRepository implements IDestinyRepository{
             const result = Result.FailWithError(new Error(errorObj.Detail, errorObj.Title));
             return result;
         }
-        
-
     }
 
     public async getAllDestinies(page: number, size: number): Promise<PaginationResultResponse<Destination>> {

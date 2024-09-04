@@ -3,6 +3,7 @@ export const InjectionTokenAxiosClient = 'AxiosClient';
 export const InjectionTokenLoginRequest = 'ILoginRequest';
 export const InjectionTokenUseCasePostLoginToUser = 'PostLoginUser'
 export const InjectionTokenUseCaseGetAllDestinies = "IGetAllDestinies"
+export const InjectionTokenUseCaseGetDestinyById = "IGetDestinyById";
 export const InjectionTokenAlertModal = "IAlertModal"
 export const InjectionTokenTokenService = "ITokenService";
 
