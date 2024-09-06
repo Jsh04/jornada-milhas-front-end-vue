@@ -1,6 +1,6 @@
 <template>
     <div :style="{backgroundImage: 'url( '+ urlImage +')'}" class="banner">
-
+        
     </div>
 </template>
 

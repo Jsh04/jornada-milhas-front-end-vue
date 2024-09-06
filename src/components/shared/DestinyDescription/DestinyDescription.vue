@@ -1,10 +1,10 @@
 <template>
     <section class="destiny-description">
         <article class="destiny-description__title">
-            <h2 class="ff-roboto">Descubra o {{Destiny?.name}}</h2>
+            <h2 class="ff-roboto">Descubra o {{currentDestiny.name}}</h2>
         </article>
         <article class="destiny-description__subtitle ff-roboto">
-            <h3>{{ Destiny?.subtitle }}</h3>
+            <h3>{{ currentDestiny.subtitle }}</h3>
         </article>
         <article class="destiny-description__details">
             <div class="destiny-description__img-container">
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="destiny-description__texts">
-                <p class="ff-roboto">{{ Destiny?.descriptionEnglish }}</p>
-                <p class="ff-roboto ">{{ Destiny?.descriptionPortuguese }}</p>
+                <p class="ff-roboto">{{ currentDestiny.descriptionEnglish }}</p>
+                <p class="ff-roboto ">{{ currentDestiny.descriptionPortuguese }}</p>
             </div>
         </article>
     </section>
@@ -25,32 +25,23 @@
 
 <script lang="ts">
 import Destination from '@/domain/entities/Destination';
-import { useStore } from '@/store';
-import { defineComponent, computed } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: "DestinyDescription",
+    props: {
+        currentDestiny: {
+            type: Destination,
+            required: true,
+            default: new Destination()
+        }
+    },
     data() {
         return {
-            Destiny: {} as Destination | undefined
+            
         }
     },
-    methods: {
-        DefineDestinyCurrent(): void{
-            const id = Number(this.$route.params.id);
-            const destiny = this.ListDestinys.find(destiny => destiny.id == id);
-            this.Destiny = destiny;
-        }
-    },
-    mounted() {
-        this.DefineDestinyCurrent();
-    },
-    setup(){
-        const store = useStore();
-        return {
-            ListDestinys: computed(() => store.state.destinyModule.Destinys) 
-        }
-    }
+
 })
 </script>
 

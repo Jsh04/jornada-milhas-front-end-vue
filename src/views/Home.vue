@@ -15,7 +15,7 @@ import { defineComponent } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
 import Filter from '@/components/shared/Filter/Filter.vue';
 import ModalTraveler from '@/components/modals/ModalTravaler/ModalTraveler.vue';
-import FilterInterface from '@/interfaces/FilterInterface';
+import FilterInterface from '@/components/interfaces/FilterInterface';
 import LoaderPassages from '@/components/shared/LoaderPassages/LoaderPassages.vue';
 
 export default defineComponent({

@@ -30,14 +30,6 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: "FooterComponent",
-    data() {
-        return {
-            
-        }
-    },
-    methods: {
-        
-    },
 })
 </script>
 

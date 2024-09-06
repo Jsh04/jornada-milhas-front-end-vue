@@ -1,14 +1,15 @@
 <template>
     <Banner style="height: 100px;" :url-image="urlImage"/>
-    <DestinyDescription />
+    <DestinyDescription :current-destiny="destiny" />
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
-import { useStore } from '@/store';
 import Destination from '@/domain/entities/Destination';
 import DestinyDescription from '@/components/shared/DestinyDescription/DestinyDescription.vue';
+import { DestinyController } from '@/presentation/DestinyController';
+import IAlertModal from '@/application/interfaces/alert/IAlertModal';
 
 export default defineComponent({
     name: "DescriptionComponent",
@@ -16,23 +17,32 @@ export default defineComponent({
     data() {
         return {
             urlImage: require("@/assets/Imagens/Banner-destino.png"),
-            destiny: {
-                id: 0,
-                name: '',
-                pictuteTest: '',
-                price: 0.0
-            } as Destination | undefined
+            destiny: {} as Destination | undefined
         }
     },
-    mounted() {
-        const id = Number(this.$route.params.id);
-        const destiny = this.ListDestinys.find(destiny => destiny.id == id)
-        this.destiny = destiny;
+    methods:{
+        async returnDestinyToDescription(){
+            const desitnyId = Number(this.$route.params.id);
+            const destinyByControllerResult = await this.destinyController.getDestinyById(desitnyId);
+
+            
+
+            this.destiny = destinyByControllerResult;
+        }
     },
+
+    async beforeMount() {
+        this.returnDestinyToDescription();
+    },
+
     setup() {
-        const store = useStore()
+        const destinyController = inject<DestinyController>("DestinyController");
+
+        if (!destinyController) 
+            throw new Error("Não é possível iniciar a aplicação")
+        
         return {
-            ListDestinys: computed(() => store.state.destinyModule.Destinys)
+           destinyController
         }
     },
 });

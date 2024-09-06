@@ -89,8 +89,10 @@ export default defineComponent({
             this.$emit('active-modal-filter', this.ActiveModal)
         },
         ReturnCount(count: number | undefined){
-            if(count == undefined || count == 0) return ""
-            else return count
+            if(count == undefined || count == 0) 
+                return ""
+            else 
+                return count
         }
     },
 })
