@@ -183,18 +183,12 @@ export default defineComponent({
             }
         },
         MaskPrice(){
-            this.Price = Util.FormatMoney(this.Price);
+            console.log('test');
+            
         },
         async getDestinyEdit(){     
-            const id = this.$route.params.id;
-            await this.store.dispatch(DESTINATION_GET_BY_ID, id);
-            this.Destiny = this.store.state.destinyModule.DestinyEdit
-
-            this.Price = Util.formatNumberInMaskPrice(this.Destiny.price);
-
-            this.Destiny.pictures.forEach(picture => {
-                this.filePond?.addFile(Util.returnByteArrayFile(picture));
-            })
+            console.log('test');
+            
         },
         async ReturnBase64Array(): Promise<string[]>{
             const arrayBase64: string[] = [];
@@ -241,9 +235,7 @@ export default defineComponent({
         }
     },
     setup() {
-        const store = useStore();
         return { 
-            store,
             v$: useVuelidate()
         }
     }

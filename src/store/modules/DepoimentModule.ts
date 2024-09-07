@@ -1,15 +1,11 @@
 
 import { Module } from "vuex";
 import { State } from "..";
-import Depoiment from "@/domain/entities/Depoiment";
-
-export interface StateDepoiment{
-    depoiments: Depoiment[];
-}
+import { StateDepoiment } from "@/domain/states/StateDepoiment";
 
 
 export const DepoimentModule: Module<StateDepoiment, State> = {
     state: {
-        depoiments: []
+        depoiments: [],
     }
 }
