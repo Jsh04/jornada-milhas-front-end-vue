@@ -1,18 +1,17 @@
 <template>
     <section class="destinations">
-    <article class="destinations-title">
-            <h2 class="ff-roboto">Destinos</h2>
-    </article>
-    <div class="destinations__cards">
-        <DestinationsCard v-for="(destination, index) in listDestination" :destination="destination" :key="index" />
-    </div>
+        <article class="destinations-title">
+            <h2 class="ff-roboto">Promoções</h2>
+        </article>
+        <div class="destinations__cards">
+            <DestinationsCard v-for="(destination, index) in listDestination" :destination="destination" :key="index" />
+        </div>
         
     </section>
 </template>
 
 <script lang="ts">
 import { defineComponent} from 'vue'
-import { useStore } from '@/store'
 import DestinationsCard from '../DestinationsCard/DestinationsCard.vue';
 import Destination from '@/domain/entities/Destination';
 
@@ -73,13 +72,7 @@ import Destination from '@/domain/entities/Destination';
         methods: {
             
         },
-        setup(){
-            const store = useStore()
-            return {
-                store,
-                
-            }
-        }
+        
     })
 </script>
 

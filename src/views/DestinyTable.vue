@@ -35,12 +35,10 @@
 import { defineComponent, inject } from 'vue';
 import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
-import swal from 'sweetalert';
-import Util from '@/util/Util';
-import { AxiosResponse } from 'axios';
 import Loader from '@/components/shared/Loader.vue';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';
 import { DestinyController } from '@/presentation/DestinyController';
+import FormatMoney from '@/common/formats/FormatMoney';
 
 
 export default defineComponent({
@@ -63,30 +61,15 @@ export default defineComponent({
         },
         ReturnMaskPrice(price: number){
             const priceToConverted = price * 100;
-            return Util.FormatMoney(priceToConverted.toString())
+            return FormatMoney.FormatMoney(priceToConverted.toString())
         },
         async DeleteDestiny(id: number){
-            try {
-                const response: AxiosResponse = await this.store.dispatch(DESTINATION_DELETE_BY_ID, id);
-                if(response.status == 204)
-                    swal({
-                        title: "Destino Deletado com sucesso",
-                        icon: 'sucess',
-                        buttons: [true, "Ok"]
-                    })
-                await this.getDestinysFromApi()
-            } catch (error) {
-                swal({
-                        title: "Erro ao deletar destino",
-                        icon: 'error',
-                        buttons: [true, "Ok"]
-                    })
-            }
+            console.log(id);
+            
            
         },
         EditDestiny(id: number){
             this.$router.push(`/admin/destino/editar/${id}`)
-            
         }
     },
     async mounted() {

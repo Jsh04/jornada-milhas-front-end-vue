@@ -1,9 +1,10 @@
 
 import { InjectionKey } from "vue";
 import { Store, createStore, useStore as vuexUseStore } from "vuex";
-import { StateDepoiment, DepoimentModule } from "./modules/DepoimentModule";
+import { DepoimentModule } from "./modules/DepoimentModule";
 import { StateUser, UserModule } from "./modules/UserModule";
 import { DestinyModule, StateDestination } from "./modules/DestinyModule";
+import { StateDepoiment } from "@/domain/states/StateDepoiment";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 

@@ -21,6 +21,7 @@
     "core-js": "^3.8.3",
     "filepond": "^4.30.6",
     "filepond-plugin-file-validate-size": "^2.2.8",
+    "maska": "^3.0.2",
     "reflect-metadata": "^0.2.2",
     "sweetalert": "^2.1.2",
     "tsyringe": "^4.8.0",

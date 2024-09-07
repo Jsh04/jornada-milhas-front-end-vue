@@ -10,7 +10,4 @@ export default class UserLimited extends User {
     constructor(name = '', Address: Address, dtBirth: Date, genre: EnumGenre, phone: Phone, cpf:Cpf){
         super(name, Address, dtBirth, genre, phone, cpf);
     }
-
-
-    // Add any additional methods specific to UserLimited here
 }

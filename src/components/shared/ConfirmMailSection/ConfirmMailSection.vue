@@ -9,7 +9,7 @@
                     <p class="ff-roboto">{{ subTitle }}</p>
                 </div>
                 <div class="confirmMail__btn">
-                    <button @click="SendBtn()" class="ff-roboto">Já confirmei E-mail</button>
+                    <button  class="ff-roboto">Já confirmei E-mail</button>
                 </div>
             </template>
             <template v-else>
@@ -49,48 +49,8 @@ export default defineComponent({
         }
     },
     setup () {
-        const store = useStore();
-        const router = useRouter();
-        const alertModal = inject<IAlertModal>("AlertModal");
-        const idUser = ref(0);
-
-        async function SendBtn(): Promise<void>{
-            try {
-                const response = await store.dispatch(CONFIRM_MAIL, idUser.value);
-                changeRouterConfirmMail(response.data)
-            } catch (error) {
-                alertModal?.addAlertModalError("Erro ao verificar a confirmação de E-mail", "Tente novamente mais tarde");
-            }
-            
-        }
-
-        async function RequestConfirmMail(idUser: number){
-            try {
-                const response = await store.dispatch(SEND_REQUEST_CONFIRM_MAIL, idUser);
-                if (response.status == 204) alertModal?.addAlertModalSuccess("E-mail confirmado com sucesso","Basta apenas clicar no botão abaixo para prosseguir");
-                
-            } catch (error) {
-                alertModal?.addAlertModalError("Erro ao confirmar E-mail, tente novamente","");
-            }
-        }
-
-        function changeRouterConfirmMail(isConfirmMail: boolean) {
-            if (isConfirmMail) 
-                router.push('/')
-            else
-                alertModal?.addAlertModalError("Você ainda não confirmou o E-mail", "")
-        }
-
-        return {
-            store, 
-            SendBtn,
-            idUser,
-            RequestConfirmMail
-        }
-    },
-    async mounted() {
-        this.idUser = Number(this.$route.params.idUser);
-        if(!this.isConfirmMail) await this.RequestConfirmMail(this.idUser)
+        console.log('');
+        
     },
 })
 </script>

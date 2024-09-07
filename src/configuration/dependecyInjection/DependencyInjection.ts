@@ -11,6 +11,7 @@ import { InjectionTokenAlertModal,
     InjectionTokenStoreUser, 
     InjectionTokenTokenService, 
     InjectionTokenUseCaseGetAllDestinies, 
+    InjectionTokenUseCaseGetDestinyById, 
     InjectionTokenUseCasePostLoginToUser 
 } from "../constants/InjectionTokens";
 import CepRequest from "@/infraestruture/gateway/CepRequest";
@@ -37,6 +38,8 @@ import StoreDestination from "@/infraestruture/store/StoreDestination";
 import IGetAllDestinies from "@/application/interfaces/useCases/destiny/IGetDestinies";
 import GetAllDestinies from "@/application/useCases/GetDestinys/GetAllDestinies";
 import { DestinyController } from "@/presentation/DestinyController";
+import IGetDestinyById from "@/application/interfaces/useCases/destiny/IGetDestinyById";
+import GetByIdDestinyUseCase from "@/application/useCases/GetDestinys/GetByIdDestiny";
 
 
 export default class DependencyInjection {
@@ -58,6 +61,7 @@ export default class DependencyInjection {
     private static addDependenciesInjectionUseCases(){
         container.register<IPostLoginUser>(InjectionTokenUseCasePostLoginToUser, { useClass: PostLoginUser });
         container.register<IGetAllDestinies>(InjectionTokenUseCaseGetAllDestinies, { useClass: GetAllDestinies })
+        container.register<IGetDestinyById>(InjectionTokenUseCaseGetDestinyById, {useClass: GetByIdDestinyUseCase})
     }
 
     private static addDependenciesInjectionInfraestruture(){

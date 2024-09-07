@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import Util from '@/util/Util';
+import FormatMoney from '@/common/formats/FormatMoney';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
     name: 'RecommendationCardComponent',
     methods:{
         ReturnFormatMoney(valueDouble: number){
-            return Util.FormatMoney(valueDouble.toString());
+            return FormatMoney.FormatMoney(valueDouble.toString());
         }
     }
     
