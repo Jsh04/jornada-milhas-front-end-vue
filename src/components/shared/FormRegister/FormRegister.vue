@@ -5,66 +5,30 @@
                 <h2 class="ff-roboto">{{ title }}</h2>
             </div>
             <div class="register__form-container">
-                <form
-                    @submit.prevent="SendForms()"
-                    action=""
-                    class="register__form"
-                >
-                    <div class="register__form-input">
-                        <input
-                            style="width: calc(530px - 3rem)"
-                            type="text"
-                            class="ff-roboto"
-                            name="name"
-                            id="name"
-                            placeholder="Digite seu nome completo"
-                            :class="[
-                                v$.User.name.$errors.length > 0
-                                    ? 'register__input_erro'
-                                    : '',
-                            ]"
-                            v-model.trim="User.name"
-                            @blur="v$.User.name.$touch"
-                        />
-                        <label class="ff-roboto">Nome</label>
-                        <span
-                            class="message_error ff-roboto"
-                            v-for="(error, index) in v$.User.name.$errors"
-                            :key="index"
-                        >
-                            {{ error.$message }}
-                        </span>
-                    </div>
-                    <div
-                        style="margin-top: 2rem"
-                        class="register__form-input"
-                        v-if="isAdminRegister"
-                    >
-                        <input
-                            style="width: calc(530px - 3rem)"
-                            type="text"
-                            class="ff-roboto"
-                            id="codeEmployee"
-                            placeholder="Digite seu nome completo"
-                            :class="[
-                                v$.User.codeEmployee.$errors.length > 0
-                                    ? 'register__input_erro'
-                                    : '',
-                            ]"
-                            v-model.trim="User.codeEmployee"
-                            minlength="8"
-                            @blur="v$.User.codeEmployee.$touch"
-                        />
-                        <label class="ff-roboto">Código do Funcionário</label>
-                        <span
-                            class="message_error ff-roboto"
-                            v-for="(error, index) in v$.User.codeEmployee
-                                .$errors"
-                            :key="index"
-                        >
-                            {{ error.$message }}
-                        </span>
-                    </div>
+                <form @submit.prevent="SendForms()" action="" class="register__form">
+                    <InputCustom v-model="User.name" 
+                        label-title="Nome" 
+                        id-input="name"  
+                        placeHolderInput="Digite seu nome" 
+                        type-input="text"> 
+                        <template v-slot:errorsInput>
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.name.$errors" :key="index">
+                                {{ error.$message }}
+                            </span>
+                        </template>
+                    </InputCustom> 
+                    <InputCustom v-if="isAdminRegister"
+                    label-title="Código Empregado" 
+                    id-input="codeEmployee"
+                    v-model.trim="User.codeEmployee"
+                    placeHolderInput="Digite o seu código de funcionário"
+                    type-input="text">
+                        <template v-slot:errorsInput>
+                            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.codeEmployee.$errors" :key="index">
+                                {{ error.$message }}
+                            </span>
+                        </template>
+                    </InputCustom>
                     <div class="register__container-fields">
                         <div class="register__form-input">
                             <input
@@ -394,10 +358,7 @@
                         >
                     </div>
                     <div class="register__form-btn-container">
-                        <button
-                            class="register__form-btn ff-roboto"
-                            type="submit"
-                        >
+                        <button class="register__form-btn ff-roboto" type="submit">
                             criar minha conta
                         </button>
                     </div>
@@ -415,8 +376,10 @@ import IAlertModal from "@/application/interfaces/alert/IAlertModal";
 import { ALERT_MODAL } from "@/common/constants/InjectionKeySerivices";
 import { vMaska } from "maska/vue";
 import FormRegisterValidations from "./validations/FormRegisterValidations";
+import InputCustom from "../InputCustom/InputCustom.vue";
 export default defineComponent({
     name: "RegisterComponent",
+    components: {InputCustom},
     props: {
         isAdminRegister: {
             type: Boolean,
@@ -439,10 +402,7 @@ export default defineComponent({
     methods: {
         async SendForms() {
             if (!this.checkedTerms) {
-                this.alertModal?.addAlertModalWarning(
-                    "Confirme que leu nossas condições",
-                    ""
-                );
+                this.alertModal?.addAlertModalWarning("Confirme que leu nossas condições","");
                 return;
             }
 

@@ -1,6 +1,5 @@
 
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import AuthorizationRoutes from "./AuthorizationRoutes";
 import Home from "@/views/Home.vue";
 import RegisterVue from "@/views/Register/Register.vue";
 import DescriptionVue from "@/views/Description.vue";

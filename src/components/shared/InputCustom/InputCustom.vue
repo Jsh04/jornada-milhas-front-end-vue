@@ -1,18 +1,20 @@
 <template>
-    <div class="form-input__custom" v-if="isAdminRegister">
+    <div class="form-input__custom">
         <input
             :type="typeInput"
-            class="ff-roboto input__style"
+            :class="['ff-roboto', classesPerson]"
             :placeholder="placeHolderInput"
             :id="idInput"
             :value="modelValue"
             @blur="$emit('blur')"
             @click="$emit('click')"
             @change="$emit('change')"
-            :disabled="isAdminRegister"
+            @input="EmitModelValue($event)" 
         />
-        <label class="ff-roboto">Endereço</label>
+        <label class="ff-roboto">{{ labelTitle }}</label>
+        <slot name="errorsInput"></slot>
     </div>
+
 </template>
 
 <script lang="ts">
@@ -31,20 +33,32 @@ export default defineComponent({
                 return true;
             }
         },
+        classesPerson: {
+            type: String,
+            required: false,
+             default: "input__style"
+        },
         placeHolderInput: {
             type: String, 
-            required: false
+            required: false,
         },
         idInput: {
             type: String, 
             required: false,
         },
-        modelValue:{
-            type: [String, Array, Boolean, Number],
-            required: true 
+        modelValue:{},
+        labelTitle: {
+            type: String, 
+            required: true
         }
     },
-    emits: ['click', 'change', 'update:modelValue']
+    emits: ['click', 'change', 'update:modelValue', 'blur'],
+    methods:{
+        EmitModelValue(event: Event){
+            const targetInput = event.target as HTMLInputElement;
+            this.$emit("update:modelValue", targetInput.value);
+        }
+    }
 });
 
 </script>
@@ -65,7 +79,6 @@ export default defineComponent({
   -webkit-appearance: none;
   outline: none;
   padding: 15px 20px;
-  width: inherit;
   font-size: 12px;
   margin-bottom: 0.5rem;
 }

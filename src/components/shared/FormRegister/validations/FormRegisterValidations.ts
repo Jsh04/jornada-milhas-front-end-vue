@@ -12,7 +12,6 @@ export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
     .createBuild()
     .addRequiredWithMessage("O campo deverá ser obrigatório")
     .build(),
-
     email: ValidatorFluentWithVuelidate
     .createBuild()
     .addRequiredWithMessage("O campo deverá ser obrigatório")
@@ -48,13 +47,10 @@ export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
             sameAs(userInputModel.password)
         ),
     },
-    password: {
-
-        required: helpers.withMessage(
-            "O campo não poderá ser nulo",
-            required
-        ),
-    },
+    password: ValidatorFluentWithVuelidate
+    .createBuild()
+    .addRequiredWithMessage("O campo não poderá ser nulo")
+    .build(),
     cpf: {
         required: helpers.withMessage(
             "O campo deverá ser obrigatório",
