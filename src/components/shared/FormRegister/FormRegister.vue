@@ -10,46 +10,28 @@
                         label-title="Nome" 
                         id-input="name"  
                         placeHolderInput="Digite seu nome" 
-                        type-input="text"> 
-                        <template v-slot:errorsInput>
-                            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.name.$errors" :key="index">
-                                {{ error.$message }}
-                            </span>
-                        </template>
-                    </InputCustom> 
+                        type-input="text" 
+                        :errors-validations="v$.User.name.$errors"/>
+
                     <InputCustom v-if="isAdminRegister"
                     label-title="Código Empregado" 
                     id-input="codeEmployee"
                     v-model.trim="User.codeEmployee"
                     placeHolderInput="Digite o seu código de funcionário"
-                    type-input="text">
-                        <template v-slot:errorsInput>
-                            <span class="message_error ff-roboto" v-for="(error, index) in v$.User.codeEmployee.$errors" :key="index">
-                                {{ error.$message }}
-                            </span>
-                        </template>
-                    </InputCustom>
+                    type-input="text" 
+                    :errors-validations="GetListErrorsCodeEmployee"/>
+
                     <div class="register__container-fields">
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="date"
-                                class="ff-roboto"
-                                placeholder="XX/XX/XXXX"
-                                id="dtBirth"
-                                v-model="User.dtBirth"
-                                @blur="v$.User.dtBirth.$touch"
-                            />
-                            <label class="ff-roboto">Data de nascimento</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.dtBirth
-                                    .$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
+                        <InputCustom 
+                        label-title="Data de nascimento" 
+                        id-input="dtBirth"
+                        v-model="User.dtBirth"
+                        placeHolderInput=""
+                        @blur="v$.User.dtBirth.$touch"
+                        type-input="date" 
+                        :errors-validations="v$.User.dtBirth.$errors"
+                        />
+                        
                         <div class="register__form-genre">
                             <label class="ff-roboto register__form-genre-label"
                                 >Gênero</label
@@ -93,44 +75,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                id="cpf"
-                                placeholder="XXX.XXX.XXX-XX"
-                                v-model="User.cpf"
-                                @blur="v$.User.cpf.$touch"
-                            />
-                            <label class="ff-roboto">CPF</label>
-                            <span
-                                v-if="v$.User.cpf.$errors.length != 0"
-                                class="message_error ff-roboto"
-                            >
-                                {{ v$.User.cpf.$errors[0].$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                placeholder="Digite seu telefone"
-                                id="phone"
-                                v-model="User.phone"
-                                maxlength="15"
-                                @blur="v$.User.phone.$touch"
-                                v-maska="'(##) #####-####'"
-                            />
-                            <label class="ff-roboto">Telefone</label>
-                            <span
-                                v-if="v$.User.phone.$errors.length != 0"
-                                class="message_error ff-roboto"
-                            >
-                                {{ v$.User.phone.$errors[0].$message }}
-                            </span>
-                        </div>
+                        <InputCustom
+                            label-title="CPF" 
+                            id-input="cpf"
+                            v-model.trim="User.cpf"
+                            placeHolderInput="XXX.XXX.XXX-XX"
+                            type-input="text" 
+                            :errors-validations="v$.User.cpf.$errors"
+                            @blur="v$.User.cpf.$touch"
+                            v-maska="'###.###.###-##'">
+                        </InputCustom>
+                        <InputCustom
+                            label-title="Telefone" 
+                            id-input="phone"
+                            v-model.trim="User.phone"
+                            placeHolderInput="Digite seu telefone"
+                            type-input="text" 
+                            :errors-validations="v$.User.phone.$errors"
+                            @blur="v$.User.phone.$touch"
+                            v-maska="'(##) #####-####'">
+                        </InputCustom>
+                        
                         <div
                             class="register__form-input"
                             v-if="isAdminRegister"
@@ -267,84 +232,43 @@
                                 {{ error.$message }}
                             </span>
                         </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="email"
-                                class="ff-roboto"
-                                id="email"
-                                name="email"
-                                v-model="User.email"
-                                placeholder="Digite seu e-mail"
-                                @blur="v$.User.email.$touch"
-                            />
-                            <label class="ff-roboto">E-mail</label>
-                            <span
-                                v-if="v$.User.email.$errors.length != 0"
-                                class="message_error ff-roboto"
-                            >
-                                {{ v$.User.email.$errors[0].$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="email"
-                                class="ff-roboto"
-                                name="confirmEmail"
-                                id="confirmEmail"
-                                placeholder="Digite seu e-mail novamente"
-                                v-model="User.confirmEmail"
-                                @blur="v$.User.confirmEmail.$touch"
-                            />
-                            <label class="ff-roboto">Confirmar e-mail</label>
-                            <span
-                                v-if="v$.User.confirmEmail.$errors.length != 0"
-                                class="message_error ff-roboto"
-                            >
-                                {{ v$.User.confirmEmail.$errors[0].$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="password"
-                                class="ff-roboto"
-                                v-model="User.password"
-                                id="password"
-                                placeholder="Digite sua senha"
-                                @blur="v$.User.password.$touch"
-                            />
-                            <label class="ff-roboto">Senha</label>
-                            <span
-                                v-if="v$.User.password.$errors.length != 0"
-                                class="message_error ff-roboto"
-                            >
-                                {{ v$.User.Password.$errors[0].$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="password"
-                                class="ff-roboto"
-                                v-model="User.confirmPassword"
-                                id="confirmPassword"
-                                placeholder="Repita sua senha"
-                                @blur="v$.User.confirmPassword.$touch"
-                            />
-                            <label class="ff-roboto">Confirmar Senha</label>
-                            <span
-                                v-if="
-                                    v$.User.confirmPassword.$errors.length != 0
-                                "
-                                class="message_error ff-roboto"
-                            >
-                                {{
-                                    v$.User.ConfirmPassword.$errors[0].$message
-                                }}
-                            </span>
-                        </div>
+                        <InputCustom
+                            label-title="E-mail" 
+                            id-input="email"
+                            v-model.trim="User.email"
+                            placeHolderInput="Digite seu e-mail"
+                            type-input="email" 
+                            :errors-validations="v$.User.email.$errors"
+                            @blur="v$.User.email.$touch">
+                        </InputCustom>
+                        <InputCustom
+                            label-title="Confirmar e-mail" 
+                            id-input="confirmEmail"
+                            v-model.trim="User.confirmEmail"
+                            placeHolderInput="XXX.XXX.XXX-XX"
+                            type-input="email" 
+                            :errors-validations="v$.User.confirmEmail.$errors"
+                            @blur="v$.User.confirmEmail.$touch">
+                        </InputCustom>
+                        <InputCustom
+                            label-title="Senha" 
+                            id-input="confirmPassword"
+                            v-model.trim="User.password"
+                            placeHolderInput="Digite sua senha"
+                            type-input="password" 
+                            :errors-validations="v$.User.password.$errors"
+                            @blur="v$.User.password.$touch">
+                        </InputCustom>
+                        <InputCustom
+                            label-title="Digite novamente Senha" 
+                            id-input="confirmPassword"
+                            v-model.trim="User.confirmPassword"
+                            placeHolderInput="Repita sua senha"
+                            type-input="password" 
+                            :errors-validations="v$.User.confirmPassword.$errors"
+                            @blur="v$.User.confirmPassword.$touch">
+                        </InputCustom>
+                        
                     </div>
                     <div class="register__form-checkbox">
                         <input
@@ -379,6 +303,11 @@ import FormRegisterValidations from "./validations/FormRegisterValidations";
 import InputCustom from "../InputCustom/InputCustom.vue";
 export default defineComponent({
     name: "RegisterComponent",
+    computed:{
+        GetListErrorsCodeEmployee(){
+            return this.v$.User.codeEmployee.$errors
+        }
+    },
     components: {InputCustom},
     props: {
         isAdminRegister: {

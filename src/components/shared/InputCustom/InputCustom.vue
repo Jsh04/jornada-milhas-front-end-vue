@@ -12,13 +12,19 @@
             @input="EmitModelValue($event)" 
         />
         <label class="ff-roboto">{{ labelTitle }}</label>
-        <slot name="errorsInput"></slot>
+        <slot>
+            <span v-if="errorsValidations.length != 0" class="message_error ff-roboto">
+                {{ errorsValidations[0].$message }}
+            </span>
+        </slot>
+        <slot name="customMessageError"></slot>
     </div>
+
 
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
     name: "CustomInputComponent",
@@ -49,6 +55,10 @@ export default defineComponent({
         modelValue:{},
         labelTitle: {
             type: String, 
+            required: true
+        },
+        errorsValidations:{
+            type: Array as PropType<{ $message: string }[]>,
             required: true
         }
     },
