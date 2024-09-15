@@ -8,15 +8,13 @@ import { email, helpers, minLength, required, sameAs } from "@vuelidate/validato
 
 export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
     return {
-    name: ValidatorFluentWithVuelidate
-    .createBuild()
-    .addRequiredWithMessage("O campo deverá ser obrigatório")
-    .build(),
-    email: ValidatorFluentWithVuelidate
-    .createBuild()
-    .addRequiredWithMessage("O campo deverá ser obrigatório")
-    .addEmailWithMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com")
-    .build(),
+    name: ValidatorFluentWithVuelidate.createBuild()
+        .addRequiredWithMessage("O campo deverá ser obrigatório")
+        .build(),
+    email: ValidatorFluentWithVuelidate.createBuild()
+        .addRequiredWithMessage("O campo deverá ser obrigatório")
+        .addEmailWithMessage("O campo deverá seguir o sequinte exemplo XXXXX@XXXX.com")
+        .build(),
     codeEmployee: isAdmin
         ? ValidatorFluentWithVuelidate.createBuild()
         .addRequiredWithMessage("O campo deverá ser obrigatório")
@@ -93,7 +91,7 @@ export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
             required
         ),
     },
-    adress: isAdmin
+    address: isAdmin
         ? {
               required: helpers.withMessage(
                   "O campo não poderá ser nulo",

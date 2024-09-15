@@ -6,7 +6,8 @@
             </div>
             <div class="register__form-container">
                 <form @submit.prevent="SendForms()" action="" class="register__form">
-                    <InputCustom v-model="User.name" 
+                    <InputCustom 
+                        v-model.trim="User.name" 
                         label-title="Nome" 
                         id-input="name"  
                         placeHolderInput="Digite seu nome" 
@@ -95,143 +96,55 @@
                             @blur="v$.User.phone.$touch"
                             v-maska="'(##) #####-####'">
                         </InputCustom>
+                        <InputCustom v-if="isAdminRegister"
+                            label-title="CEP" 
+                            id-input="email"
+                            v-model.trim="User.cep"
+                            placeHolderInput="Digite seu CEP"
+                            type-input="text" 
+                            :min-length-input="8"
+                            :max-length-input="9"
+                            :errors-validations="v$.User.cep.$errors"
+                            @blur="[v$.User.cep.$touch, GetInfoAdress()]">
+                        </InputCustom>
+                        <InputCustom v-if="isAdminRegister"
+                            label-title="Cidade" 
+                            id-input="city"
+                            v-model.trim="User.city"
+                            placeHolderInput="Digite sua cidade"
+                            type-input="text" 
+                            :errors-validations="v$.User.city.$errors"
+                            @blur="v$.User.city.$touch">
+                        </InputCustom>
+                        <SelectCustom
+                            label-title="Estado" 
+                            id-select="state"
+                            v-model.trim="User.state"
+                            classes-person="w-100"
+                            placeHolderInput="Selecione seu estado"
+                            type-input="text"
+                            :errors-validations="v$.User.state.$errors"
+                            :list-selected-generic="optionsDataStatesOfBrazil"
+                            @blur="v$.User.state.$touch" />
                         
-                        <div
-                            class="register__form-input"
-                            v-if="isAdminRegister"
-                        >
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                placeholder="Digite seu CEP"
-                                id="cep"
-                                v-model="User.cep"
-                                minlength="8"
-                                maxlength="9"
-                                @blur="[v$.User.cep.$touch, GetInfoAdress()]"
-                            />
-                            <label class="ff-roboto">CEP</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.cep.$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                placeholder="Digite seu cidade"
-                                id="city"
-                                v-model="User.city"
-                                @blur="v$.User.city.$touch"
-                            />
-                            <label class="ff-roboto">Cidade</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.city.$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
-                        <div class="register__form-input">
-                            <select
-                                v-model="User.state"
-                                id="state"
-                                style="width: calc((530px / 2) - 6px)"
-                                class="ff-roboto"
-                                @blur="v$.User.state.$touch"
-                                :disabled="isAdminRegister"
-                            >
-                                <option value="0">Selecione o estado</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                            </select>
-                            <label class="ff-roboto">Estado</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.state.$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
-                        <div
-                            class="register__form-input"
-                            v-if="isAdminRegister"
-                        >
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                placeholder="Seu endereço"
-                                id="address"
-                                v-model="User.address"
-                                @blur="v$.User.adress.$touch"
-                                :disabled="isAdminRegister"
-                            />
-                            <label class="ff-roboto">Endereço</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.adress.$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
-                        <div
-                            class="register__form-input"
-                            v-if="isAdminRegister"
-                        >
-                            <input
-                                style="width: calc((530px / 2) - 3rem)"
-                                type="text"
-                                class="ff-roboto"
-                                placeholder="Seu bairro"
-                                id="district"
-                                v-model="User.district"
-                                :disabled="isAdminRegister"
-                                @blur="[v$.User.district.$touch]"
-                            />
-                            <label class="ff-roboto">Bairro</label>
-                            <span
-                                class="message_error ff-roboto"
-                                v-for="(error, index) in v$.User.district
-                                    .$errors"
-                                :key="index"
-                            >
-                                {{ error.$message }}
-                            </span>
-                        </div>
+                        <InputCustom v-if="isAdminRegister"
+                            label-title="Endereço" 
+                            id-input="address"
+                            v-model.trim="User.address"
+                            placeHolderInput="Digite seu endereço"
+                            type-input="text" 
+                            :errors-validations="v$.User.address.$errors"
+                            @blur="v$.User.address.$touch">
+                        </InputCustom>
+                        <InputCustom v-if="isAdminRegister"
+                            label-title="Bairro" 
+                            id-input="district"
+                            v-model.trim="User.district"
+                            placeHolderInput="Digite seu bairro"
+                            type-input="text" 
+                            :errors-validations="v$.User.district.$errors"
+                            @blur="v$.User.district.$touch">
+                        </InputCustom>
                         <InputCustom
                             label-title="E-mail" 
                             id-input="email"
@@ -300,7 +213,10 @@ import IAlertModal from "@/application/interfaces/alert/IAlertModal";
 import { ALERT_MODAL } from "@/common/constants/InjectionKeySerivices";
 import { vMaska } from "maska/vue";
 import FormRegisterValidations from "./validations/FormRegisterValidations";
-import InputCustom from "../InputCustom/InputCustom.vue";
+import InputCustom from "../InputsCustom/InputCustom.vue";
+import ISelectOption from "@/components/interfaces/ISelectOption";
+import SelectCustom from "../InputsCustom/SelectCustom.vue";
+
 export default defineComponent({
     name: "RegisterComponent",
     computed:{
@@ -308,7 +224,7 @@ export default defineComponent({
             return this.v$.User.codeEmployee.$errors
         }
     },
-    components: {InputCustom},
+    components: {InputCustom, SelectCustom},
     props: {
         isAdminRegister: {
             type: Boolean,
@@ -325,6 +241,35 @@ export default defineComponent({
             UrlImage: require("@/assets/Imagens/4-Banner-cadastro.png"),
             User: {} as IUserInputModel,
             checkedTerms: false,
+            optionsDataStatesOfBrazil: [
+            { value: 'AC', name: 'Acre' },
+            { value: 'AL', name: 'Alagoas' },
+            { value: 'AP', name: 'Amapá' },
+            { value: 'AM', name: 'Amazonas' },
+            { value: 'BA', name: 'Bahia' },
+            { value: 'CE', name: 'Ceará' },
+            { value: 'DF', name: 'Distrito Federal' },
+            { value: 'ES', name: 'Espírito Santo' },
+            { value: 'GO', name: 'Goiás' },
+            { value: 'MA', name: 'Maranhão' },
+            { value: 'MT', name: 'Mato Grosso' },
+            { value: 'MS', name: 'Mato Grosso do Sul' },
+            { value: 'MG', name: 'Minas Gerais' },
+            { value: 'PA', name: 'Pará' },
+            { value: 'PB', name: 'Paraíba' },
+            { value: 'PR', name: 'Paraná' },
+            { value: 'PE', name: 'Pernambuco' },
+            { value: 'PI', name: 'Piauí' },
+            { value: 'RJ', name: 'Rio de Janeiro' },
+            { value: 'RN', name: 'Rio Grande do Norte' },
+            { value: 'RS', name: 'Rio Grande do Sul' },
+            { value: 'RO', name: 'Rondônia' },
+            { value: 'RR', name: 'Roraima' },
+            { value: 'SC', name: 'Santa Catarina' },
+            { value: 'SP', name: 'São Paulo' },
+            { value: 'SE', name: 'Sergipe' },
+            { value: 'TO', name: 'Tocantins' }
+            ] as ISelectOption[]
         };
     },
 
