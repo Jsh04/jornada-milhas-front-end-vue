@@ -1,8 +1,5 @@
 # JornadaMilhas - Aplicação Vue.js com TypeScript para Venda de Passagens Aéreas
 
-## Descrição
-
-JornadaMilhas é uma aplicação web para venda de passagens aéreas desenvolvida com Vue.js, TypeScript, Vuex, Clean Architecture, Repository Pattern, Vuelidate e Tsringe, com foco em escalabilidade, manutenibilidade e testabilidade. O projeto visa proporcionar uma experiência de compra de passagens intuitiva e eficiente para os usuários, ao mesmo tempo em que oferece uma base de código robusta e organizada para desenvolvedores, seguindo os princípios SOLID. Além disso, a aplicação utiliza Docker e Kubernetes para facilitar o deploy e o gerenciamento em produção, e GitHub Actions para automatizar o processo de build e deploy.
 
 ## Tecnologias Utilizadas
 
@@ -10,10 +7,12 @@ JornadaMilhas é uma aplicação web para venda de passagens aéreas desenvolvid
     * Vue.js
     * TypeScript
     * Vuex
+    * BootStrap
+    * CSS3
     * Vuelidate
     * Vue Router
     * Axios
-    * Node.js (opcional, caso haja backend)
+    * Node.js
     * TypeScript
 * **Arquitetura e Design:**
     * Clean Architecture
