@@ -37,7 +37,7 @@ import Destination from '@/domain/entities/Destination';
 import { useStore } from '@/store';
 import Loader from '@/components/shared/Loader.vue';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';
-import { DestinyController } from '@/presentation/DestinyController';
+import { DestinyService } '@/presentation/DestinyService';
 import FormatMoney from '@/common/formats/FormatMoney';
 
 

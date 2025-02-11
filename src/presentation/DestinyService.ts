@@ -5,7 +5,7 @@ import Destination from "@/domain/entities/Destination";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
-export class DestinyController{
+export class DestinyService{
 
     constructor(
         @inject(InjectionTokenUseCaseGetAllDestinies) private getAllDestiniesUseCase: IGetAllDestinies,

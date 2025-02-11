@@ -26,7 +26,8 @@ const routes: RouteRecordRaw[] = [
         children: [
             {
                 path: '/',
-                component: MainSectionHome
+                component: MainSectionHome,
+                
             },
             {
                 path: '/passagens',
