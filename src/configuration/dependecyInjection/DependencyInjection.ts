@@ -2,8 +2,8 @@ import { container } from "tsyringe";
 import { InjectionTokenAlertModal, 
     InjectionTokenAxiosClient, 
     InjectionTokenCepRequest, 
-    InjectionTokenDestinyController, 
     InjectionTokenDestinyRepository, 
+    InjectionTokenDestinyService, 
     InjectionTokenLoginController, 
     InjectionTokenLoginRequest, 
     InjectionTokenStoreDestination, 
@@ -37,7 +37,7 @@ import { StateDestination } from "@/store/modules/DestinyModule";
 import StoreDestination from "@/infraestruture/store/StoreDestination";
 import IGetAllDestinies from "@/application/interfaces/useCases/destiny/IGetDestinies";
 import GetAllDestinies from "@/application/useCases/GetDestinys/GetAllDestinies";
-import { DestinyController } from "@/presentation/DestinyController";
+import { DestinyService } from "@/presentation/DestinyService";
 import IGetDestinyById from "@/application/interfaces/useCases/destiny/IGetDestinyById";
 import GetByIdDestinyUseCase from "@/application/useCases/GetDestinys/GetByIdDestiny";
 
@@ -78,6 +78,6 @@ export default class DependencyInjection {
 
     private static addDependenciesInjectionPresentation(){
         container.registerSingleton(InjectionTokenLoginController, LoginController);
-        container.registerSingleton(InjectionTokenDestinyController, DestinyController);
+        container.registerSingleton(InjectionTokenDestinyService, DestinyService);
     }
 }

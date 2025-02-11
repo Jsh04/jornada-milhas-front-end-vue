@@ -1,9 +1,12 @@
 <template>
-  <Header></Header>
+  <div>
+    <Header></Header>
       <main>
           <router-view></router-view>
       </main>
-  <Footer></Footer>
+    <Footer></Footer>
+  </div>
+  
 </template>
 
 <script lang="ts">
