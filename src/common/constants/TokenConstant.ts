@@ -1,1 +1,0 @@
-export const TokenKeyLocalStorage = "TOKEN_KEY_JORNADA_MILHAS"
