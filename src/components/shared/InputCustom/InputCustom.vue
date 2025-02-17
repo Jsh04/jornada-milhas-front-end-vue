@@ -1,5 +1,5 @@
 <template>
-    <div class="form-input__custom" v-if="isAdminRegister">
+    <div class="form-input__custom">
         <input
             :type="typeInput"
             class="ff-roboto input__style"
@@ -9,7 +9,6 @@
             @blur="$emit('blur')"
             @click="$emit('click')"
             @change="$emit('change')"
-            :disabled="isAdminRegister"
         />
         <label class="ff-roboto">Endereço</label>
     </div>
@@ -44,7 +43,7 @@ export default defineComponent({
             required: true 
         }
     },
-    emits: ['click', 'change', 'update:modelValue']
+    emits: ['click', 'change', 'blur', 'update:modelValue']
 });
 
 </script>
