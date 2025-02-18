@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import CheckboxFilter from '../CheckboxFilter/CheckboxFilter.vue';
-import ICheckboxFilter from '@/components/interfaces/ICheckboxFilter';
+import ICheckboxFilter from '@/views/TicketsPurchase/interfaces/ICheckboxFilter';
 
 export default defineComponent({
     name:"FilterContainerCheckboxComponent",

@@ -1,4 +1,4 @@
-import IUserInputModel from "@/application/InputModels/IUserInputModel"
+import ICustomerInputModel from "@/application/InputModels/ICustomerInputModel"
 import { greaterThan18 } from "@/common/validations/ValidationBirthDate"
 import { validateCpf } from "@/common/validations/ValidationCPF"
 import { validatePhone } from "@/common/validations/ValidationPhone"
@@ -6,7 +6,7 @@ import ValidatorFluentWithVuelidate from "@/common/validations/ValidationsVuelid
 import { email, helpers, minLength, required, sameAs } from "@vuelidate/validators"
 
 
-export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
+export default (isAdmin: boolean, customerInputModel: ICustomerInputModel) =>  {
     return {
     name: ValidatorFluentWithVuelidate
     .createBuild()
@@ -35,7 +35,7 @@ export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
         ),
         sameAsEmail: helpers.withMessage(
             "O email deverá ser igual ao email digitado anteriormente",
-            sameAs(userInputModel.email)
+            sameAs(customerInputModel.email)
         ),
     },
     confirmPassword: {
@@ -45,7 +45,7 @@ export default (isAdmin: boolean, userInputModel: IUserInputModel) =>  {
         ),
         sameAsPassword: helpers.withMessage(
             "O senha deverá ser a mesma digitada anteriormente",
-            sameAs(userInputModel.password)
+            sameAs(customerInputModel.password)
         ),
     },
     password: {

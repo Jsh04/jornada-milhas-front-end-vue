@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import FilterContainerCheckbox from '@/components/shared/FilterContainerCheckbox/FilterContainerCheckbox.vue';
-import ICheckboxFilter from '@/components/interfaces/ICheckboxFilter';
+import ICheckboxFilter from '@/views/TicketsPurchase/interfaces/ICheckboxFilter';
 import RecommendationCard from '@/components/shared/RecommendationCard/RecommendationCard.vue';
 import ContainerTextCustom from '@/components/shared/ContainerTextCustom/ContainerTextCustom.vue';
 import TextDescribePayment from '@/components/shared/TextDescribePayment.vue'

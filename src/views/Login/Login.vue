@@ -52,7 +52,7 @@
             </div>
             <div class="login__form-btn">
               <button type="submit" class="ff-roboto">
-                ACESSAR MINHA CONTA<span v-if="loading" class="loader"></span>
+                ACESSAR MINHA CONTA <span v-if="loading" class="loader"></span>
               </button>
             </div>
           </form>
@@ -69,14 +69,13 @@
   </section>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, inject } from "vue";
 import Banner from "@/components/shared/Banner/Banner.vue";
 import useVuelidate from "@vuelidate/core";
 import { required, helpers } from "@vuelidate/validators";
 import ILoginInputModel from "@/application/InputModels/ILoginInputModel";
-import IAlertModal from "@/application/interfaces/alert/IAlertModal";
-import LoginController from "@/presentation/LoginController";
+
 export default defineComponent({
   name: "LoginComponent",
   components: { Banner },
@@ -130,28 +129,7 @@ export default defineComponent({
       },
     };
   },
-  setup() {
-    const loginController = inject<LoginController>("LoginController");
-    const alertModal = inject<IAlertModal>("AlertModal");
 
-    if (!loginController) {
-      alert('Aplicação indisponivel, tente novamente mais tarde');
-      throw new Error("Erro na instância do controller");
-    }
-        
-    if (!alertModal) {
-        alert('Aplicação indisponivel, tente novamente mais tarde');
-        throw new Error("Erro na instância do Modal");
-    }
-
-    
-
-    return {
-      loginController,
-      v$: useVuelidate(),
-      alertModal,
-    };
-  },
 });
 </script>
 

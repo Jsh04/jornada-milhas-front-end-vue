@@ -4,17 +4,9 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    name: "BannerComponent",
-    props: ['urlImage'],
-    data() {
-        return {
-            
-        }
-    },
+<script setup lang="ts">
+defineProps({
+    urlImage: String,
 })
 </script>
 

@@ -7,7 +7,7 @@
 import { defineComponent, inject } from 'vue';
 import Banner from '@/components/shared/Banner/Banner.vue';
 import Destination from '@/domain/entities/Destination';
-import DestinyDescription from '@/components/shared/DestinyDescription/DestinyDescription.vue';
+import DestinyDescription from '@/views/FlightDescription/DestinyDescription.vue';
 import { DestinyController } from '@/presentation/DestinyService';
 import IAlertModal from '@/application/interfaces/alert/IAlertModal';
 

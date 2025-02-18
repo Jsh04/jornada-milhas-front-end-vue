@@ -9,34 +9,11 @@
   
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Header from './components/shared/Header/Header.vue';
 import Footer from './components/shared/footer/Footer.vue';
-import { container } from 'tsyringe';
-import DependencyInjection from "./configuration/dependecyInjection/DependencyInjection";
-import { InjectionTokenAlertModal, InjectionTokenDestinyController, InjectionTokenLoginController } from './configuration/constants/InjectionTokens';
-import IAlertModal from './application/interfaces/alert/IAlertModal';
-import PostLoginUser from './application/useCases/PostLoginUser/PostLoginUser';
 
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    Header,
-    Footer
-  },
-  provide(){
-    return {
-      LoginController: container.resolve<PostLoginUser>(InjectionTokenLoginController),
-      AlertModal: container.resolve<IAlertModal>(InjectionTokenAlertModal),
-      DestinyController: container.resolve(InjectionTokenDestinyController)
-    }
-  },
-  setup() {
-    DependencyInjection.addDependencyInjectionConfig();
-  }
-});
 </script>
 <style>
 

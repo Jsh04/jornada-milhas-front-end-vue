@@ -4,7 +4,7 @@ import AuthorizationRoutes from "./AuthorizationRoutes";
 import Home from "@/views/Home.vue";
 import RegisterVue from "@/views/Register/Register.vue";
 import DescriptionVue from "@/views/Description.vue";
-import LoginVue from "@/views/Login.vue";
+import LoginVue from "@/views/Login/Login.vue";
 import About from "@/views/About/About.vue";
 import RegisterAdminVue from "@/views/RegisterAdmin/RegisterAdmin.vue";
 import DestinyPageVue from "@/views/DestinysPage/DestinyPage.vue";
